@@ -4,12 +4,12 @@ namespace Gyermekvasut.Modellek.AllomasNS;
 
 public class Allomas
 {
-    public AllomasNev Nev { get; }
+    public AllomasNev AllomasNev { get; }
     public AllomasiTopologia Topologia { get; }
 
     public Allomas(AllomasNev nev)
     {
-        Nev = nev;
+        AllomasNev = nev;
         Topologia = Topologiak.Felepit(nev);
     }
 }

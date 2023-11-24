@@ -2,6 +2,7 @@
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Telefon;
+using Gyermekvasut.Modellek.VonatNS;
 
 namespace Gyermekvasut.Halozat;
 
@@ -18,7 +19,7 @@ public static class GrpcToModelMapper
             GrpcAllomasNev.Szepjuhaszne => AllomasNev.Szepjuhaszne,
             GrpcAllomasNev.Harshegy => AllomasNev.Harshegy,
             GrpcAllomasNev.Huvosvolgy => AllomasNev.Huvosvolgy,
-            _ => throw new ArgumentException(nameof(grpcAllomasNev))
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcAllomasNev)}: {grpcAllomasNev}")
         };
     }
 
@@ -28,12 +29,40 @@ public static class GrpcToModelMapper
         {
             GrpcCsengetes.Rovid => Csengetes.Rovid,
             GrpcCsengetes.Hosszu => Csengetes.Hosszu,
-            _ => throw new ArgumentException(nameof(grpcCsengetes))
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcCsengetes)}: {grpcCsengetes}")
         };
     }
 
-    public static List<TModel> MapRepeated<TGrpc, TModel>(RepeatedField<TGrpc> repeatedField, Func<TGrpc, TModel> mapper)
+    public static TimeOnly MapIdo(GrpcIdo grpcIdo)
+        => new(grpcIdo.Ora, grpcIdo.Perc);
+
+    public static EngedelyKeresTipus MapEngedelyKeresTipus(GrpcEngedelyKeresTipus grpcEngedelyKeresTipus)
     {
-        return repeatedField.Select(mapper).ToList();
+        return grpcEngedelyKeresTipus switch
+        {
+            GrpcEngedelyKeresTipus.AzonosIranyuVolt => EngedelyKeresTipus.AzonosIranyuVolt,
+            GrpcEngedelyKeresTipus.EllenkezoIranyuVolt => EngedelyKeresTipus.EllenkezoIranyuVolt,
+            GrpcEngedelyKeresTipus.EllenkezoIranyuVan => EngedelyKeresTipus.EllenkezoIranyuVan,
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcEngedelyKeresTipus)}: {grpcEngedelyKeresTipus}")
+        };
     }
+
+    public static EngedelyAdasTipus MapEngedelyAdasTipus(GrpcEngedelyAdasTipus grpcEngedelyAdasTipus)
+    {
+        return grpcEngedelyAdasTipus switch
+        {
+            GrpcEngedelyAdasTipus.AzonosIranyu => EngedelyAdasTipus.AzonosIranyu,
+            GrpcEngedelyAdasTipus.EllenkezoIranyu => EngedelyAdasTipus.EllenkezoIranyu,
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcEngedelyAdasTipus)}: {grpcEngedelyAdasTipus}")
+        };
+    }
+
+    public static Vonat MapVonat(GrpcVonat grpcVonat)
+    {
+        // TODO Map Vonat
+        throw new NotImplementedException();
+    }
+
+    public static List<TModel> MapRepeated<TGrpc, TModel>(RepeatedField<TGrpc> repeatedField, Func<TGrpc, TModel> mapper)
+        => repeatedField.Select(mapper).ToList();
 }

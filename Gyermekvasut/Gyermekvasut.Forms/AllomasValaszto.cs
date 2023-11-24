@@ -5,7 +5,7 @@ namespace Gyermekvasut.Forms;
 
 public partial class AllomasValaszto : Form
 {
-    Dictionary<HalozatiAllomas, AllomasForm> allomasFormok = new();
+    readonly Dictionary<HalozatiAllomas, AllomasForm> allomasFormok = new();
     public AllomasValaszto(List<HalozatiAllomas> allomasok)
     {
         InitializeComponent();
@@ -28,7 +28,7 @@ class AllomasButton : Button
     public AllomasButton(AllomasForm allomasForm)
     {
         AllomasForm = allomasForm;
-        Text = AllomasForm.Allomas.Nev.Nev();
+        Text = AllomasForm.Allomas.AllomasNev.Nev();
         Click += AllomasButton_Click;
     }
 

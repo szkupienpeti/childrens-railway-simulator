@@ -23,4 +23,40 @@
 
   <ProjectExtensions><VisualStudio><UserProperties gyermekvasut_1halozat_1settings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
+  <ItemGroup>
+    <Compile Update="HalozatiAllomas.Csengetes.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+	<Compile Update="HalozatiAllomas.VisszaCsengetes.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+	<Compile Update="HalozatiAllomas.EngedelyKeres.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+	</Compile>
+	<Compile Update="HalozatiAllomas.EngedelyAdas.cs">
+	  <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+	</Compile>
+    <Compile Update="HalozatiAllomas.EngedelyMegtagadas.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+    <Compile Update="HalozatiAllomas.IndulasiIdoKozles.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+    <Compile Update="HalozatiAllomas.IndulasiIdoKozlesVetel.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+    <Compile Update="HalozatiAllomas.Visszajelentes.cs">
+      <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+    </Compile>
+	<Compile Update="HalozatiAllomas.VisszajelentesVetel.cs">
+	  <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+	</Compile>
+	<Compile Update="HalozatiAllomas.VonatAllomaskozbeBelep.cs">
+	  <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+	</Compile>
+	<Compile Update="HalozatiAllomas.VonatAllomaskozbolKilep.cs">
+	  <DependentUpon>HalozatiAllomas.cs</DependentUpon>
+	</Compile>
+  </ItemGroup>
+
 </Project>

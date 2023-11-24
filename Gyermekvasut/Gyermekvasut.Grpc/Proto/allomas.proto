@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 option csharp_namespace = "Gyermekvasut.Grpc";
-package allomas;
+package gyermekvasut;
 
 service GrpcAllomas {
   rpc Csengetes(CsengetesRequest) returns (google.protobuf.Empty);
@@ -19,7 +19,7 @@ service GrpcAllomas {
 }
 
 enum GrpcAllomasNev {
-  ALLOMAS_KOD_UNSPECIFIED = 0;
+  GRPC_ALLOMAS_NEV_UNSPECIFIED = 0;
   SZECHENYIHEGY = 1;
   CSILLEBERC = 2;
   VIRAGVOLGY = 3;
@@ -30,7 +30,7 @@ enum GrpcAllomasNev {
 }
 
 enum GrpcCsengetes {
-  CSENGETES_UNSPECIFIED = 0;
+  GRPC_CSENGETES_UNSPECIFIED = 0;
   ROVID = 1;
   HOSSZU = 2;
 }
@@ -46,7 +46,7 @@ message VisszaCsengetesRequest {
 }
 
 enum GrpcEngedelyKeresTipus {
-  ENGEDELY_KERES_TIPUS_UNSPECIFIED = 0;
+  GRPC_ENGEDELY_KERES_TIPUS_UNSPECIFIED = 0;
   AZONOS_IRANYU_VOLT = 1;
   ELLENKEZO_IRANYU_VOLT = 2;
   ELLENKEZO_IRANYU_VAN = 3;
@@ -57,13 +57,17 @@ message EngedelyKeresRequest {
   GrpcEngedelyKeresTipus tipus = 2;
   optional string utolso_vonat = 3;
   string vonatszam = 4;
-  int32 ora = 5;
-  int32 perc = 6;
-  string nev = 7;
+  GrpcIdo ido = 5;
+  string nev = 6;
+}
+
+message GrpcIdo {
+  int32 perc = 1;
+  int32 ora = 2;
 }
 
 enum GrpcEngedelyAdasTipus {
-  ENGEDELY_ADAS_TIPUS_UNSPECIFIED = 0;
+  GRPC_ENGEDELY_ADAS_TIPUS_UNSPECIFIED = 0;
   AZONOS_IRANYU = 1;
   ELLENKEZO_IRANYU = 2;
 }
@@ -87,27 +91,27 @@ message EngedelyMegtagadasRequest {
 message IndulasiIdoKozlesRequest {
   GrpcAllomasNev kuldo = 1;
   string vonatszam = 2;
-  int32 ora = 3;
-  int32 perc = 4;
-  string nev = 5;
+  GrpcIdo ido = 3;
+  string nev = 4;
 }
 
 message IndulasiIdoKozlesVetelRequest {
   GrpcAllomasNev kuldo = 1;
   string vonatszam = 2;
-  int32 ora = 3;
-  int32 perc = 4;
-  string nev = 5;
+  GrpcIdo ido = 3;
+  string nev = 4;
 }
 
 message VisszajelentesRequest {
   GrpcAllomasNev kuldo = 1;
   string vonatszam = 2;
+  string nev = 3;
 }
 
 message VisszajelentesVetelRequest {
   GrpcAllomasNev kuldo = 1;
   string vonatszam = 2;
+  string nev = 3;
 }
 
 message VonatAllomaskozbeBelepRequest {
@@ -117,7 +121,7 @@ message VonatAllomaskozbeBelepRequest {
 
 message VonatAllomaskozbolKilepRequest {
   GrpcAllomasNev kuldo = 1;
-  string nev = 2;
+  string vonatszam = 2;
 }
 
 message GrpcVonat {

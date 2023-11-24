@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gyermekvasut.Halozat\Gyermekvasut.Halozat.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
   </ItemGroup>
 
 </Project>

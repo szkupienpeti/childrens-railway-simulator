@@ -45,8 +45,10 @@ public class Valto : PalyaElem
         Vegallas = alapAllas;
         Vezerles = alapAllas;
         Lezaras = alapLezaras;
-        allitasTimer = new(allitasiIdoSec * MILLISECONDS_IN_SECOND / Szimulacio.Instance.SebessegSzorzo);
-        allitasTimer.AutoReset = false;
+        allitasTimer = new(allitasiIdoSec * MILLISECONDS_IN_SECOND / Szimulacio.Instance.SebessegSzorzo)
+        {
+            AutoReset = false
+        };
         allitasTimer.Elapsed += AllitasiIdoLejart;
         AllitasiIdoSec = allitasiIdoSec;
         Tajolas = tajolas;
