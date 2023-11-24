@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gyermekvasut.Grpc\Gyermekvasut.Grpc.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="gyermekvasut.halozat.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties gyermekvasut_1halozat_1settings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
