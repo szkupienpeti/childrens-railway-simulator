@@ -14,7 +14,8 @@ internal class GrpcAllomasServerFactory : GrpcAllomasFactoryBase
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddGrpc();
-        builder.Services.AddSingleton(new GrpcAllomasServer());
+        GrpcAllomasServer grpcAllomasServer = new();
+        builder.Services.AddSingleton(grpcAllomasServer);
 
         var app = builder.Build();
         app.MapGrpcService<GrpcAllomasServer>();
@@ -22,7 +23,6 @@ internal class GrpcAllomasServerFactory : GrpcAllomasFactoryBase
 
         string address = GetAllomasAddress(allomasNev);
         app.RunAsync(address);
-
-        return (app.Services.GetRequiredService(typeof(GrpcAllomasServer)) as GrpcAllomasServer)!;
+        return grpcAllomasServer;
     }
 }
