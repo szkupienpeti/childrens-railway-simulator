@@ -14,12 +14,13 @@ public class Szakasz : EgyenesPalyaElem
         {
             if (value != _szerelveny)
             {
+                Szerelveny? elozoSzerelveny = _szerelveny;
                 _szerelveny = value;
-                OnSzerelvenyChanged();
+                OnSzerelvenyChanged(elozoSzerelveny);
             }
         }
     }
-    public event EventHandler? SzerelvenyChanged;
+    public event EventHandler<SzakaszSzerelvenyChangedEventArgs>? SzerelvenyChanged;
 
     public Szakasz(string nev, int hossz) : base(nev)
     {
@@ -46,8 +47,17 @@ public class Szakasz : EgyenesPalyaElem
         Trace.WriteLine($"{szerelveny} elhagyta {this} szakaszt");
     }
 
-    protected virtual void OnSzerelvenyChanged()
+    protected virtual void OnSzerelvenyChanged(Szerelveny? elozoSzerelveny)
     {
-        SzerelvenyChanged?.Invoke(this, EventArgs.Empty);
+        SzerelvenyChanged?.Invoke(this, new(elozoSzerelveny));
+    }
+}
+
+public class SzakaszSzerelvenyChangedEventArgs : EventArgs
+{
+    public Szerelveny? ElozoSzerelveny { get; }
+    public SzakaszSzerelvenyChangedEventArgs(Szerelveny? elozoSzerelveny)
+    {
+        ElozoSzerelveny = elozoSzerelveny;
     }
 }

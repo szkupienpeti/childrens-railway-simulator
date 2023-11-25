@@ -1,5 +1,4 @@
-﻿using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Palya;
+﻿using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 
 namespace Gyermekvasut.Modellek.Topologia;
@@ -23,8 +22,8 @@ public class AllomasiTopologia
         {
             PalyaElem elozo = elemek[i - 1];
             PalyaElem elem = elemek[i];
-            elozo.VpSzomszedolas(elem);
-            elem.KpSzomszedolas(elozo);
+            elozo.Szomszedolas(Irany.VegpontFele, elem);
+            elem.Szomszedolas(Irany.KezdopontFele, elozo);
 
             if (elem is Valto)
             {
@@ -45,14 +44,22 @@ public class AllomasiTopologia
     {
         Valtok.Add(valto);
         valto.KiteroSzomszedolas(kiteroSzar);
-        switch (valto.CsucsFelolIrany)
+        kiteroSzar.Szomszedolas(valto.CsucsIrany, valto);
+    }
+
+    public Irany GetAllomaskozIrany(Szakasz allomaskoz)
+    {
+        if (allomaskoz == KpAllomaskoz)
         {
-            case VonatNS.Irany.Paros:
-                kiteroSzar.KpSzomszedolas(valto);
-                break;
-            case VonatNS.Irany.Paratlan:
-                kiteroSzar.VpSzomszedolas(valto);
-                break;
+            return Irany.KezdopontFele!;
+        }
+        else if (allomaskoz == VpAllomaskoz)
+        {
+            return Irany.VegpontFele!;
+        }
+        else
+        {
+            throw new ArgumentException($"A szakasz nem állomásköz: {allomaskoz}");
         }
     }
 }

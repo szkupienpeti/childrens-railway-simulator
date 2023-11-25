@@ -1,4 +1,5 @@
-﻿using Gyermekvasut.Modellek.Topologia;
+﻿using Gyermekvasut.Modellek.Palya;
+using Gyermekvasut.Modellek.Topologia;
 
 namespace Gyermekvasut.Modellek.AllomasNS;
 
@@ -11,5 +12,5 @@ public class Allomas
     {
         AllomasNev = nev;
         Topologia = Topologiak.Felepit(nev);
-    }
+    }    
 }

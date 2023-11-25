@@ -1,8 +1,8 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -14,7 +14,7 @@ public partial class HalozatiAllomas : Allomas
         IndulasiIdoKozlesEvent?.Invoke(this, e);
     }
 
-    public void IndulasiIdotKozol(HivasIrany irany, string vonatszam, TimeOnly ido, string nev)
+    public void IndulasiIdotKozol(Irany irany, string vonatszam, TimeOnly ido, string nev)
     {
         IndulasiIdoKozlesRequest request = new()
         {

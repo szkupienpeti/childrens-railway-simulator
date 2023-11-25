@@ -43,9 +43,9 @@ public class Vagany : Szakasz
         MenesztesChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    protected override void OnSzerelvenyChanged()
+    protected override void OnSzerelvenyChanged(Szerelveny? elozoSzerelveny)
     {
-        base.OnSzerelvenyChanged();
+        base.OnSzerelvenyChanged(elozoSzerelveny);
         if (Szerelveny is Vonat)
         {
             Vonat vonat = (Szerelveny as Vonat)!;

@@ -1,8 +1,8 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -14,7 +14,7 @@ public partial class HalozatiAllomas : Allomas
         VisszajelentesVetelEvent?.Invoke(this, e);
     }
 
-    public void VisszajelentestVesz(HivasIrany irany, string vonatszam, string nev)
+    public void VisszajelentestVesz(Irany irany, string vonatszam, string nev)
     {
         VisszajelentesVetelRequest request = new()
         {

@@ -1,5 +1,6 @@
 using Gyermekvasut.Halozat;
 using Gyermekvasut.Halozat.EventArgsNS;
+using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.VonatNS;
@@ -60,11 +61,11 @@ public partial class AllomasForm : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-        Allomas.Csenget(Modellek.Telefon.HivasIrany.KezdopontFele, new List<Modellek.Telefon.Csengetes> { Modellek.Telefon.Csengetes.Hosszu });
+        Allomas.Csenget(Irany.KezdopontFele, new List<Modellek.Telefon.Csengetes> { Modellek.Telefon.Csengetes.Hosszu });
     }
 
     private void button2_Click(object sender, EventArgs e)
     {
-        Allomas.Csenget(Modellek.Telefon.HivasIrany.VegpontFele, new List<Modellek.Telefon.Csengetes> { Modellek.Telefon.Csengetes.Hosszu, Modellek.Telefon.Csengetes.Hosszu });
+        Allomas.Csenget(Irany.VegpontFele, new List<Modellek.Telefon.Csengetes> { Modellek.Telefon.Csengetes.Hosszu, Modellek.Telefon.Csengetes.Hosszu });
     }
 }

@@ -5,10 +5,10 @@ namespace Gyermekvasut.Modellek.VonatNS;
 public class Menetrend
 {
     public string Vonatszam { get; }
-    public Irany Irany { get; }
+    public VonatIrany Irany { get; }
     public List<AllomasiMenetrendSor> Sorok { get; } = new();
 
-    public Menetrend(string vonatszam, Irany irany, params AllomasiMenetrendSor[] sorok)
+    public Menetrend(string vonatszam, VonatIrany irany, params AllomasiMenetrendSor[] sorok)
     {
         Vonatszam = vonatszam;
         Irany = irany;

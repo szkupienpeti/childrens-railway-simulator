@@ -3,6 +3,7 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -14,7 +15,7 @@ public partial class HalozatiAllomas : Allomas
         EngedelyKeresEvent?.Invoke(this, e);
     }
 
-    public void EngedelytKer(HivasIrany irany, EngedelyKeresTipus tipus,
+    public void EngedelytKer(Irany irany, EngedelyKeresTipus tipus,
         string utolsoVonat, string vonatszam, TimeOnly ido, string nev)
     {
         EngedelyKeresRequest request = new()

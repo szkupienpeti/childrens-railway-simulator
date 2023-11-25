@@ -29,26 +29,26 @@ public static class Topologiak
          *                  \-K1   I.  V1-/
          */
         Szakasz allomaskozJanoshegy = new("I-S állomásköz", 3000);
-        Elojelzo aej = new("AEj", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
+        Elojelzo aej = new("AEj", Irany.VegpontFele, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
         Szakasz aej_a = new("AEj-A", 400);
-        Fojelzo a = new("A", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
+        Fojelzo a = new("A", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
         Szakasz csucs2 = new("2-es váltó csúcs", 100);
-        Valto valto2 = new("2", VonatNS.Irany.Paros, ValtoTajolas.Jobbos, 3);
+        Valto valto2 = new("2", Irany.KezdopontFele, ValtoTajolas.Jobbos, 3);
         Szakasz valto2e = new("2-es váltó E", 100);
         Szakasz valto2k = new("2-es váltó K", 100);
-        Fojelzo k2 = new("K2", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
-        Fojelzo k1 = new("K1", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo k2 = new("K2", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo k1 = new("K1", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
         Vagany vg2 = new("II.", AllomasNev.Szepjuhaszne, 100);
         Vagany vg1 = new("I.", AllomasNev.Szepjuhaszne, 100);
-        Fojelzo v2 = new("V2", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
-        Fojelzo v1 = new("V1", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo v2 = new("V2", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo v1 = new("V1", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
         Szakasz valto1e = new("1-es váltó E", 100);
         Szakasz valto1k = new("1-es váltó K", 100);
-        Valto valto1 = new("1", VonatNS.Irany.Paratlan, ValtoTajolas.Balos, 3);
+        Valto valto1 = new("1", Irany.VegpontFele, ValtoTajolas.Balos, 3);
         Szakasz csucs1 = new("1-es váltó csúcs", 100);
-        Fojelzo b = new("B", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
+        Fojelzo b = new("B", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
         Szakasz b_bej = new("B-BEj", 400);
-        Elojelzo bej = new("BEj", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
+        Elojelzo bej = new("BEj", Irany.KezdopontFele, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
         Szakasz allomaskozHarshegy = new("S-H állomásköz", 3000);
         AllomasiTopologia topologia = new(allomaskozJanoshegy, allomaskozHarshegy);
         topologia.EgyenesFeltolt(allomaskozJanoshegy, aej, aej_a, a, csucs2, valto2, valto2e, k2,
@@ -67,26 +67,26 @@ public static class Topologiak
          *                  \-K1   I.  V1-/
          */
         Szakasz allomaskozJanoshegy = new("I-S állomásköz", 3000);
-        Elojelzo aej = new("AEj", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
+        Elojelzo aej = new("AEj", Irany.VegpontFele, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
         Szakasz aej_a = new("AEj-A", 400);
-        Fojelzo a = new("A", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
+        Fojelzo a = new("A", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
         Szakasz csucs2 = new("2-es váltó csúcs", 100);
-        Valto valto2 = new("2", VonatNS.Irany.Paros, ValtoTajolas.Jobbos, 3);
+        Valto valto2 = new("2", Irany.KezdopontFele, ValtoTajolas.Jobbos, 3);
         Szakasz valto2e = new("2-es váltó E", 100);
         Szakasz valto2k = new("2-es váltó K", 100);
-        Fojelzo k2 = new("K2", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
-        Fojelzo k1 = new("K1", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo k2 = new("K2", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo k1 = new("K1", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
         Vagany vg2 = new("II.", AllomasNev.Szepjuhaszne, 100);
         Vagany vg1 = new("I.", AllomasNev.Szepjuhaszne, 100);
-        Fojelzo v2 = new("V2", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
-        Fojelzo v1 = new("V1", VonatNS.Irany.Paros, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo v2 = new("V2", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
+        Fojelzo v1 = new("V1", Irany.VegpontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Kijarati);
         Szakasz valto1e = new("1-es váltó E", 100);
         Szakasz valto1k = new("1-es váltó K", 100);
-        Valto valto1 = new("1", VonatNS.Irany.Paratlan, ValtoTajolas.Balos, 3);
+        Valto valto1 = new("1", Irany.VegpontFele, ValtoTajolas.Balos, 3);
         Szakasz csucs1 = new("1-es váltó csúcs", 100);
-        Fojelzo b = new("B", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
+        Fojelzo b = new("B", Irany.KezdopontFele, JelzoForma.FenyJelzo, FojelzoRendeltetes.Bejarati);
         Szakasz b_bej = new("B-BEj", 400);
-        Elojelzo bej = new("BEj", VonatNS.Irany.Paratlan, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
+        Elojelzo bej = new("BEj", Irany.KezdopontFele, JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu);
         Szakasz allomaskozHarshegy = new("S-H állomásköz", 3000);
         AllomasiTopologia topologia = new(allomaskozJanoshegy, allomaskozHarshegy);
         topologia.EgyenesFeltolt(allomaskozJanoshegy, aej, aej_a, a, csucs2, valto2, valto2e, k2,

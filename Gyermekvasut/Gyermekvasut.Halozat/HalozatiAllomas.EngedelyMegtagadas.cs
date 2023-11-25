@@ -1,8 +1,8 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -14,7 +14,7 @@ public partial class HalozatiAllomas : Allomas
         EngedelyMegtagadasEvent?.Invoke(this, e);
     }
 
-    public void EngedelytMegtagad(HivasIrany irany, string vonatszam, string ok, int percMulva, string nev)
+    public void EngedelytMegtagad(Irany irany, string vonatszam, string ok, int percMulva, string nev)
     {
         EngedelyMegtagadasRequest request = new()
         {

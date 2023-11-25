@@ -3,6 +3,7 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -14,7 +15,7 @@ public partial class HalozatiAllomas : Allomas
         CsengetesEvent?.Invoke(this, e);
     }
 
-    public void Csenget(HivasIrany irany, List<Csengetes> csengetesek)
+    public void Csenget(Irany irany, List<Csengetes> csengetesek)
     {
         CsengetesRequest request = new()
         {

@@ -16,6 +16,7 @@ public class Szerelveny
     public int MaxSebesseg { get; protected set; } = 20;
     public string SzerelvenyNev { get; }
     public Irany Irany { get; protected set; }
+    public VonatIrany VonatIrany => Irany.ToVonatIrany();
     public virtual string Nev => SzerelvenyNev;
     public List<Jarmu> Jarmuvek { get; } = new();
     public int Hossz

@@ -72,7 +72,7 @@ public class Vonat : Szerelveny
 
     private void IranyKonzisztenciaCheck()
     {
-        if (AktualisMenetrend!.Irany != Irany)
+        if (AktualisMenetrend!.Irany != Irany.ToVonatIrany())
         {
             throw new ArgumentException("A szerelvény irány és a menetrendi irány nem egyeznek meg.");
         }

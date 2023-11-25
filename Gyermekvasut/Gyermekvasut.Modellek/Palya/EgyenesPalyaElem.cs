@@ -9,21 +9,27 @@ public class EgyenesPalyaElem : PalyaElem
 
     public EgyenesPalyaElem(string nev) : base(nev) { }
 
-    public override void KpSzomszedolas(PalyaElem kpSzomszed)
+    public override void Szomszedolas(Irany irany, PalyaElem szomszed)
     {
-        this.kpSzomszed = kpSzomszed;
-    }
-    public override void VpSzomszedolas(PalyaElem vpSzomszed)
-    {
-        this.vpSzomszed = vpSzomszed;
+        switch (irany)
+        {
+            case Irany.KezdopontFele:
+                kpSzomszed = szomszed;
+                break;
+            case Irany.VegpontFele:
+                vpSzomszed = szomszed;
+                break;
+            default:
+                throw new NotImplementedException();
+        }
     }
 
     public override PalyaElem? Kovetkezo(Irany irany)
     {
         return irany switch
         {
-            Irany.Paros => vpSzomszed,
-            Irany.Paratlan => kpSzomszed,
+            Irany.KezdopontFele => kpSzomszed,
+            Irany.VegpontFele => vpSzomszed,
             _ => throw new NotImplementedException()
         };
     }

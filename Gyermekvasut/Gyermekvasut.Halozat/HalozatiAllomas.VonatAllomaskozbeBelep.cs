@@ -1,9 +1,9 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek.VonatNS;
+using Gyermekvasut.Modellek;
 
 namespace Gyermekvasut.Halozat;
 
@@ -15,7 +15,7 @@ public partial class HalozatiAllomas : Allomas
         VonatAllomaskozbeBelepEvent?.Invoke(this, e);
     }
 
-    public void VonatotAllomaskozbeBeleptet(HivasIrany irany, Vonat vonat)
+    public void VonatotAllomaskozbeBeleptet(Irany irany, Vonat vonat)
     {
         VonatAllomaskozbeBelepRequest request = new()
         {

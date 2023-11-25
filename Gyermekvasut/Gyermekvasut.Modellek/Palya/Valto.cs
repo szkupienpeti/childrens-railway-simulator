@@ -27,7 +27,7 @@ public class Valto : PalyaElem
     // Statikus
     public int AllitasiIdoSec { get; }
     public ValtoTajolas Tajolas { get; }
-    public Irany CsucsFelolIrany { get; }
+    public Irany CsucsIrany { get; }
     // Alaphelyzet
     public ValtoAllas AlapAllas { get; }
     public ValtoLezaras AlapLezaras { get; }
@@ -36,10 +36,10 @@ public class Valto : PalyaElem
     private PalyaElem? egyenesSzar;
     private PalyaElem? kiteroSzar;
 
-    public Valto(string nev, Irany csucsFelolIrany, ValtoTajolas tajolas, int allitasiIdo)
-        : this(nev, csucsFelolIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva) { }
+    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdo)
+        : this(nev, csucsIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva) { }
 
-    public Valto(string nev, Irany csucsFelolIrany, ValtoTajolas tajolas, int allitasiIdoSec,
+    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdoSec,
         ValtoAllas alapAllas, ValtoLezaras alapLezaras) : base(nev)
     {
         Vegallas = alapAllas;
@@ -52,7 +52,7 @@ public class Valto : PalyaElem
         allitasTimer.Elapsed += AllitasiIdoLejart;
         AllitasiIdoSec = allitasiIdoSec;
         Tajolas = tajolas;
-        CsucsFelolIrany = csucsFelolIrany;
+        CsucsIrany = csucsIrany;
         AlapAllas = alapAllas;
         AlapLezaras = alapLezaras;
     }
@@ -67,24 +67,26 @@ public class Valto : PalyaElem
         Vegallas = Vezerles;
     }
 
-    public void Allit(ValtoAllas cel)
+    public bool Allit(ValtoAllas cel)
     {
         if (Lezaras == ValtoLezaras.Lezarva || Vegallas == cel)
         {
-            return;
+            return false;
         }
         Vezerles = cel;
         Vegallas = null;
         allitasTimer.Start();
+        return true;
     }
 
-    public void Lezar()
+    public bool Lezar()
     {
         if (Vegallas == null)
         {
-            return;
+            return false;
         }
         Lezaras = ValtoLezaras.Lezarva;
+        return true;
     }
 
     public void Felold()
@@ -94,13 +96,21 @@ public class Valto : PalyaElem
 
     public void Szomszedolas(PalyaElem csucsFelol, PalyaElem egyenes, PalyaElem kitero)
     {
-        this.csucsSzar = csucsFelol;
-        this.egyenesSzar = egyenes;
-        this.kiteroSzar = kitero;
+        csucsSzar = csucsFelol;
+        egyenesSzar = egyenes;
+        kiteroSzar = kitero;
     }
     public override PalyaElem? Kovetkezo(Irany irany)
     {
-        if (irany == CsucsFelolIrany)
+        if (irany == CsucsIrany)
+        {
+            if (Vegallas == null)
+            {
+                throw new InvalidOperationException($"Váltfelvágás: a gyök felől érintett {Nev} váltónak nincs végállása");
+            }
+            return csucsSzar;
+        }
+        else
         {
             return Vegallas switch
             {
@@ -109,40 +119,20 @@ public class Valto : PalyaElem
                 _ => throw new InvalidOperationException($"A csúcs felől érintett {Nev} váltónak nincs végállása")
             };
         }
+    }
+
+    public override void Szomszedolas(Irany irany, PalyaElem szomszed)
+    {
+        if (irany == CsucsIrany)
+        {
+            csucsSzar = szomszed;
+        }
         else
         {
-            if (Vegallas == null)
-            {
-                throw new InvalidOperationException($"Váltfelvágás: a gyök felől érintett {Nev} váltónak nincs végállása");
-            }
-            return csucsSzar;
+            egyenesSzar = szomszed;
         }
     }
 
-    public override void KpSzomszedolas(PalyaElem kpSzomszed)
-    {
-        switch (CsucsFelolIrany)
-        {
-            case Irany.Paros:
-                csucsSzar = kpSzomszed;
-                break;
-            case Irany.Paratlan:
-                egyenesSzar = kpSzomszed;
-                break;
-        }
-    }
-    public override void VpSzomszedolas(PalyaElem vpSzomszed)
-    {
-        switch (CsucsFelolIrany)
-        {
-            case Irany.Paros:
-                egyenesSzar = vpSzomszed;
-                break;
-            case Irany.Paratlan:
-                csucsSzar = vpSzomszed;
-                break;
-        }
-    }
     public void KiteroSzomszedolas(PalyaElem kiteroSzomszed)
     {
         kiteroSzar = kiteroSzomszed;
