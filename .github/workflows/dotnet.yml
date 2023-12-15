@@ -21,11 +21,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./Gyermekvasut/Gyermekvasut.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./Gyermekvasut/Gyermekvasut.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./Gyermekvasut/Gyermekvasut.sln --no-build --verbosity normal
     # Run code analysis for all projects/solutions, such that code analysis violations break the build.
     - name: Run .NET Code Analysis
       uses: dotnet/code-analysis@main
