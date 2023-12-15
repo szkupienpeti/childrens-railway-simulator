@@ -44,7 +44,7 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"szkupienpeti_childrens-railway-simulator" /o:"szkup" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet restore
-          dotnet build
-          dotnet test
+          dotnet restore ./Gyermekvasut/Gyermekvasut.sln
+          dotnet build ./Gyermekvasut/Gyermekvasut.sln
+          dotnet test ./Gyermekvasut/Gyermekvasut.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
