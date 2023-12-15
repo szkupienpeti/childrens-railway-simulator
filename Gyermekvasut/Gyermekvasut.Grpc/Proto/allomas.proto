@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+option csharp_namespace = "Gyermekvasut.Grpc";
+package gyermekvasut;
+
+service GrpcAllomas {
+  rpc Csengetes(CsengetesRequest) returns (google.protobuf.Empty);
+  rpc VisszaCsengetes(VisszaCsengetesRequest) returns (google.protobuf.Empty);
+  rpc EngedelyKeres(EngedelyKeresRequest) returns (google.protobuf.Empty);
+  rpc EngedelyAdas(EngedelyAdasRequest) returns (google.protobuf.Empty);
+  rpc EngedelyMegtagadas(EngedelyMegtagadasRequest) returns (google.protobuf.Empty);
+  rpc IndulasiIdoKozles(IndulasiIdoKozlesRequest) returns (google.protobuf.Empty);
+  rpc IndulasiIdoKozlesVetel(IndulasiIdoKozlesVetelRequest) returns (google.protobuf.Empty);
+  rpc Visszajelentes(VisszajelentesRequest) returns (google.protobuf.Empty);
+  rpc VisszajelentesVetel(VisszajelentesVetelRequest) returns (google.protobuf.Empty);
+  rpc VonatAllomaskozbeBelep(VonatAllomaskozbeBelepRequest) returns (google.protobuf.Empty);
+  rpc VonatAllomaskozbolKilep(VonatAllomaskozbolKilepRequest) returns (google.protobuf.Empty);
+}
+
+enum GrpcAllomasNev {
+  GRPC_ALLOMAS_NEV_UNSPECIFIED = 0;
+  SZECHENYIHEGY = 1;
+  CSILLEBERC = 2;
+  VIRAGVOLGY = 3;
+  JANOSHEGY = 4;
+  SZEPJUHASZNE = 5;
+  HARSHEGY = 6;
+  HUVOSVOLGY = 7;
+}
+
+enum GrpcCsengetes {
+  GRPC_CSENGETES_UNSPECIFIED = 0;
+  ROVID = 1;
+  HOSSZU = 2;
+}
+
+message CsengetesRequest {
+  GrpcAllomasNev kuldo = 1;
+  repeated GrpcCsengetes csengetesek = 2;
+}
+
+message VisszaCsengetesRequest {
+  GrpcAllomasNev kuldo = 1;
+  repeated GrpcCsengetes csengetesek = 2;
+}
+
+enum GrpcEngedelyKeresTipus {
+  GRPC_ENGEDELY_KERES_TIPUS_UNSPECIFIED = 0;
+  AZONOS_IRANYU_VOLT = 1;
+  ELLENKEZO_IRANYU_VOLT = 2;
+  ELLENKEZO_IRANYU_VAN = 3;
+}
+
+message EngedelyKeresRequest {
+  GrpcAllomasNev kuldo = 1;
+  GrpcEngedelyKeresTipus tipus = 2;
+  optional string utolso_vonat = 3;
+  string vonatszam = 4;
+  GrpcIdo ido = 5;
+  string nev = 6;
+}
+
+message GrpcIdo {
+  int32 perc = 1;
+  int32 ora = 2;
+}
+
+enum GrpcEngedelyAdasTipus {
+  GRPC_ENGEDELY_ADAS_TIPUS_UNSPECIFIED = 0;
+  AZONOS_IRANYU = 1;
+  ELLENKEZO_IRANYU = 2;
+}
+
+message EngedelyAdasRequest {
+  GrpcAllomasNev kuldo = 1;
+  GrpcEngedelyAdasTipus tipus = 2;
+  optional string utolso_vonat = 3;
+  string vonatszam = 4;
+  string nev = 5;
+}
+
+message EngedelyMegtagadasRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+  string ok = 3;
+  int32 perc_mulva = 4;
+  string nev = 5;
+}
+
+message IndulasiIdoKozlesRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+  GrpcIdo ido = 3;
+  string nev = 4;
+}
+
+message IndulasiIdoKozlesVetelRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+  GrpcIdo ido = 3;
+  string nev = 4;
+}
+
+message VisszajelentesRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+  string nev = 3;
+}
+
+message VisszajelentesVetelRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+  string nev = 3;
+}
+
+message VonatAllomaskozbeBelepRequest {
+  GrpcAllomasNev kuldo = 1;
+  GrpcVonat vonat = 2;
+}
+
+message VonatAllomaskozbolKilepRequest {
+  GrpcAllomasNev kuldo = 1;
+  string vonatszam = 2;
+}
+
+message GrpcVonat {
+  string nev = 1;
+  int32 hossz = 2;
+  repeated GrpcJarmu jarmuvek = 3;
+  // TODO Menetrend stb.?
+}
+
+message GrpcJarmu {
+  string tipus = 1;
+}

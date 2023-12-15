@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "I,S - Gyermekvasut": {
+      "commandName": "Project",
+      "commandLineArgs": "i,s"
+    }
+  }
+}
