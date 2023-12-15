@@ -5,10 +5,14 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gyermekvasut.Biztberek.Emeltyus\Gyermekvasut.Biztberek.Emeltyus.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Biztberek.Reteszes\Gyermekvasut.Biztberek.Reteszes.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Biztberek.Valtozaras\Gyermekvasut.Biztberek.Valtozaras.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Halozat\Gyermekvasut.Halozat.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
   </ItemGroup>

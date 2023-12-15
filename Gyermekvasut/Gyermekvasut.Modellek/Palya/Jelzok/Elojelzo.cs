@@ -7,7 +7,7 @@ public class Elojelzo : Jelzo
     public Sebessegjelzes Elojelzes
     {
         get => _elojelzes;
-        private set
+        set
         {
             if (value != _elojelzes)
             {

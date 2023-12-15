@@ -61,13 +61,12 @@ public partial class HalozatiAllomas : Allomas
 
     private void SubscribeToAllomaskozEvents()
     {
-        if (Topologia.KpAllomaskoz != null)
+        foreach (var allomaskoz in Topologia.Allomaskozok.Values)
         {
-            Topologia.KpAllomaskoz.SzerelvenyChanged += Allomaskoz_SzerelvenyChanged;
-        }
-        if (Topologia.VpAllomaskoz != null)
-        {
-            Topologia.VpAllomaskoz.SzerelvenyChanged += Allomaskoz_SzerelvenyChanged;
+            if (allomaskoz != null)
+            {
+                allomaskoz.SzerelvenyChanged += Allomaskoz_SzerelvenyChanged;
+            }
         }
     }
 
@@ -96,6 +95,4 @@ public partial class HalozatiAllomas : Allomas
             _ => throw new NotImplementedException()
         };
     }
-
-    
 }

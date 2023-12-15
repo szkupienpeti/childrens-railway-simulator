@@ -4,23 +4,27 @@ using Gyermekvasut.Modellek.Palya.Jelzok;
 
 namespace Gyermekvasut.Modellek.Topologia;
 
-public static class Topologiak
+public static class TopologiaFactory
 {
-    public static AllomasiTopologia Felepit(AllomasNev allomasNev)
+    // TODO Make factory non-static?
+    public static AllomasiTopologia Create(AllomasNev allomasNev)
     {
-        return allomasNev switch
+        AllomasiTopologia topologia = allomasNev switch
         {
             AllomasNev.Szechenyihegy => throw new NotImplementedException(),
             AllomasNev.Csilleberc => throw new NotImplementedException(),
             AllomasNev.Viragvolgy => throw new NotImplementedException(),
-            AllomasNev.Janoshegy => JanoshegyFelepit(),
-            AllomasNev.Szepjuhaszne => SzepjuhaszneFelepit(),
+            AllomasNev.Janoshegy => CreateJanoshegy(),
+            AllomasNev.Szepjuhaszne => CreateSzepjuhaszne(),
             AllomasNev.Harshegy => throw new NotImplementedException(),
             AllomasNev.Huvosvolgy => throw new NotImplementedException(),
             _ => throw new NotImplementedException()
         };
+        LezarasiTablazatFactory lezarasiTablazatFactory = new(topologia);
+        topologia.LezarasiTablazat = lezarasiTablazatFactory.Create();
+        return topologia;
     }
-    private static AllomasiTopologia JanoshegyFelepit()
+    private static AllomasiTopologia CreateJanoshegy()
     {
         // TODO Just copied from Szepjuhaszne, change it!!!
         /* 
@@ -59,7 +63,7 @@ public static class Topologiak
         return topologia;
     }
 
-    private static AllomasiTopologia SzepjuhaszneFelepit()
+    private static AllomasiTopologia CreateSzepjuhaszne()
     {
         /* 
          * A (I)                                       (H) O

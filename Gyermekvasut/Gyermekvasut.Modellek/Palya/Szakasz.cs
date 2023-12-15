@@ -49,15 +49,17 @@ public class Szakasz : EgyenesPalyaElem
 
     protected virtual void OnSzerelvenyChanged(Szerelveny? elozoSzerelveny)
     {
-        SzerelvenyChanged?.Invoke(this, new(elozoSzerelveny));
+        SzerelvenyChanged?.Invoke(this, new(elozoSzerelveny, Szerelveny));
     }
 }
 
 public class SzakaszSzerelvenyChangedEventArgs : EventArgs
 {
     public Szerelveny? ElozoSzerelveny { get; }
-    public SzakaszSzerelvenyChangedEventArgs(Szerelveny? elozoSzerelveny)
+    public Szerelveny? UjSzerelveny { get; }
+    public SzakaszSzerelvenyChangedEventArgs(Szerelveny? elozoSzerelveny, Szerelveny? ujSzerelveny)
     {
         ElozoSzerelveny = elozoSzerelveny;
+        UjSzerelveny = ujSzerelveny;
     }
 }

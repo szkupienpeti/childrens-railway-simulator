@@ -1,3 +1,5 @@
+using Gyermekvasut.Biztberek.Emeltyus.Emeltyuk;
+using Gyermekvasut.Biztberek.Valtozaras;
 using Gyermekvasut.Halozat;
 using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek;
@@ -10,12 +12,23 @@ namespace Gyermekvasut.Forms;
 public partial class AllomasForm : Form
 {
     public HalozatiAllomas Allomas { get; }
+    public ValtozarasBiztber ValtozarasBiztber { get; }
+    private ValtozarasEmeltyuCsoport csoport;
+    private KetfogalmuElojelzoEmeltyu<ValtozarasBiztber> elojelzoEmeltyu;
+    private BejaratiJelzoEmeltyu1<ValtozarasBiztber> bejaratiJelzoEmeltyu1;
+    private BejaratiJelzoEmeltyu2<ValtozarasBiztber> bejaratiJelzoEmeltyu2;
     public AllomasForm(HalozatiAllomas allomas)
     {
         Allomas = allomas;
         InitializeComponent();
         Text = Allomas.AllomasNev.Nev();
         SubscribeToEvents();
+        ValtozarasBiztberFactory valtozarasBiztberFactory = new(allomas);
+        ValtozarasBiztber = valtozarasBiztberFactory.Create();
+        csoport = ValtozarasBiztber.EmeltyuCsoportok[Irany.KezdopontFele];
+        elojelzoEmeltyu = csoport.ElojelzoEmeltyu;
+        bejaratiJelzoEmeltyu1 = csoport.BejaratiJelzoEmeltyu1;
+        bejaratiJelzoEmeltyu2 = csoport.BejaratiJelzoEmeltyu2;
     }
 
     private void SubscribeToEvents()
@@ -67,5 +80,33 @@ public partial class AllomasForm : Form
     private void button2_Click(object sender, EventArgs e)
     {
         Allomas.Csenget(Irany.VegpontFele, new List<Modellek.Telefon.Csengetes> { Modellek.Telefon.Csengetes.Hosszu, Modellek.Telefon.Csengetes.Hosszu });
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+        MessageBox.Show("Test");
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        var result = elojelzoEmeltyu.AllitasiKiserlet(ValtozarasBiztber);
+        MessageBox.Show(result.ToString());
+    }
+
+    private void button5_Click(object sender, EventArgs e)
+    {
+        var result = bejaratiJelzoEmeltyu1.AllitasiKiserlet(ValtozarasBiztber);
+        MessageBox.Show(result.ToString());
+    }
+
+    private void button6_Click(object sender, EventArgs e)
+    {
+        var result = bejaratiJelzoEmeltyu2.AllitasiKiserlet(ValtozarasBiztber);
+        MessageBox.Show(result.ToString());
+    }
+
+    private void button7_Click(object sender, EventArgs e)
+    {
+        csoport.ValtozarKulcsTarolo.ValtozarKulcsBetesz(ValtoAllas.Egyenes);
     }
 }

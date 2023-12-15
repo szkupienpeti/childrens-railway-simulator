@@ -8,14 +8,41 @@ public class AllomasiTopologia
     public HashSet<Valto> Valtok { get; } = new();
     public HashSet<Jelzo> Jelzok { get; } = new();
     public HashSet<Vagany> Vaganyok { get; } = new();
-    public Szakasz KpAllomaskoz { get; }
-    public Szakasz VpAllomaskoz { get; }
-
-    internal AllomasiTopologia(Szakasz kpAllomaskoz, Szakasz vpAllomaskoz)
+    public Dictionary<Irany, Szakasz?> Allomaskozok { get; } = new();
+    private LezarasiTablazat? _lezarasiTablazat;
+    public LezarasiTablazat LezarasiTablazat
     {
-        KpAllomaskoz = kpAllomaskoz;
-        VpAllomaskoz = vpAllomaskoz;
+        get => _lezarasiTablazat!;
+        set => _lezarasiTablazat = value!;
     }
+
+    internal AllomasiTopologia(Szakasz? kpAllomaskoz, Szakasz? vpAllomaskoz)
+    {
+        Allomaskozok[Irany.KezdopontFele] = kpAllomaskoz;
+        Allomaskozok[Irany.VegpontFele] = vpAllomaskoz;
+    }
+
+    public Fojelzo GetBejaratiJelzo(Irany allomasvegIrany)
+    {
+        return Jelzok.OfType<Fojelzo>()
+            // A KP állomásvég felöli jelző a VP fele néz
+            .Single(fojelzo => fojelzo.Rendeltetes == FojelzoRendeltetes.Bejarati
+                && fojelzo.Irany == allomasvegIrany.Fordit());
+    }
+
+    public Elojelzo GetElojelzo(Irany allomasvegIrany)
+    {
+        return Jelzok.OfType<Elojelzo>()
+            // A KP állomásvég felöli jelző a VP fele néz
+            .Single(elojelzo => elojelzo.Irany == allomasvegIrany.Fordit());
+    }
+
+    public Valto GetOnlyValto(Irany allomasvegIrany)
+    {
+        return Valtok
+            .Single(valto => valto.CsucsIrany == allomasvegIrany);
+    }
+
     public void EgyenesFeltolt(params PalyaElem[] elemek)
     {
         for (int i = 1; i < elemek.Length; i++)
@@ -45,21 +72,9 @@ public class AllomasiTopologia
         Valtok.Add(valto);
         valto.KiteroSzomszedolas(kiteroSzar);
         kiteroSzar.Szomszedolas(valto.CsucsIrany, valto);
+        // TODO Lezárási táblázathoz hozzáad: gyök felé elindul mindkét száron, ha vágányt talál, add
     }
 
     public Irany GetAllomaskozIrany(Szakasz allomaskoz)
-    {
-        if (allomaskoz == KpAllomaskoz)
-        {
-            return Irany.KezdopontFele!;
-        }
-        else if (allomaskoz == VpAllomaskoz)
-        {
-            return Irany.VegpontFele!;
-        }
-        else
-        {
-            throw new ArgumentException($"A szakasz nem állomásköz: {allomaskoz}");
-        }
-    }
+        => Allomaskozok.Single(pair => pair.Value == allomaskoz).Key;
 }

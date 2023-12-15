@@ -14,14 +14,32 @@ public class Valto : PalyaElem
         {
             if (value != _vegallas)
             {
+                ValtoAllas? elozoVegallas = _vegallas;
                 _vegallas = value;
-                OnVegallasChanged();
+                OnVegallasChanged(elozoVegallas);
             }
         }
     }
-    public event EventHandler<ValtoVegallasEventArgs>? VegallasChanged;
+    public event EventHandler? VegallasChanged;
     public ValtoAllas Vezerles { get; private set; }
-    public ValtoLezaras Lezaras { get; private set; }
+
+    private ValtoLezaras _lezaras;
+    public ValtoLezaras Lezaras
+    {
+        get => _lezaras;
+        private set
+        {
+            if (value != _lezaras)
+            {
+                _lezaras = value;
+                OnLezarasChanged();
+            }
+        }
+    }
+
+    public event EventHandler? LezarasChanged;
+
+    // TODO Csak az elektromos váltóban legyen, a helyszíni váltó azonnal átáll, ott a váltókezelőbe kell időzítés
     private readonly System.Timers.Timer allitasTimer;
 
     // Statikus
@@ -33,8 +51,11 @@ public class Valto : PalyaElem
     public ValtoLezaras AlapLezaras { get; }
     // Pálya
     private PalyaElem? csucsSzar;
+    public PalyaElem CsucsSzar => csucsSzar!;
     private PalyaElem? egyenesSzar;
+    public PalyaElem EgyenesSzar => egyenesSzar!;
     private PalyaElem? kiteroSzar;
+    public PalyaElem KiteroSzar => kiteroSzar!;
 
     public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdo)
         : this(nev, csucsIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva) { }
@@ -57,9 +78,31 @@ public class Valto : PalyaElem
         AlapLezaras = alapLezaras;
     }
 
-    private void OnVegallasChanged()
+    public PalyaElem GetGyokSzar(ValtoAllas valtoAllas)
     {
-        VegallasChanged?.Invoke(this, new ValtoVegallasEventArgs(Vegallas));
+        return valtoAllas switch
+        {
+            ValtoAllas.Egyenes => EgyenesSzar,
+            ValtoAllas.Kitero => KiteroSzar,
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    public Vagany GetGyokFeloliVagany(ValtoAllas valtoAllas)
+    {
+        Irany gyokIrany = CsucsIrany.Fordit();
+        PalyaElem valtoGyokSzar = GetGyokSzar(valtoAllas);
+        return valtoGyokSzar.GetKovetkezoFeltetelesPalyaElem<Vagany>(gyokIrany)!;
+    }
+
+    private void OnVegallasChanged(ValtoAllas? elozoVegallas)
+    {
+        VegallasChanged?.Invoke(this, new ValtoVegallasEventArgs(elozoVegallas, Vegallas));
+    }
+
+    private void OnLezarasChanged()
+    {
+        LezarasChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void AllitasiIdoLejart(object? sender, System.Timers.ElapsedEventArgs e)
@@ -79,18 +122,21 @@ public class Valto : PalyaElem
         return true;
     }
 
-    public bool Lezar()
+    public void Lezar(ValtoAllas allas)
     {
-        if (Vegallas == null)
+        if (Vegallas != allas)
         {
-            return false;
+            throw new InvalidOperationException($"A váltó {Vegallas} végállásban van, de {allas} állásba próbálták lezárni");
         }
         Lezaras = ValtoLezaras.Lezarva;
-        return true;
     }
 
-    public void Felold()
+    public void Felold(ValtoAllas allas)
     {
+        if (Vegallas != allas)
+        {
+            throw new InvalidOperationException($"A váltó {Vegallas} végállásban van, de {allas} állásból próbálták feloldani");
+        }
         Lezaras = ValtoLezaras.Feloldva;
     }
 
@@ -159,10 +205,12 @@ public enum ValtoLezaras
 
 public class ValtoVegallasEventArgs : EventArgs
 {
-    public ValtoAllas? Vegallas { get; set; }
+    public ValtoAllas? ElozoVegallas { get; set; }
+    public ValtoAllas? UjVegallas { get; set; }
 
-    public ValtoVegallasEventArgs(ValtoAllas? vegallas)
+    public ValtoVegallasEventArgs(ValtoAllas? elozoVegallas, ValtoAllas? ujVegallas)
     {
-        Vegallas = vegallas;
+        ElozoVegallas = elozoVegallas;
+        UjVegallas = ujVegallas;
     }
 }

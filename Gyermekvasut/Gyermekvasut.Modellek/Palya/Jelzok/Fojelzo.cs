@@ -9,7 +9,7 @@ public class Fojelzo : Jelzo
     public Sebessegjelzes Jelzes
     {
         get => _jelzes;
-        private set
+        set
         {
             if (value != _jelzes)
             {
