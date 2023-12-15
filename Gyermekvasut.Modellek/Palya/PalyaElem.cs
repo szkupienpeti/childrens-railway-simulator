@@ -4,7 +4,7 @@ public abstract class PalyaElem
 {
     public string Nev { get; }
 
-    public PalyaElem(string nev)
+    protected PalyaElem(string nev)
     {
         Nev = nev;
     }

@@ -7,7 +7,7 @@ namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 [TestClass]
 public class ValtozarasBiztberTests
 {
-    private ValtozarasBiztber CreateBiztber(AllomasNev allomasNev)
+    private static ValtozarasBiztber CreateBiztber(AllomasNev allomasNev)
     {
         Allomas allomas = new(allomasNev);
         ValtozarasBiztberFactory factory = new(allomas);

@@ -2,6 +2,9 @@
 
 public sealed class Szimulacio
 {
+    private static readonly int SECONDS_IN_MINUTE = 60;
+    private static readonly int MILLISECONDS_IN_SECOND = 1000;
+
     private static readonly Lazy<Szimulacio> lazy = new(() => new());
 
     public static Szimulacio Instance => lazy.Value;
@@ -11,7 +14,7 @@ public sealed class Szimulacio
     public void Start(int ora, int perc)
     {
         KozpontiIdo = new TimeOnly(ora, perc);
-        KozpontiOra.Interval = 60 * 1000 / SebessegSzorzo;
+        KozpontiOra.Interval = (double)SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND / SebessegSzorzo;
         KozpontiOra.Elapsed += KozpontiOra_Elapsed;
         KozpontiOra.Start();
     }
@@ -25,7 +28,7 @@ public sealed class Szimulacio
     private TimeOnly _kozpontiIdo;
     public TimeOnly KozpontiIdo
     {
-        get => KozpontiIdo;
+        get => _kozpontiIdo;
         private set
         {
             if (value != _kozpontiIdo)

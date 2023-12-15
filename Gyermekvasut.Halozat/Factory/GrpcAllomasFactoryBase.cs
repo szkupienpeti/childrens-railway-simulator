@@ -7,7 +7,7 @@ internal abstract class GrpcAllomasFactoryBase
 {
     private IConfiguration Configuration { get; }
 
-    public GrpcAllomasFactoryBase(IConfiguration configuration)
+    protected GrpcAllomasFactoryBase(IConfiguration configuration)
     {
         Configuration = configuration;
     }

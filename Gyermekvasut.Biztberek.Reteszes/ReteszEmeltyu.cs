@@ -4,7 +4,7 @@ using Gyermekvasut.Modellek.Palya;
 namespace Gyermekvasut.Biztberek.Reteszes;
 
 public class ReteszEmeltyu<TAllitasiKiserletVisitor> : Emeltyu<TAllitasiKiserletVisitor>
-    where TAllitasiKiserletVisitor : ReteszesAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IReteszesAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
 {
     public bool UresbenMozog { get; private set; }
     public Valto Valto { get; }

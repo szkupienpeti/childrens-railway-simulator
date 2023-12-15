@@ -12,7 +12,7 @@ public abstract class EmeltyuCsoportFactory<TAllitasiKiserletVisitor, TEmeltyuCs
     protected AllomasiTopologia Topologia { get; }
     protected ValtokezeloFactory<TValtokezelo> ValtokezeloFactory { get; }
 
-    public EmeltyuCsoportFactory(AllomasiTopologia topologia, ValtokezeloFactory<TValtokezelo> valtokezeloFactory)
+    protected EmeltyuCsoportFactory(AllomasiTopologia topologia, ValtokezeloFactory<TValtokezelo> valtokezeloFactory)
     {
         Topologia = topologia;
         ValtokezeloFactory = valtokezeloFactory;

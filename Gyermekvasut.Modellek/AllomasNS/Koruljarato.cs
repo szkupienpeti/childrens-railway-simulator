@@ -8,7 +8,7 @@ public abstract class Koruljarato
     protected System.Timers.Timer timer = new();
     public Allomas Allomas { get; }
 
-    public Koruljarato(Allomas allomas)
+    protected Koruljarato(Allomas allomas)
     {
         Allomas = allomas;
         foreach (var vagany in Allomas.Topologia.Vaganyok)

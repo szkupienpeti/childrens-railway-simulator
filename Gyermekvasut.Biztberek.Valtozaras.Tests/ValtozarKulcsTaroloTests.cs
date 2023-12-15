@@ -6,7 +6,7 @@ namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 [TestClass]
 public class ValtozarKulcsTaroloTests
 {
-    private Valto CreateValto(ValtoAllas valtoAllas, ValtoLezaras valtoLezaras)
+    private static Valto CreateValto(ValtoAllas valtoAllas, ValtoLezaras valtoLezaras)
         => new("", Irany.KezdopontFele, ValtoTajolas.Balos, 1, valtoAllas, valtoLezaras);
 
     [DataTestMethod]

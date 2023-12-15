@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.Palya;
 
 namespace Gyermekvasut.Biztberek.Reteszes;
 
-public class ReteszesBiztber : EmeltyusBiztber<ReteszesBiztber, ReteszesEmeltyuCsoport, ReteszesValtokezelo>, ReteszesAllitasiKiserletVisitor<ReteszesBiztber>
+public class ReteszesBiztber : EmeltyusBiztber<ReteszesBiztber, ReteszesEmeltyuCsoport, ReteszesValtokezelo>, IReteszesAllitasiKiserletVisitor<ReteszesBiztber>
 {
     public ReteszesBiztber(Allomas allomas, EmeltyuCsoportFactory<ReteszesBiztber, ReteszesEmeltyuCsoport, ReteszesValtokezelo> emeltyuCsoportFactory)
         : base(allomas, emeltyuCsoportFactory) { }

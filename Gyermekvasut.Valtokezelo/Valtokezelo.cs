@@ -24,8 +24,8 @@ public abstract class Valtokezelo
     private System.Timers.Timer VaganyutBeallitasTimer { get; } = new() { AutoReset = false };
 
     public event EventHandler<BejelentesEventArgs>? Bejelentes;
-    
-    public Valtokezelo(Valto valto, ValtoLezarasSzerep valtoLezarasSzerep,
+
+    protected Valtokezelo(Valto valto, ValtoLezarasSzerep valtoLezarasSzerep,
         LezarasiTablazat lezarasiTablazat, Fojelzo bejaratiJelzo,
         Szakasz kijaratOldoSzakasz, Szakasz kijaratOldoSzakaszElottiSzakasz,
         Szakasz egyenesBejaratOldoSzakasz, Szakasz egyenesBejaratOldoSzakaszElottiSzakasz,
@@ -228,7 +228,7 @@ public abstract class Valtokezelo
         {
             VaganyutIrany.Bejarat => BejaratOldoSzakaszok[Valto.Vegallas!.Value],
             VaganyutIrany.Kijarat => KijaratOldoSzakaszok,
-            _ => throw new ArgumentNullException("Nincs aktuális vágányút")
+            _ => throw new InvalidOperationException("Nincs aktuális vágányút")
         };
     }
 }

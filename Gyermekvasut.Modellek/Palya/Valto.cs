@@ -140,12 +140,6 @@ public class Valto : PalyaElem
         Lezaras = ValtoLezaras.Feloldva;
     }
 
-    public void Szomszedolas(PalyaElem csucsFelol, PalyaElem egyenes, PalyaElem kitero)
-    {
-        csucsSzar = csucsFelol;
-        egyenesSzar = egyenes;
-        kiteroSzar = kitero;
-    }
     public override PalyaElem? Kovetkezo(Irany irany)
     {
         if (irany == CsucsIrany)

@@ -7,7 +7,7 @@ public abstract class Jelzo : EgyenesPalyaElem
     public Irany Irany { get; }
     public JelzoForma Forma { get; }
     public event EventHandler? JelzesChanged;
-    public Jelzo(string nev, Irany irany, JelzoForma forma) : base(nev)
+    protected Jelzo(string nev, Irany irany, JelzoForma forma) : base(nev)
     {
         Irany = irany;
         Forma = forma;

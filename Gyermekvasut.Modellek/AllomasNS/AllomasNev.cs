@@ -1,4 +1,6 @@
-﻿namespace Gyermekvasut.Modellek.AllomasNS;
+﻿using System.Collections.Immutable;
+
+namespace Gyermekvasut.Modellek.AllomasNS;
 
 public enum AllomasNev
 {
@@ -13,8 +15,8 @@ public enum AllomasNev
 
 public static class AllomasNevExtensions
 {
-    public static readonly List<AllomasNev> VONAL = new()
-    {
+    public static readonly ImmutableList<AllomasNev> VONAL = ImmutableList.Create
+    (
         AllomasNev.Szechenyihegy,
         AllomasNev.Csilleberc,
         AllomasNev.Viragvolgy,
@@ -22,7 +24,7 @@ public static class AllomasNevExtensions
         AllomasNev.Szepjuhaszne,
         AllomasNev.Harshegy,
         AllomasNev.Huvosvolgy
-    };
+    );
 
     public static string Nev(this AllomasNev allomasNev)
     {

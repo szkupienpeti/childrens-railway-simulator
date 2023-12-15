@@ -9,8 +9,8 @@ public abstract class ValtokezeloFactory<TValtokezelo>
     where TValtokezelo : Valtokezelo
 {
     protected AllomasiTopologia Topologia { get; }
-    
-    public ValtokezeloFactory(AllomasiTopologia topologia)
+
+    protected ValtokezeloFactory(AllomasiTopologia topologia)
     {
         Topologia = topologia;
     }

@@ -11,7 +11,7 @@ public abstract class EmeltyusBiztberFactory<TBiztber, TEmeltyuCsoport, TValtoke
 {
     protected EmeltyuCsoportFactory<TBiztber, TEmeltyuCsoport, TValtokezelo> EmeltyuCsoportFactory { get; }
 
-    public EmeltyusBiztberFactory(Allomas allomas, EmeltyuCsoportFactory<TBiztber, TEmeltyuCsoport, TValtokezelo> emeltyuCsoportFactory)
+    protected EmeltyusBiztberFactory(Allomas allomas, EmeltyuCsoportFactory<TBiztber, TEmeltyuCsoport, TValtokezelo> emeltyuCsoportFactory)
         : base(allomas)
     {
         EmeltyuCsoportFactory = emeltyuCsoportFactory;

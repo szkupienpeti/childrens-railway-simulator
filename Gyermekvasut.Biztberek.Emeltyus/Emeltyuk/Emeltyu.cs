@@ -20,7 +20,7 @@ public abstract class Emeltyu<TAllitasiKiserletVisitor>
     
     public event EventHandler? AllasChanged;
 
-    public Emeltyu(string nev, EmeltyuAllas alapAllas)
+    protected Emeltyu(string nev, EmeltyuAllas alapAllas)
     {
         Nev = nev;
         _allas = alapAllas; // Do not invoke event

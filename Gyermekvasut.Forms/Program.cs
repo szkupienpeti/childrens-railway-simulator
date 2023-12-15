@@ -31,14 +31,6 @@ internal static class Program
     }
 
     private static AllomasNev AllomasNevFromKod(this string kod)
-    {
-        foreach (AllomasNev allomasNev in Enum.GetValues(typeof(AllomasNev)))
-        {
-            if (string.Equals(allomasNev.Kod(), kod, StringComparison.OrdinalIgnoreCase))
-            {
-                return allomasNev;
-            }
-        }
-        throw new ArgumentException($"Nem található AllomasNev {kod} kóddal");
-    }
+        => Enum.GetValues<AllomasNev>()
+            .Single(allomasNev => string.Equals(allomasNev.Kod(), kod, StringComparison.OrdinalIgnoreCase));
 }

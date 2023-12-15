@@ -14,7 +14,7 @@ public abstract class EmeltyusBiztber<TAllitasiKiserletVisitor, TEmeltyuCsoport,
 {
     public Dictionary<Irany, TEmeltyuCsoport> EmeltyuCsoportok { get; } = new();
 
-    public EmeltyusBiztber(Allomas allomas, EmeltyuCsoportFactory<TAllitasiKiserletVisitor, TEmeltyuCsoport, TValtokezelo> emeltyuCsoportFactory)
+    protected EmeltyusBiztber(Allomas allomas, EmeltyuCsoportFactory<TAllitasiKiserletVisitor, TEmeltyuCsoport, TValtokezelo> emeltyuCsoportFactory)
         : base(allomas)
     {
         foreach (Irany irany in Enum.GetValues<Irany>())
@@ -126,7 +126,7 @@ public abstract class EmeltyusBiztber<TAllitasiKiserletVisitor, TEmeltyuCsoport,
     private bool ElojelzoMegalljElojelzesben(Emeltyu<TAllitasiKiserletVisitor> emeltyu)
         => ElojelzoMegalljElojelzesben(GetEmeltyuCsoport(emeltyu));
 
-    private bool ElojelzoMegalljElojelzesben(TEmeltyuCsoport emeltyuCsoport)
+    private static bool ElojelzoMegalljElojelzesben(TEmeltyuCsoport emeltyuCsoport)
         => emeltyuCsoport.ElojelzoEmeltyu.Allas == EmeltyuAllas.Also;
 
     protected bool ValtoSzerkezetilegLezarva(Emeltyu<TAllitasiKiserletVisitor> emeltyu, ValtoAllas valtoAllas)
@@ -150,14 +150,12 @@ public abstract class EmeltyusBiztber<TAllitasiKiserletVisitor, TEmeltyuCsoport,
     // Segédfüggvények
     protected TEmeltyuCsoport GetEmeltyuCsoport(Emeltyu<TAllitasiKiserletVisitor> emeltyu)
         => EmeltyuCsoportok.Values
-            .Where(emeltyuCsoport => emeltyuCsoport.Tartalmaz(emeltyu))
-            .Single();
+            .Single(emeltyuCsoport => emeltyuCsoport.Tartalmaz(emeltyu));
 
     protected Valtokezelo GetValtokezelo(Emeltyu<TAllitasiKiserletVisitor> emeltyu)
         => GetEmeltyuCsoport(emeltyu).Valtokezelo;
 
     protected TEmeltyuCsoport GetTulvegiEmeltyuCsoport(Emeltyu<TAllitasiKiserletVisitor> emeltyu)
         => EmeltyuCsoportok.Values
-            .Where(emeltyuCsoport => !emeltyuCsoport.Tartalmaz(emeltyu))
-            .Single();
+            .Single(emeltyuCsoport => !emeltyuCsoport.Tartalmaz(emeltyu));
 }

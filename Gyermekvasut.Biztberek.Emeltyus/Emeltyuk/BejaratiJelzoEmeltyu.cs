@@ -7,7 +7,7 @@ public abstract class BejaratiJelzoEmeltyu<TAllitasiKiserletVisitor> : Emeltyu<T
 {
     public Fojelzo BejaratiJelzo { get; }
 
-    public BejaratiJelzoEmeltyu(string nev, Fojelzo bejaratiJelzo, EmeltyuAllas alapAllas)
+    protected BejaratiJelzoEmeltyu(string nev, Fojelzo bejaratiJelzo, EmeltyuAllas alapAllas)
         : base(nev, alapAllas)
     {
         if (bejaratiJelzo.Rendeltetes != FojelzoRendeltetes.Bejarati)
