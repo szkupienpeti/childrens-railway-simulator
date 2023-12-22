@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using Gyermekvasut.Modellek.Topologia;
+using System.Collections.Immutable;
 
 namespace Gyermekvasut.Modellek.AllomasNS;
 
@@ -27,8 +28,7 @@ public static class AllomasNevExtensions
     );
 
     public static string Nev(this AllomasNev allomasNev)
-    {
-        return allomasNev switch
+        => allomasNev switch
         {
             AllomasNev.Szechenyihegy => "Széchenyihegy",
             AllomasNev.Csilleberc => "Csillebérc",
@@ -39,11 +39,9 @@ public static class AllomasNevExtensions
             AllomasNev.Huvosvolgy => "Hűvösvölgy",
             _ => throw new NotImplementedException()
         };
-    }
 
     public static string Kod(this AllomasNev allomasNev)
-    {
-        return allomasNev switch
+        => allomasNev switch
         {
             AllomasNev.Szechenyihegy => "A",
             AllomasNev.Csilleberc => "U",
@@ -54,7 +52,14 @@ public static class AllomasNevExtensions
             AllomasNev.Huvosvolgy => "O",
             _ => throw new NotImplementedException()
         };
-    }
+
+    public static AllomasNev? Szomszed(this AllomasNev allomasNev, Irany irany)
+        => irany switch
+        {
+            Irany.KezdopontFele => allomasNev.KpSzomszed(),
+            Irany.VegpontFele => allomasNev.VpSzomszed(),
+            _ => throw new NotImplementedException()
+        };
 
     public static AllomasNev? KpSzomszed(this AllomasNev allomasNev)
     {

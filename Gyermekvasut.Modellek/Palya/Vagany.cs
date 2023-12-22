@@ -22,6 +22,11 @@ public class Vagany : Szakasz
     public event EventHandler? MenesztesChanged;
     public event EventHandler<VonatErkezettEventArgs>? VonatErkezett;
 
+    public Vagany(string nev, AllomasNev allomasNev) : base(nev)
+    {
+        AllomasNev = allomasNev;
+    }
+
     public Vagany(string nev, AllomasNev allomasNev, int hossz) : base(nev, hossz)
     {
         AllomasNev = allomasNev;
@@ -46,9 +51,8 @@ public class Vagany : Szakasz
     protected override void OnSzerelvenyChanged(Szerelveny? elozoSzerelveny)
     {
         base.OnSzerelvenyChanged(elozoSzerelveny);
-        if (Szerelveny is Vonat)
+        if (Szerelveny is Vonat vonat)
         {
-            Vonat vonat = (Szerelveny as Vonat)!;
             OnVonatErkezett(vonat);
         }
     }

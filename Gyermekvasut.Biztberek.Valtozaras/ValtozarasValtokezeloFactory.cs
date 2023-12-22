@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.Topologia;
 
 namespace Gyermekvasut.Biztberek.Valtozaras;
 
-public class ValtozarasValtokezeloFactory : ValtokezeloFactory<ValtozarasValtokezelo>
+internal class ValtozarasValtokezeloFactory : ValtokezeloFactory<ValtozarasValtokezelo>
 {
     public ValtozarasValtokezeloFactory(AllomasiTopologia topologia) : base(topologia) { }
 

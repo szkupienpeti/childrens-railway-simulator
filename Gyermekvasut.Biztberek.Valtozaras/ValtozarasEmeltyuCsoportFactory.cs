@@ -4,7 +4,7 @@ using Gyermekvasut.Modellek.Topologia;
 
 namespace Gyermekvasut.Biztberek.Valtozaras;
 
-public class ValtozarasEmeltyuCsoportFactory
+internal class ValtozarasEmeltyuCsoportFactory
     : EmeltyuCsoportFactory<ValtozarasBiztber, ValtozarasEmeltyuCsoport, ValtozarasValtokezelo>
 {
     public ValtozarasEmeltyuCsoportFactory(AllomasiTopologia topologia,

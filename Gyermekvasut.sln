@@ -17,15 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Halozat", "Gye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Forms", "Gyermekvasut.Forms\Gyermekvasut.Forms.csproj", "{8BCBAA77-E636-4E24-A6E7-C3480D3AF14B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Biztberek.Emeltyus", "Gyermekvasut.Biztberek.Emeltyus\Gyermekvasut.Biztberek.Emeltyus.csproj", "{ED974739-6874-4D74-83B0-49EA01A8DE79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Biztberek.Emeltyus", "Gyermekvasut.Biztberek.Emeltyus\Gyermekvasut.Biztberek.Emeltyus.csproj", "{ED974739-6874-4D74-83B0-49EA01A8DE79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Biztberek.Valtozaras", "Gyermekvasut.Biztberek.Valtozaras\Gyermekvasut.Biztberek.Valtozaras.csproj", "{6CE8EDC4-C50E-4850-AAA8-384BDC391110}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Biztberek.Valtozaras", "Gyermekvasut.Biztberek.Valtozaras\Gyermekvasut.Biztberek.Valtozaras.csproj", "{6CE8EDC4-C50E-4850-AAA8-384BDC391110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Biztberek.Reteszes", "Gyermekvasut.Biztberek.Reteszes\Gyermekvasut.Biztberek.Reteszes.csproj", "{2A6E1A79-FC1F-416F-9CE3-35D101B5FDCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Biztberek.Reteszes", "Gyermekvasut.Biztberek.Reteszes\Gyermekvasut.Biztberek.Reteszes.csproj", "{2A6E1A79-FC1F-416F-9CE3-35D101B5FDCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Valtokezelo", "Gyermekvasut.Valtokezelo\Gyermekvasut.Valtokezelo.csproj", "{E494B165-1420-4D48-BE34-ECCC74A4A0CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Valtokezelo", "Gyermekvasut.Valtokezelo\Gyermekvasut.Valtokezelo.csproj", "{E494B165-1420-4D48-BE34-ECCC74A4A0CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Biztberek.Valtozaras.Tests", "Gyermekvasut.Biztberek.Valtozaras.Tests\Gyermekvasut.Biztberek.Valtozaras.Tests.csproj", "{8D6CC303-E5B6-48E1-8484-417142438842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Biztberek.Valtozaras.Tests", "Gyermekvasut.Biztberek.Valtozaras.Tests\Gyermekvasut.Biztberek.Valtozaras.Tests.csproj", "{8D6CC303-E5B6-48E1-8484-417142438842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Modellek.Tests", "Gyermekvasut.Modellek.Tests\Gyermekvasut.Modellek.Tests.csproj", "{B909D240-CE6A-4687-9C27-970C2C44BF23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{8D6CC303-E5B6-48E1-8484-417142438842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6CC303-E5B6-48E1-8484-417142438842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D6CC303-E5B6-48E1-8484-417142438842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

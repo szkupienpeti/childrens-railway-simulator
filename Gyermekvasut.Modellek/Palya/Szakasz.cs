@@ -5,7 +5,10 @@ namespace Gyermekvasut.Modellek.Palya;
 
 public class Szakasz : EgyenesPalyaElem
 {
-    public int Hossz { get; }
+    private static readonly int HIANYZO_HOSSZ = -1;
+
+    public int Hossz { get; private set; }
+    public bool HosszHianyzik { get => Hossz == HIANYZO_HOSSZ; }
     private Szerelveny? _szerelveny = null;
     public Szerelveny? Szerelveny
     {
@@ -22,9 +25,33 @@ public class Szakasz : EgyenesPalyaElem
     }
     public event EventHandler<SzakaszSzerelvenyChangedEventArgs>? SzerelvenyChanged;
 
+    public Szakasz(string nev) : base(nev)
+    {
+        Hossz = HIANYZO_HOSSZ;
+    }
+
     public Szakasz(string nev, int hossz) : base(nev)
     {
+        ValidateHossz(hossz);
         Hossz = hossz;
+    }
+
+    public void SetHossz(int hossz)
+    {
+        if (Hossz != HIANYZO_HOSSZ)
+        {
+            throw new InvalidOperationException("Már be van állítva a szakasz hossza");
+        }
+        ValidateHossz(hossz);
+        Hossz = hossz;
+    }
+
+    private static void ValidateHossz(int hossz)
+    {
+        if (hossz <= 0)
+        {
+            throw new ArgumentException("A szakasz hosszának pozitívnak kell lennie");
+        }
     }
 
     public void Elfoglal(Szerelveny szerelveny)

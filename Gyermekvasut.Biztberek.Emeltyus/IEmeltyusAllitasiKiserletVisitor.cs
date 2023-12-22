@@ -2,8 +2,8 @@
 
 namespace Gyermekvasut.Biztberek.Emeltyus;
 
-public interface EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
-    where TAllitasiKiserletVisitor : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+public interface IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
 {
     EmeltyuAllitasEredmeny ElojelzoEmeltyuAllitasKiserlet(KetfogalmuElojelzoEmeltyu<TAllitasiKiserletVisitor> elojelzoEmeltyu);
 

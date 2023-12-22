@@ -3,7 +3,7 @@
 namespace Gyermekvasut.Biztberek.Emeltyus.Emeltyuk;
 
 public abstract class BejaratiJelzoEmeltyu<TAllitasiKiserletVisitor> : Emeltyu<TAllitasiKiserletVisitor>
-    where TAllitasiKiserletVisitor : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
 {
     public Fojelzo BejaratiJelzo { get; }
 

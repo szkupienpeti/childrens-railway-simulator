@@ -11,6 +11,6 @@ public class Allomas
     public Allomas(AllomasNev nev)
     {
         AllomasNev = nev;
-        Topologia = TopologiaFactory.Create(nev);
+        Topologia = AllomasiTopologiaFactory.Create(nev);
     }    
 }

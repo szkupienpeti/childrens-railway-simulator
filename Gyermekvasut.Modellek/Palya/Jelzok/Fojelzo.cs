@@ -33,8 +33,8 @@ public class Fojelzo : Jelzo
         }
     }
     
-    public Fojelzo(string nev, Irany irany, JelzoForma forma, FojelzoRendeltetes rendeltetes)
-        : base(nev, irany, forma)
+    public Fojelzo(string nev, Irany irany, JelzoForma forma, FojelzoRendeltetes rendeltetes, Szelvenyszam szelvenyszam)
+        : base(nev, irany, forma, szelvenyszam)
     {
         Rendeltetes = rendeltetes;
     }

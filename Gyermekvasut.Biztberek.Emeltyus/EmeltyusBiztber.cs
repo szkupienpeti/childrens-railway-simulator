@@ -7,8 +7,8 @@ using Gyermekvasut.Modellek.Palya;
 
 namespace Gyermekvasut.Biztberek.Emeltyus;
 
-public abstract class EmeltyusBiztber<TAllitasiKiserletVisitor, TEmeltyuCsoport, TValtokezelo> : Biztber, EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
-    where TAllitasiKiserletVisitor : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+public abstract class EmeltyusBiztber<TAllitasiKiserletVisitor, TEmeltyuCsoport, TValtokezelo> : Biztber, IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
     where TEmeltyuCsoport : EmeltyuCsoport<TAllitasiKiserletVisitor, TValtokezelo>
     where TValtokezelo : Valtokezelo
 {

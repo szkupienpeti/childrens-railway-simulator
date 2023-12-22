@@ -1,13 +1,11 @@
-﻿using Gyermekvasut.Modellek.VonatNS;
+﻿namespace Gyermekvasut.Modellek.Palya;
 
-namespace Gyermekvasut.Modellek.Palya;
-
-public class EgyenesPalyaElem : PalyaElem
+public abstract class EgyenesPalyaElem : PalyaElem
 {
     private PalyaElem? kpSzomszed = null;
     private PalyaElem? vpSzomszed = null;
 
-    public EgyenesPalyaElem(string nev) : base(nev) { }
+    protected EgyenesPalyaElem(string nev) : base(nev) { }
 
     public override void Szomszedolas(Irany irany, PalyaElem szomszed)
     {

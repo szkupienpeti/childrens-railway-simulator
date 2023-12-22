@@ -18,7 +18,9 @@ public class Ismetlojelzo : Jelzo
         }
     }
 
-    public Ismetlojelzo(string nev, Irany irany) : base(nev, irany, JelzoForma.FenyJelzo) { }
+    public Ismetlojelzo(string nev, Irany irany, Szelvenyszam szelvenyszam)
+        : base(nev, irany, JelzoForma.FenyJelzo, szelvenyszam)
+    { }
 }
 
 public enum IsmeteltJelzes

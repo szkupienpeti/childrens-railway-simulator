@@ -8,6 +8,7 @@ public class AllomasiTopologia
     public HashSet<Valto> Valtok { get; } = new();
     public HashSet<Jelzo> Jelzok { get; } = new();
     public HashSet<Vagany> Vaganyok { get; } = new();
+    public HashSet<Szakasz> Szakaszok { get; } = new();
     public Dictionary<Irany, Szakasz?> Allomaskozok { get; } = new();
     private LezarasiTablazat? _lezarasiTablazat;
     public LezarasiTablazat LezarasiTablazat
@@ -43,26 +44,30 @@ public class AllomasiTopologia
             .Single(valto => valto.CsucsIrany == allomasvegIrany);
     }
 
-    public void EgyenesFeltolt(params PalyaElem[] elemek)
+    public void EgyenesFeltolt(List<PalyaElem> elemek)
     {
-        for (int i = 1; i < elemek.Length; i++)
+        for (int i = 1; i < elemek.Count; i++)
         {
             PalyaElem elozo = elemek[i - 1];
             PalyaElem elem = elemek[i];
             elozo.Szomszedolas(Irany.VegpontFele, elem);
             elem.Szomszedolas(Irany.KezdopontFele, elozo);
-
-            if (elem is Valto)
+            
+            if (elem is Valto valto)
             {
-                Valtok.Add((elem as Valto)!);
+                Valtok.Add(valto);
             }
-            if (elem is Jelzo)
+            if (elem is Jelzo jelzo)
             {
-                Jelzok.Add((elem as Jelzo)!);
+                Jelzok.Add(jelzo);
             }
-            if (elem is Vagany)
+            if (elem is Vagany vagany)
             {
-                Vaganyok.Add((elem as Vagany)!);
+                Vaganyok.Add(vagany);
+            }
+            if (elem is Szakasz szakasz)
+            {
+                Szakaszok.Add(szakasz);
             }
         }
     }
@@ -74,6 +79,9 @@ public class AllomasiTopologia
         kiteroSzar.Szomszedolas(valto.CsucsIrany, valto);
         // TODO Lezárási táblázathoz hozzáad: gyök felé elindul mindkét száron, ha vágányt talál, add
     }
+
+    public HashSet<Szakasz> GetHianyzoHosszuSzakaszok()
+        =>Szakaszok.Where(sz => sz.HosszHianyzik).ToHashSet();
 
     public Irany GetAllomaskozIrany(Szakasz allomaskoz)
         => Allomaskozok.Single(pair => pair.Value == allomaskoz).Key;

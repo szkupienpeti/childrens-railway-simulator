@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.Topologia;
 namespace Gyermekvasut.Biztberek.Emeltyus;
 
 public abstract class EmeltyuCsoportFactory<TAllitasiKiserletVisitor, TEmeltyuCsoport, TValtokezelo>
-    where TAllitasiKiserletVisitor : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
     where TEmeltyuCsoport : EmeltyuCsoport<TAllitasiKiserletVisitor, TValtokezelo>
     where TValtokezelo : Valtokezelo
 {

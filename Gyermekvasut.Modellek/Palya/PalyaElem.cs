@@ -1,6 +1,6 @@
 ﻿namespace Gyermekvasut.Modellek.Palya;
 
-public abstract class PalyaElem
+public abstract class PalyaElem : IPalyaElem
 {
     public string Nev { get; }
 
@@ -19,13 +19,10 @@ public abstract class PalyaElem
         PalyaElem? iter = this;
         while ((iter = iter.Kovetkezo(irany)) != null)
         {
-            if (iter is TPalyaElem)
+            if (iter is TPalyaElem tipusosIter
+                && (feltetel == null || feltetel!.Invoke(tipusosIter)))
             {
-                TPalyaElem tipusosIter = (iter as TPalyaElem)!;
-                if (feltetel == null || feltetel!.Invoke(tipusosIter))
-                {
-                    return tipusosIter;
-                }
+                return tipusosIter;
             }
         }
         return null;

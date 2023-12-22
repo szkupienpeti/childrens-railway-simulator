@@ -17,8 +17,8 @@ public class Elojelzo : Jelzo
         }
     }
     
-    public Elojelzo(string nev, Irany irany, JelzoForma forma, ElojelzoTipus tipus)
-        : base(nev, irany, forma)
+    public Elojelzo(string nev, Irany irany, JelzoForma forma, ElojelzoTipus tipus, Szelvenyszam szelvenyszam)
+        : base(nev, irany, forma, szelvenyszam)
     {
         Tipus = tipus;
     }

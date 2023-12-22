@@ -2,15 +2,18 @@
 
 namespace Gyermekvasut.Modellek.Palya.Jelzok;
 
-public abstract class Jelzo : EgyenesPalyaElem
+public abstract class Jelzo : EgyenesPalyaElem, IHelyhezKotottPalyaElem
 {
+    public Szelvenyszam Szelvenyszam { get; }
     public Irany Irany { get; }
     public JelzoForma Forma { get; }
+
     public event EventHandler? JelzesChanged;
-    protected Jelzo(string nev, Irany irany, JelzoForma forma) : base(nev)
+    protected Jelzo(string nev, Irany irany, JelzoForma forma, Szelvenyszam szelvenyszam) : base(nev)
     {
         Irany = irany;
         Forma = forma;
+        Szelvenyszam = szelvenyszam;
     }
     protected void OnJelzesChanged()
     {

@@ -6,7 +6,7 @@ using Gyermekvasut.ValtokezeloNS;
 namespace Gyermekvasut.Biztberek.Emeltyus;
 
 public abstract class EmeltyuCsoport<TAllitasiKiserletVisitor, TValtokezelo>
-    where TAllitasiKiserletVisitor : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+    where TAllitasiKiserletVisitor : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
     where TValtokezelo : Valtokezelo
 {
     public Irany AllomasvegIrany { get; }

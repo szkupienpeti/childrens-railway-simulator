@@ -2,7 +2,7 @@
 
 namespace Gyermekvasut.Modellek.Palya;
 
-public class Valto : PalyaElem
+public class Valto : PalyaElem, IHelyhezKotottPalyaElem
 {
     private static readonly int MILLISECONDS_IN_SECOND = 1000;
     // Dinamikus
@@ -43,6 +43,7 @@ public class Valto : PalyaElem
     private readonly System.Timers.Timer allitasTimer;
 
     // Statikus
+    public Szelvenyszam Szelvenyszam { get; }
     public int AllitasiIdoSec { get; }
     public ValtoTajolas Tajolas { get; }
     public Irany CsucsIrany { get; }
@@ -57,11 +58,11 @@ public class Valto : PalyaElem
     private PalyaElem? kiteroSzar;
     public PalyaElem KiteroSzar => kiteroSzar!;
 
-    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdo)
-        : this(nev, csucsIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva) { }
+    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdo, Szelvenyszam szelvenyszam)
+        : this(nev, csucsIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva, szelvenyszam) { }
 
     public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdoSec,
-        ValtoAllas alapAllas, ValtoLezaras alapLezaras) : base(nev)
+        ValtoAllas alapAllas, ValtoLezaras alapLezaras, Szelvenyszam szelvenyszam) : base(nev)
     {
         Vegallas = alapAllas;
         Vezerles = alapAllas;
@@ -76,6 +77,7 @@ public class Valto : PalyaElem
         CsucsIrany = csucsIrany;
         AlapAllas = alapAllas;
         AlapLezaras = alapLezaras;
+        Szelvenyszam = szelvenyszam;
     }
 
     public PalyaElem GetGyokSzar(ValtoAllas valtoAllas)
@@ -206,5 +208,31 @@ public class ValtoVegallasEventArgs : EventArgs
     {
         ElozoVegallas = elozoVegallas;
         UjVegallas = ujVegallas;
+    }
+}
+
+public static class ValtoTajolasExtensions
+{
+    public static ValtoTajolas Fordit(this ValtoTajolas tajolas)
+    {
+        return tajolas switch
+        {
+            ValtoTajolas.Balos => ValtoTajolas.Jobbos,
+            ValtoTajolas.Jobbos => ValtoTajolas.Balos,
+            _ => throw new NotImplementedException()
+        };
+    }
+}
+
+public static class ValtoAllasExtensions
+{
+    public static ValtoAllas Fordit(this ValtoAllas allas)
+    {
+        return allas switch
+        {
+            ValtoAllas.Egyenes => ValtoAllas.Kitero,
+            ValtoAllas.Kitero => ValtoAllas.Egyenes,
+            _ => throw new NotImplementedException()
+        };
     }
 }

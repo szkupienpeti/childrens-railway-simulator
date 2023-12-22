@@ -55,23 +55,18 @@ public class Szerelveny
         // Feltételezés: szakasz szélén áll
         PalyaElem elem = Szakaszok[0];
         // Ha vágányon áll: menesztés szükséges
-        if (elem is Vagany)
+        if (elem is Vagany vagany && !vagany.Menesztes)
         {
-            Vagany vagany = (elem as Vagany)!;
-            if (!vagany.Menesztes)
-            {
-                // Menesztésre (feloszlásra) várakozás
-                Trace.WriteLine(Nev + " menesztésre (feloszlásra) vár " + vagany.AllomasNev.Nev() + " " + vagany.Nev + " vágányon");
-                vagany.MenesztesChanged += Vagany_MenesztesChanged;
-                return;
-            }
+            // Menesztésre (feloszlásra) várakozás
+            Trace.WriteLine(Nev + " menesztésre (feloszlásra) vár " + vagany.AllomasNev.Nev() + " " + vagany.Nev + " vágányon");
+            vagany.MenesztesChanged += Vagany_MenesztesChanged;
+            return;
         }
         PalyaElem? kovetkezo = elem;
         while ((kovetkezo = kovetkezo.Kovetkezo(Irany)) != null)
         {
-            if (kovetkezo is Fojelzo)
+            if (kovetkezo is Fojelzo fojelzo)
             {
-                Fojelzo fojelzo = (kovetkezo as Fojelzo)!;
                 if (fojelzo.Irany == Irany)
                 {
                     // Szemből érintett főjelző
@@ -90,9 +85,8 @@ public class Szerelveny
                     MaxSebesseg = PALYASEBESSEG;
                 }
             }
-            else if (kovetkezo is Szakasz)
+            else if (kovetkezo is Szakasz szakasz)
             {
-                Szakasz szakasz = (kovetkezo as Szakasz)!;
                 szakasz.Elfoglal(this);
                 Szakaszok.Insert(0, szakasz);
                 ElejeTimer.Interval = TavolsagInterval(szakasz.Hossz);

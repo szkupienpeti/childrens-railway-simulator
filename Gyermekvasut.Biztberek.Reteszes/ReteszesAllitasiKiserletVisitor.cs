@@ -3,7 +3,7 @@ using Gyermekvasut.Biztberek.Emeltyus.Emeltyuk;
 
 namespace Gyermekvasut.Biztberek.Reteszes;
 
-public interface IReteszesAllitasiKiserletVisitor<TAllitasiKiserletVisitor> : EmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
+public interface IReteszesAllitasiKiserletVisitor<TAllitasiKiserletVisitor> : IEmeltyusAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
     where TAllitasiKiserletVisitor : IReteszesAllitasiKiserletVisitor<TAllitasiKiserletVisitor>
 {
     EmeltyuAllitasEredmeny ReteszEmeltyuAllitasKiserlet(ReteszEmeltyu<TAllitasiKiserletVisitor> reteszEmeltyu);

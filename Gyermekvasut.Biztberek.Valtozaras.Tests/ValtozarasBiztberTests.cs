@@ -14,7 +14,9 @@ public class ValtozarasBiztberTests
         return factory.Create();
     }
 
-    [TestMethod]
+    [DataTestMethod]
+    [DataRow(Irany.KezdopontFele)]
+    [DataRow(Irany.VegpontFele)]
     public void ElojelzoAllitasiKiserlet_Alaphelyzet_NemAllithatoSzerkezetileg(Irany irany)
     {
         // Arrange
@@ -26,4 +28,6 @@ public class ValtozarasBiztberTests
         // Assert
         Assert.AreEqual(EmeltyuAllitasEredmeny.NemAllithatoSzerkezetileg, allitasEredmeny);
     }
+
+    // TODO Define tests
 }
