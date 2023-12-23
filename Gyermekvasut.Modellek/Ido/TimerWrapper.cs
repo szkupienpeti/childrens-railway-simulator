@@ -21,6 +21,7 @@ internal class TimerWrapper : ITimer
         get => Timer.Interval;
         set => Timer.Interval = value;
     }
+    public bool Enabled => Timer.Enabled;
 
     public event EventHandler? Elapsed;
 

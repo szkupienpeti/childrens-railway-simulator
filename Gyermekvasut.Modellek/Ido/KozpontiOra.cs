@@ -18,6 +18,7 @@ public class KozpontiOra
             }
         }
     }
+    public bool Enabled { get; private set; }
     public int SebessegSzorzo { get; }
     public ITimer Timer { get; }
 
@@ -34,6 +35,11 @@ public class KozpontiOra
 
     public void Start(TimeOnly kezdoIdo)
     {
+        if (Enabled)
+        {
+            throw new InvalidOperationException("A központi órát már elindították");
+        }
+        Enabled = true;
         KozpontiIdo = kezdoIdo;
         Timer.Interval = (double)SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND / SebessegSzorzo;
         Timer.Elapsed += Timer_Elapsed;
