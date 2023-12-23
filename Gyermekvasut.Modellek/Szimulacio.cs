@@ -1,48 +1,32 @@
-﻿namespace Gyermekvasut.Modellek;
+﻿using Gyermekvasut.Modellek.Ido;
+
+namespace Gyermekvasut.Modellek;
 
 public sealed class Szimulacio
 {
-    private static readonly int SECONDS_IN_MINUTE = 60;
-    private static readonly int MILLISECONDS_IN_SECOND = 1000;
+    private static Szimulacio? _instance;
+    public static Szimulacio Instance => _instance!;
 
-    private static readonly Lazy<Szimulacio> lazy = new(() => new());
+    public int SebessegSzorzo { get; }
+    public KozpontiOra Ora { get; }
 
-    public static Szimulacio Instance => lazy.Value;
-
-    private Szimulacio() { }
-
-    public void Start(int ora, int perc)
+    private Szimulacio(int sebessegSzorzo)
     {
-        KozpontiIdo = new TimeOnly(ora, perc);
-        KozpontiOra.Interval = (double)SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND / SebessegSzorzo;
-        KozpontiOra.Elapsed += KozpontiOra_Elapsed;
-        KozpontiOra.Start();
+        SebessegSzorzo = sebessegSzorzo;
+        Ora = new(sebessegSzorzo, new TimerWrapper());
     }
 
-    private void KozpontiOra_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    public void Start(TimeOnly kezdoIdo)
     {
-        KozpontiIdo = KozpontiIdo.AddMinutes(1);
+        Ora.Start(kezdoIdo);
     }
 
-    private System.Timers.Timer KozpontiOra { get; } = new();
-    private TimeOnly _kozpontiIdo;
-    public TimeOnly KozpontiIdo
+    public static void Build(int sebessegSzorzo)
     {
-        get => _kozpontiIdo;
-        private set
+        if (Instance != null)
         {
-            if (value != _kozpontiIdo)
-            {
-                _kozpontiIdo = value;
-                OnKozpontiIdoChanged();
-            }
+            throw new InvalidOperationException("A szimuláció már felépült");
         }
+        _instance = new Szimulacio(sebessegSzorzo);
     }
-    public event EventHandler? KozpontiIdoChanged;
-
-    private void OnKozpontiIdoChanged()
-    {
-        KozpontiIdoChanged?.Invoke(this, EventArgs.Empty);
-    }
-    public int SebessegSzorzo { get; set; } = 2;
 }
