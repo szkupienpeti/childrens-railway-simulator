@@ -9,6 +9,7 @@ public sealed class Szimulacio
 
     public int SebessegSzorzo { get; }
     public KozpontiOra Ora { get; }
+    public bool Enabled { get; private set; }
 
     private Szimulacio(int sebessegSzorzo)
     {
@@ -18,6 +19,11 @@ public sealed class Szimulacio
 
     public void Start(TimeOnly kezdoIdo)
     {
+        if (Enabled)
+        {
+            throw new InvalidOperationException("A szimulációt már elindították");
+        }
+        Enabled = true;
         Ora.Start(kezdoIdo);
     }
 
@@ -28,5 +34,10 @@ public sealed class Szimulacio
             throw new InvalidOperationException("A szimuláció már felépült");
         }
         _instance = new Szimulacio(sebessegSzorzo);
+    }
+
+    public static void CleanUp()
+    {
+        _instance = null;
     }
 }
