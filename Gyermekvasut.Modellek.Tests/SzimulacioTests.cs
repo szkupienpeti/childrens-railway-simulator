@@ -1,16 +1,20 @@
-﻿namespace Gyermekvasut.Modellek.Tests;
+﻿using Gyermekvasut.Biztberek.Valtozaras.Tests;
+
+namespace Gyermekvasut.Modellek.Tests;
 
 [TestClass]
-public class SzimulacioTests
+public class SzimulacioTests : SzimulaciosTestBase
 {
-    private static readonly int SEBESSEG_SZORZO = 2;
-    private static readonly TimeOnly KEZDO_IDO = new(9, 10);
+    public override void TestInitialize()
+    {
+        // Do not initialize Szimulacio
+    }
 
     [TestMethod]
     public void Build_WhenNotBuilt_ShouldBuild()
     {
         // Act
-        Szimulacio.Build(SEBESSEG_SZORZO);
+        Szimulacio.Build(SebessegSzorzo);
         // Assert
         Assert.IsNotNull(Szimulacio.Instance);
     }
@@ -19,9 +23,9 @@ public class SzimulacioTests
     public void Build_WhenAlreadyBuilt_ShouldThrow()
     {
         // Arrange
-        Szimulacio.Build(SEBESSEG_SZORZO);
+        Szimulacio.Build(SebessegSzorzo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Build(SEBESSEG_SZORZO),
+        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Build(SebessegSzorzo),
             "A szimuláció már felépült");
     }
 
@@ -29,9 +33,9 @@ public class SzimulacioTests
     public void Start_WhenNotStarted_ShouldStart()
     {
         // Arrange
-        Szimulacio.Build(SEBESSEG_SZORZO);
+        Szimulacio.Build(SebessegSzorzo);
         // Act
-        Szimulacio.Instance.Start(KEZDO_IDO);
+        Szimulacio.Instance.Start(KezdoIdo);
         // Assert
         Assert.IsTrue(Szimulacio.Instance.Enabled);
         Assert.IsTrue(Szimulacio.Instance.Ora.Enabled);
@@ -41,27 +45,21 @@ public class SzimulacioTests
     public void Start_WhenAlreadyStarted_ShouldThrow()
     {
         // Arrange
-        Szimulacio.Build(SEBESSEG_SZORZO);
-        Szimulacio.Instance.Start(KEZDO_IDO);
+        Szimulacio.Build(SebessegSzorzo);
+        Szimulacio.Instance.Start(KezdoIdo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Instance.Start(KEZDO_IDO),
+        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Instance.Start(KezdoIdo),
             "A szimulációt már elindították");
     }
 
     [TestMethod]
-    public void CleanUp_WhenBuilt_ShouldCleanUp()
+    public void Cleanup_WhenBuilt_ShouldCleanUp()
     {
         // Arrange
-        Szimulacio.Build(SEBESSEG_SZORZO);
+        Szimulacio.Build(SebessegSzorzo);
         // Act
-        Szimulacio.CleanUp();
+        Szimulacio.Cleanup();
         // Assert
         Assert.IsNull(Szimulacio.Instance);
-    }
-
-    [TestCleanup]
-    public void TestCleanUp()
-    {
-        Szimulacio.CleanUp();
     }
 }

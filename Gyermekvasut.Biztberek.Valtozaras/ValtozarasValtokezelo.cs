@@ -2,6 +2,7 @@
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
+using Gyermekvasut.Modellek.Ido;
 
 namespace Gyermekvasut.Biztberek.Valtozaras;
 
@@ -24,11 +25,11 @@ public class ValtozarasValtokezelo : Valtokezelo
     public ValtozarasValtokezelo(Valto valto, LezarasiTablazat lezarasiTablazat, Fojelzo bejaratiJelzo,
         Szakasz kijaratOldoSzakasz, Szakasz kijaratOldoSzakaszElottiSzakasz,
         Szakasz egyenesBejaratOldoSzakasz, Szakasz egyenesBejaratOldoSzakaszElottiSzakasz,
-        Szakasz kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz)
+        Szakasz kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz, ITimer timer)
         : base(valto, ValtoLezarasSzerep.Valtokezelo, lezarasiTablazat, bejaratiJelzo,
             kijaratOldoSzakasz, kijaratOldoSzakaszElottiSzakasz,
             egyenesBejaratOldoSzakasz, egyenesBejaratOldoSzakaszElottiSzakasz,
-            kiteroBejaratOldoSzakasz, kiteroBejaratOldoSzakaszElottiSzakasz)
+            kiteroBejaratOldoSzakasz, kiteroBejaratOldoSzakaszElottiSzakasz, timer)
     { }
 
     public void ValtozarKulcsTaroloHozzarendel(ValtozarKulcsTarolo valtozarKulcsTarolo)

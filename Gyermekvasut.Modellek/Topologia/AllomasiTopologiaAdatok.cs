@@ -13,7 +13,6 @@ public record AltalanosAllomasiTopologiaAdat(
     AllomasNev AllomasNev,
     JelzoForma JelzoForma,
     ElojelzoTipus ElojelzoTipus,
-    int ValtoAllitasIdo,
     Dictionary<VaganySzerep, ValtoAllas> VaganyValtoAllasok,
     Dictionary<VaganySzerep, int> VaganyHosszok,
     Dictionary<TopologiaiObjektumSzerep, Szelvenyszam> Szelvenyszamok,

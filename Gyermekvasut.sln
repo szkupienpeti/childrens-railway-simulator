@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gyermekvasut.Biztberek.Valt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Modellek.Tests", "Gyermekvasut.Modellek.Tests\Gyermekvasut.Modellek.Tests.csproj", "{B909D240-CE6A-4687-9C27-970C2C44BF23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyermekvasut.Tests.Util", "Gyermekvasut.Tests.Util\Gyermekvasut.Tests.Util.csproj", "{5E70994A-84BB-431F-913D-A6C7A5CE0D4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B909D240-CE6A-4687-9C27-970C2C44BF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E70994A-84BB-431F-913D-A6C7A5CE0D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E70994A-84BB-431F-913D-A6C7A5CE0D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E70994A-84BB-431F-913D-A6C7A5CE0D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E70994A-84BB-431F-913D-A6C7A5CE0D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

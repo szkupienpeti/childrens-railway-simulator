@@ -1,17 +1,17 @@
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.Palya;
+using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 
 [TestClass]
-public class ValtozarKulcsTaroloTests
+public class ValtozarKulcsTaroloTests : SzimulaciosTestBase
 {
     private static Valto CreateValto(ValtoAllas valtoAllas, ValtoLezaras valtoLezaras)
-        => new("", Irany.KezdopontFele, ValtoTajolas.Balos, 1, valtoAllas, valtoLezaras, new(1,0));
+        => new("", Irany.KezdopontFele, ValtoTajolas.Balos, valtoAllas, valtoLezaras, new(1,0));
 
-    [DataTestMethod]
-    [DataRow(ValtoAllas.Egyenes)]
-    [DataRow(ValtoAllas.Kitero)]
+    [TestMethod]
+    [DynamicData(nameof(DynamicTestDataUtil.ValtoAllasValues), typeof(DynamicTestDataUtil))]
     public void KulcsBetesz_WhenTaroloUres_ShouldLezar(ValtoAllas valtoAllas)
     {
         // Arrange
@@ -24,9 +24,8 @@ public class ValtozarKulcsTaroloTests
         Assert.AreEqual(valtoAllas, tarolo.ValtozarKulcs!.Value);
     }
 
-    [DataTestMethod]
-    [DataRow(ValtoAllas.Egyenes)]
-    [DataRow(ValtoAllas.Kitero)]
+    [TestMethod]
+    [DynamicData(nameof(DynamicTestDataUtil.ValtoAllasValues), typeof(DynamicTestDataUtil))]
     public void KulcsBetesz_WhenTaroloTele_ShouldThrow(ValtoAllas valtoAllas)
     {
         // Arrange
@@ -50,9 +49,8 @@ public class ValtozarKulcsTaroloTests
             $"A váltó {valtoAllas} végállásban van, de {valtozarKulcs} állásba próbálták lezárni");
     }
 
-    [DataTestMethod]
-    [DataRow(ValtoAllas.Egyenes)]
-    [DataRow(ValtoAllas.Kitero)]
+    [TestMethod]
+    [DynamicData(nameof(DynamicTestDataUtil.ValtoAllasValues), typeof(DynamicTestDataUtil))]
     public void KulcsKivesz_WhenTaroloTele_ShouldFelold(ValtoAllas valtoAllas)
     {
         // Arrange
@@ -65,9 +63,8 @@ public class ValtozarKulcsTaroloTests
         Assert.AreEqual(valtoAllas, valtozarKulcs);
     }
 
-    [DataTestMethod]
-    [DataRow(ValtoAllas.Egyenes)]
-    [DataRow(ValtoAllas.Kitero)]
+    [TestMethod]
+    [DynamicData(nameof(DynamicTestDataUtil.ValtoAllasValues), typeof(DynamicTestDataUtil))]
     public void KulcsKivesz_WhenTaroloUres_ShouldThrow(ValtoAllas valtoAllas)
     {
         // Arrange

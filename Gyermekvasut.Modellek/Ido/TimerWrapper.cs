@@ -5,9 +5,13 @@ internal class TimerWrapper : ITimer
 {
     private System.Timers.Timer Timer { get; }
 
-    public TimerWrapper()
+    public TimerWrapper(bool autoReset, double interval)
     {
-        Timer = new System.Timers.Timer();
+        Timer = new()
+        {
+            AutoReset = autoReset,
+            Interval = interval
+        };
         Timer.Elapsed += Timer_Elapsed;
     }
 

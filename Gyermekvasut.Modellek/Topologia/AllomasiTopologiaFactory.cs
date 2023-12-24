@@ -9,6 +9,7 @@ public static class AllomasiTopologiaFactory
 {
     public static AllomasiTopologia Create(AllomasNev allomasNev)
     {
+        ForceClassInitializations();
         AllomasiTopologiaAdatok topologiaAdatok = AllomasiTopologiaAdatokFactory.Create(allomasNev);
         AllomasiTopologia topologia = KetvaganyosAllomasFelepit(topologiaAdatok);
         // TODO Hűvösvölgy kivételek kezelése: B jelző, tolatásjelzők
@@ -168,7 +169,7 @@ public static class AllomasiTopologiaFactory
 
     private static Ismetlojelzo? CreateIsmetlojelzo(AltalanosAllomasiTopologiaAdat altalanosAdatok, FojelzoSzerep fojelzoSzerep)
     {
-        IsmetlojelzoSzerep ismetlojelzoSzerep = fojelzoSzerep.Ismetlojelzo!;
+        IsmetlojelzoSzerep? ismetlojelzoSzerep = fojelzoSzerep.Ismetlojelzo!;
         if (altalanosAdatok.Szelvenyszamok.ContainsKey(ismetlojelzoSzerep))
         {
             string nev = GetNev(ismetlojelzoSzerep, altalanosAdatok);
@@ -192,8 +193,7 @@ public static class AllomasiTopologiaFactory
         Irany allomasOldal = allomasOldalAdatok.AllomasOldal;
         ValtoSzerep valtoSzerep = ValtoSzerep.GetByOldal(allomasOldal);
         string nev = GetNev(valtoSzerep, altalanosAdatok);
-        return new(nev, allomasOldal, allomasOldalAdatok.ValtoTajolas,
-            altalanosAdatok.ValtoAllitasIdo, altalanosAdatok.Szelvenyszamok[valtoSzerep]);
+        return new(nev, allomasOldal, allomasOldalAdatok.ValtoTajolas, altalanosAdatok.Szelvenyszamok[valtoSzerep]);
     }
 
     private static Fojelzo? CreateKijaratiJelzo(AltalanosAllomasiTopologiaAdat altalanosAdatok,
@@ -245,6 +245,14 @@ public static class AllomasiTopologiaFactory
 
     private static string GetNev(TopologiaiObjektumSzerep szerep, AltalanosAllomasiTopologiaAdat altalanosAdatok)
         => altalanosAdatok.NevFelulirasok.GetValueOrDefault(szerep, szerep.Nev);
+
+    /// <summary>
+    /// Forces topological object role static fields to initialize, even if the role class is not even used yet.
+    /// </summary>
+    private static void ForceClassInitializations()
+    {
+        System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(IsmetlojelzoSzerep).TypeHandle);
+    }
 }
 
 record AllomasVegTopologiaElemek(Szakasz SzelsoSzakasz, Valto Valto, Szakasz ValtoKiteroSzar);

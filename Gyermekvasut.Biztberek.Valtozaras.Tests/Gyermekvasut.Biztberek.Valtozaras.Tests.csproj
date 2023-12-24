@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gyermekvasut.Biztberek.Valtozaras\Gyermekvasut.Biztberek.Valtozaras.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Tests.Util\Gyermekvasut.Tests.Util.csproj" />
   </ItemGroup>
 
   <ItemGroup>

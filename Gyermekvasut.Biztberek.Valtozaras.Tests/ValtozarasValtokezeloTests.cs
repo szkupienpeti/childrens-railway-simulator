@@ -9,19 +9,8 @@ using System.Threading.Tasks;
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 
 [TestClass()]
-public class ValtozarasValtokezeloTests
+public class ValtozarasValtokezeloTests : SzimulaciosTestBase
 {
-    [TestMethod()]
-    public void ValtozarasValtokezeloTest()
-    {
-        Assert.Fail();
-    }
-
-    [TestMethod()]
-    public void ValtozarKulcsTaroloHozzarendelTest()
-    {
-        Assert.Fail();
-    }
 
     // TODO Define tests
 }

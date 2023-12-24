@@ -2,9 +2,6 @@
 
 public class KozpontiOra
 {
-    private static readonly int SECONDS_IN_MINUTE = 60;
-    private static readonly int MILLISECONDS_IN_SECOND = 1000;
-
     private TimeOnly _kozpontiIdo;
     public TimeOnly KozpontiIdo
     {
@@ -19,13 +16,12 @@ public class KozpontiOra
         }
     }
     public bool Enabled { get; private set; }
-    public int SebessegSzorzo { get; }
     public ITimer Timer { get; }
 
-    public KozpontiOra(int sebessegSzorzo, ITimer timer)
+    public KozpontiOra(ITimer timer)
     {
-        SebessegSzorzo = sebessegSzorzo;
         Timer = timer;
+        Timer.Elapsed += Timer_Elapsed;
     }
 
     private void Timer_Elapsed(object? sender, EventArgs e)
@@ -41,8 +37,6 @@ public class KozpontiOra
         }
         Enabled = true;
         KozpontiIdo = kezdoIdo;
-        Timer.Interval = (double)SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND / SebessegSzorzo;
-        Timer.Elapsed += Timer_Elapsed;
         Timer.Start();
     }
 

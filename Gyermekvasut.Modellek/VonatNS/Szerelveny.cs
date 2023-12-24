@@ -48,8 +48,6 @@ public class Szerelveny
         VegeTimer.Elapsed += VegeTimer_Elapsed;
     }
 
-    
-
     public void Tovabblep()
     {
         // Feltételezés: szakasz szélén áll

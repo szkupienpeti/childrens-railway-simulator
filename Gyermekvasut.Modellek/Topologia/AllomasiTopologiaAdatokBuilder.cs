@@ -10,20 +10,17 @@ internal class AllomasiTopologiaAdatokBuilder
     private AllomasNev AllomasNev { get; }
     private JelzoForma JelzoForma { get; }
     private ElojelzoTipus ElojelzoTipus { get; }
-    private int ValtoAllitasIdo { get; }
     public Dictionary<VaganySzerep, ValtoAllas> VaganyValtoAllasok { get; } = new();
     public Dictionary<VaganySzerep, int> VaganyHosszok { get; } = new();
     public Dictionary<TopologiaiObjektumSzerep, Szelvenyszam> Szelvenyszamok { get; } = new();
     public Dictionary<TopologiaiObjektumSzerep, string> NevFelulirasok { get; } = new();
     public Dictionary<Irany, AllomasOldalTopologiaAdat> AllomasOldalAdatok { get; } = new();
 
-    public AllomasiTopologiaAdatokBuilder(AllomasNev allomasNev,
-        JelzoForma jelzoForma, ElojelzoTipus elojelzoTipus, int valtoAllitasIdo)
+    public AllomasiTopologiaAdatokBuilder(AllomasNev allomasNev, JelzoForma jelzoForma, ElojelzoTipus elojelzoTipus)
     {
         AllomasNev = allomasNev;
         JelzoForma = jelzoForma;
         ElojelzoTipus = elojelzoTipus;
-        ValtoAllitasIdo = valtoAllitasIdo;
     }
 
     public AllomasiTopologiaAdatokBuilder AddVaganyValtoAllas(VaganySzerep vaganySzerep, ValtoAllas valtoAllas)
@@ -70,8 +67,8 @@ internal class AllomasiTopologiaAdatokBuilder
         {
             throw new InvalidOperationException("Inkonzisztens kijárati jelző és vágányhosszmegadás kombináció");
         }
-        return new(new(AllomasNev, JelzoForma, ElojelzoTipus, ValtoAllitasIdo,
-            VaganyValtoAllasok, VaganyHosszok, Szelvenyszamok, NevFelulirasok),
+        return new(new(AllomasNev, JelzoForma, ElojelzoTipus, VaganyValtoAllasok,
+            VaganyHosszok, Szelvenyszamok, NevFelulirasok),
             AllomasOldalAdatok);
     }
 

@@ -5,29 +5,17 @@ using Gyermekvasut.Modellek.AllomasNS;
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 
 [TestClass]
-public class ValtozarasBiztberTests
+public class ValtozarasBiztberTests : ValtozarasBiztberTestBase
 {
-    private static ValtozarasBiztber CreateBiztber(AllomasNev allomasNev)
+    [TestMethod]
+    [DynamicData(nameof(ValtozarasBiztberAllomasOldalakData), typeof(ValtozarasBiztberTestBase))]
+    public void EmeltyuAllasok_WhenAlaphelyzet(AllomasNev allomasNev, Irany irany)
     {
-        Allomas allomas = new(allomasNev);
-        ValtozarasBiztberFactory factory = new(allomas);
-        return factory.Create();
-    }
-
-    [DataTestMethod]
-    [DataRow(Irany.KezdopontFele)]
-    [DataRow(Irany.VegpontFele)]
-    public void ElojelzoAllitasiKiserlet_Alaphelyzet_NemAllithatoSzerkezetileg(Irany irany)
-    {
-        // Arrange
-        var biztber = CreateBiztber(AllomasNev.Janoshegy);
-        var emeltyuCsoport = biztber.EmeltyuCsoportok[irany];
-        var elojelzoEmeltyu = emeltyuCsoport.ElojelzoEmeltyu;
-        // Act
-        var allitasEredmeny = biztber.ElojelzoEmeltyuAllitasKiserlet(elojelzoEmeltyu);
+        // Arrange and act
+        CreateBiztber(allomasNev);
         // Assert
-        Assert.AreEqual(EmeltyuAllitasEredmeny.NemAllithatoSzerkezetileg, allitasEredmeny);
+        Assert.AreEqual(EmeltyuAllas.Also, GetElojelzoEmeltyu(irany).Allas);
+        Assert.AreEqual(EmeltyuAllas.Also, GetBejaratiJelzoEmeltyu1(irany).Allas);
+        Assert.AreEqual(EmeltyuAllas.Felso, GetBejaratiJelzoEmeltyu2(irany).Allas);
     }
-
-    // TODO Define tests
 }

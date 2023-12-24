@@ -1,22 +1,25 @@
-﻿using Gyermekvasut.Modellek.Ido;
+﻿using Gyermekvasut.Biztberek.Valtozaras.Tests;
+using Gyermekvasut.Modellek.Ido;
 using Moq;
 
 namespace Gyermekvasut.Modellek.Tests;
 
 [TestClass]
-public class KozpontiOraTests
+public class KozpontiOraTests : SzimulaciosTestBase
 {
-    private static readonly int SEBESSEG_SZORZO = 2;
-    private static readonly TimeOnly KEZDO_IDO = new(9, 10);
+    public override void TestInitialize()
+    {
+        // Do not initialize Szimulacio
+    }
 
     [TestMethod]
     public void Start_WhenNotStarted_ShouldStart()
     {
         // Arrange
         var timer = new Mock<ITimer>();
-        var ora = new KozpontiOra(SEBESSEG_SZORZO, timer.Object);
+        var ora = new KozpontiOra(timer.Object);
         // Act
-        ora.Start(KEZDO_IDO);
+        ora.Start(KezdoIdo);
         // Assert
         Assert.IsTrue(ora.Enabled);
     }
@@ -26,10 +29,10 @@ public class KozpontiOraTests
     {
         // Arrange
         var timer = new Mock<ITimer>();
-        var ora = new KozpontiOra(SEBESSEG_SZORZO, timer.Object);
-        ora.Start(KEZDO_IDO);
+        var ora = new KozpontiOra(timer.Object);
+        ora.Start(KezdoIdo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => ora.Start(KEZDO_IDO),
+        Assert.ThrowsException<InvalidOperationException>(() => ora.Start(KezdoIdo),
             "A központi órát már elindították");
     }
 
@@ -38,12 +41,12 @@ public class KozpontiOraTests
     {
         // Arrange
         var timer = new Mock<ITimer>();
-        var ora = new KozpontiOra(SEBESSEG_SZORZO, timer.Object);
-        ora.Start(KEZDO_IDO);
+        var ora = new KozpontiOra(timer.Object);
+        ora.Start(KezdoIdo);
         // Act
         timer.Raise(t => t.Elapsed += null, EventArgs.Empty);
         // Assert
-        Assert.AreEqual(KEZDO_IDO.AddMinutes(1), ora.KozpontiIdo);
+        Assert.AreEqual(KezdoIdo.AddMinutes(1), ora.KozpontiIdo);
     }
 
     [TestMethod]
@@ -51,13 +54,13 @@ public class KozpontiOraTests
     {
         // Arrange
         var timer = new Mock<ITimer>();
-        var ora = new KozpontiOra(SEBESSEG_SZORZO, timer.Object);
+        var ora = new KozpontiOra(timer.Object);
         var eventRaised = false;
         ora.KozpontiIdoChanged += delegate (object? sender, EventArgs e)
         {
             eventRaised = true;
         };
-        ora.Start(KEZDO_IDO);
+        ora.Start(KezdoIdo);
         // Act
         timer.Raise(t => t.Elapsed += null, EventArgs.Empty);
         // Assert

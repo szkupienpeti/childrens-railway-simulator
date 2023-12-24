@@ -14,7 +14,7 @@ internal class LezarasiTablazatFactory
     public LezarasiTablazat Create()
     {
         LezarasiTablazat lezarasiTablazat = new();
-        foreach (Valto valto in  Topologia.Valtok)
+        foreach (Valto valto in Topologia.Valtok)
         {
             foreach (ValtoAllas valtoAllas in Enum.GetValues<ValtoAllas>())
             {

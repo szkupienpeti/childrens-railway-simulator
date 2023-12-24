@@ -35,7 +35,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateSzechenyihegy()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Szechenyihegy,
-                JelzoForma.AlakJelzo, ElojelzoTipus.HaromFogalmu, 10)
+                JelzoForma.AlakJelzo, ElojelzoTipus.HaromFogalmu)
             // Vágánytengelyugrás: páratlan váltó(körzet) állásai
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Kitero)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Egyenes)
@@ -64,7 +64,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateCsilleberc()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Csilleberc,
-                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu, 1)
+                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Egyenes)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Kitero)
             .AddAllomasOldalAdat(Irany.KezdopontFele, 1018 - 0613, ValtoTajolas.Balos)
@@ -91,7 +91,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateViragvolgy()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Viragvolgy,
-                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu, 10)
+                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Egyenes)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Kitero)
             .AddVaganyHossz(VaganySzerep.Elso, 74)
@@ -115,7 +115,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateJanoshegy()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Janoshegy,
-                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu, 10)
+                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Egyenes)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Kitero)
             .AddVaganyHossz(VaganySzerep.Elso, 58)
@@ -139,7 +139,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateSzepjuhaszne()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Szepjuhaszne,
-                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu, 1)
+                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Kitero)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Egyenes)
             .AddAllomasOldalAdat(Irany.KezdopontFele, 6108 - 5065, ValtoTajolas.Jobbos)
@@ -166,7 +166,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateHarshegy()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Harshegy,
-                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu, 10)
+                JelzoForma.AlakJelzo, ElojelzoTipus.KetFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Egyenes)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Kitero)
             .AddVaganyHossz(VaganySzerep.Elso, 118)
@@ -190,7 +190,7 @@ public static class AllomasiTopologiaAdatokFactory
     /// </summary>
     private static AllomasiTopologiaAdatok CreateHuvosvolgy()
         => new AllomasiTopologiaAdatokBuilder(AllomasNev.Huvosvolgy,
-                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu, 1)
+                JelzoForma.FenyJelzo, ElojelzoTipus.HaromFogalmu)
             .AddVaganyValtoAllas(VaganySzerep.Elso, ValtoAllas.Egyenes)
             .AddVaganyValtoAllas(VaganySzerep.Masodik, ValtoAllas.Kitero)
             .AddAllomasOldalAdat(Irany.KezdopontFele, 10474 - 9328, ValtoTajolas.Balos)

@@ -1,20 +1,16 @@
+using Gyermekvasut.Biztberek.Valtozaras.Tests;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Topologia;
 using Gyermekvasut.Modellek.Topologia.ObjektumSzerepek;
+using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Modellek.Tests;
 
 [TestClass]
-public class AllomasiTopologiaAdatokFactoryTests
+public class AllomasiTopologiaAdatokFactoryTests : SzimulaciosTestBase
 {
-    [DataTestMethod]
-    [DataRow(AllomasNev.Szechenyihegy)]
-    [DataRow(AllomasNev.Csilleberc)]
-    [DataRow(AllomasNev.Viragvolgy)]
-    [DataRow(AllomasNev.Janoshegy)]
-    [DataRow(AllomasNev.Szepjuhaszne)]
-    [DataRow(AllomasNev.Harshegy)]
-    [DataRow(AllomasNev.Huvosvolgy)]
+    [TestMethod]
+    [DynamicData(nameof(DynamicTestDataUtil.AllomasNevValues), typeof(DynamicTestDataUtil))]
     public void Create_MindenAllomas_AllomaskozHosszokEgyeznek(AllomasNev allomasNev)
     {
         // Arrange and act

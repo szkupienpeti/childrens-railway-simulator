@@ -1,4 +1,5 @@
 ﻿using Gyermekvasut.Modellek;
+using Gyermekvasut.Modellek.Ido;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
@@ -9,10 +10,13 @@ public abstract class ValtokezeloFactory<TValtokezelo>
     where TValtokezelo : Valtokezelo
 {
     protected AllomasiTopologia Topologia { get; }
+    protected abstract double VaganyutBeallitasMinutes { get; }
+    public ITimerFactory TimerFactory { get; }
 
-    protected ValtokezeloFactory(AllomasiTopologia topologia)
+    protected ValtokezeloFactory(AllomasiTopologia topologia, ITimerFactory timerFactory)
     {
         Topologia = topologia;
+        TimerFactory = timerFactory;
     }
 
     public TValtokezelo Create(Irany allomasvegIrany)
@@ -25,14 +29,15 @@ public abstract class ValtokezeloFactory<TValtokezelo>
         Szakasz egyenesValtoSzar = egyenesVagany.GetKovetkezoFeltetelesPalyaElem<Szakasz>(allomasvegIrany)!;
         Vagany kiteroVagany = valto.GetGyokFeloliVagany(ValtoAllas.Kitero);
         Szakasz kiteroValtoSzar = kiteroVagany.GetKovetkezoFeltetelesPalyaElem<Szakasz>(allomasvegIrany)!;
+        ITimer timer = TimerFactory.Create(false, IdoUtil.MinutesToTimerInterval(VaganyutBeallitasMinutes));
         return Create(valto, bejaratiJelzo,
             allomaskoz, allomaskozElottiSzakasz,
             egyenesVagany, egyenesValtoSzar,
-            kiteroVagany, kiteroValtoSzar);
+            kiteroVagany, kiteroValtoSzar, timer);
     }
 
     protected abstract TValtokezelo Create(Valto valto, Fojelzo bejaratiJelzo,
         Szakasz kijaratOldoSzakasz, Szakasz kijaratOldoSzakaszElottiSzakasz,
         Vagany egyenesBejaratOldoSzakasz, Szakasz egyenesBejaratOldoSzakaszElottiSzakasz,
-        Vagany kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz);
+        Vagany kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz, ITimer timer);
 }

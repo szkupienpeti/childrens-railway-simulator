@@ -1,4 +1,5 @@
 ﻿using Gyermekvasut.Modellek.BiztberNS;
+using Gyermekvasut.Modellek.Ido;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
@@ -21,7 +22,7 @@ public abstract class Valtokezelo
     /// </summary>
     public bool AktualisVaganyutFelhasznalva { get; private set; }
     public VaganyutElrendeles? KovetkezoKijaratiVaganyutElrendeles { get; private set; }
-    private System.Timers.Timer VaganyutBeallitasTimer { get; } = new() { AutoReset = false };
+    private ITimer VaganyutBeallitasTimer { get; }
 
     public event EventHandler<BejelentesEventArgs>? Bejelentes;
 
@@ -29,7 +30,8 @@ public abstract class Valtokezelo
         LezarasiTablazat lezarasiTablazat, Fojelzo bejaratiJelzo,
         Szakasz kijaratOldoSzakasz, Szakasz kijaratOldoSzakaszElottiSzakasz,
         Szakasz egyenesBejaratOldoSzakasz, Szakasz egyenesBejaratOldoSzakaszElottiSzakasz,
-        Szakasz kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz)
+        Szakasz kiteroBejaratOldoSzakasz, Szakasz kiteroBejaratOldoSzakaszElottiSzakasz,
+        ITimer timer)
     {
         Valto = valto;
         ValtoLezarasSzerep = valtoLezarasSzerep;
@@ -42,6 +44,7 @@ public abstract class Valtokezelo
         KijaratOldoSzakaszok = new(kijaratOldoSzakasz, kijaratOldoSzakaszElottiSzakasz);
         BejaratOldoSzakaszok[ValtoAllas.Egyenes] = new(egyenesBejaratOldoSzakasz, egyenesBejaratOldoSzakaszElottiSzakasz);
         BejaratOldoSzakaszok[ValtoAllas.Kitero] = new(kiteroBejaratOldoSzakasz, kiteroBejaratOldoSzakaszElottiSzakasz);
+        VaganyutBeallitasTimer = timer;
         VaganyutBeallitasTimer.Elapsed += VaganyutBeallitasTimer_Elapsed;
     }
 
@@ -108,7 +111,7 @@ public abstract class Valtokezelo
         KovetkezoKijaratiVaganyutElrendeles = elrendeles;
     }
 
-    private void VaganyutBeallitasTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    private void VaganyutBeallitasTimer_Elapsed(object? sender, EventArgs e)
     {
         VaganyutBeallitas();
         if (ValtoLezarasSzerep == ValtoLezarasSzerep.Valtokezelo)
@@ -216,10 +219,10 @@ public abstract class Valtokezelo
     }
 
     // Segédfüggvények
-    private Szakasz GetOldoSzakasz()
+    public Szakasz GetOldoSzakasz()
         => GetOldoSzakaszok().OldoSzakasz;
 
-    private Szakasz GetOldoSzakaszElottiSzakasz()
+    public Szakasz GetOldoSzakaszElottiSzakasz()
         => GetOldoSzakaszok().OldoSzakaszElottiSzakasz;
 
     private OldoSzakaszok GetOldoSzakaszok()

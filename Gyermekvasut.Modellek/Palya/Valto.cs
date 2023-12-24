@@ -39,9 +39,6 @@ public class Valto : PalyaElem, IHelyhezKotottPalyaElem
 
     public event EventHandler? LezarasChanged;
 
-    // TODO Csak az elektromos váltóban legyen, a helyszíni váltó azonnal átáll, ott a váltókezelőbe kell időzítés
-    private readonly System.Timers.Timer allitasTimer;
-
     // Statikus
     public Szelvenyszam Szelvenyszam { get; }
     public int AllitasiIdoSec { get; }
@@ -58,21 +55,15 @@ public class Valto : PalyaElem, IHelyhezKotottPalyaElem
     private PalyaElem? kiteroSzar;
     public PalyaElem KiteroSzar => kiteroSzar!;
 
-    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdo, Szelvenyszam szelvenyszam)
-        : this(nev, csucsIrany, tajolas, allitasiIdo, ValtoAllas.Egyenes, ValtoLezaras.Feloldva, szelvenyszam) { }
+    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, Szelvenyszam szelvenyszam)
+        : this(nev, csucsIrany, tajolas, ValtoAllas.Egyenes, ValtoLezaras.Feloldva, szelvenyszam) { }
 
-    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas, int allitasiIdoSec,
+    public Valto(string nev, Irany csucsIrany, ValtoTajolas tajolas,
         ValtoAllas alapAllas, ValtoLezaras alapLezaras, Szelvenyszam szelvenyszam) : base(nev)
     {
         Vegallas = alapAllas;
         Vezerles = alapAllas;
         Lezaras = alapLezaras;
-        allitasTimer = new(allitasiIdoSec * MILLISECONDS_IN_SECOND / Szimulacio.Instance.SebessegSzorzo)
-        {
-            AutoReset = false
-        };
-        allitasTimer.Elapsed += AllitasiIdoLejart;
-        AllitasiIdoSec = allitasiIdoSec;
         Tajolas = tajolas;
         CsucsIrany = csucsIrany;
         AlapAllas = alapAllas;
@@ -107,12 +98,21 @@ public class Valto : PalyaElem, IHelyhezKotottPalyaElem
         LezarasChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private void AllitasiIdoLejart(object? sender, System.Timers.ElapsedEventArgs e)
+    public bool Allit(ValtoAllas cel)
     {
-        Vegallas = Vezerles;
+        if (AllitasMegkezd(cel))
+        {
+            bool allitasBefejezve = AllitasBefejez();
+            if (!allitasBefejezve)
+            {
+                throw new InvalidOperationException("Az állítás megkezdődött, de nem tudott befejeződni");
+            }
+            return allitasBefejezve;
+        }
+        return false;
     }
 
-    public bool Allit(ValtoAllas cel)
+    public bool AllitasMegkezd(ValtoAllas cel)
     {
         if (Lezaras == ValtoLezaras.Lezarva || Vegallas == cel)
         {
@@ -120,8 +120,17 @@ public class Valto : PalyaElem, IHelyhezKotottPalyaElem
         }
         Vezerles = cel;
         Vegallas = null;
-        allitasTimer.Start();
         return true;
+    }
+
+    public bool AllitasBefejez()
+    {
+        if (Vegallas == null)
+        {
+            Vegallas = Vezerles;
+            return true;
+        }
+        return false;
     }
 
     public void Lezar(ValtoAllas allas)

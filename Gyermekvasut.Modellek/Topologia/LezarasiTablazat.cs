@@ -26,8 +26,14 @@ public class LezarasiTablazat
     {
         if (!ValtoAllasok.ContainsKey(vagany))
         {
-            throw new ArgumentException($"A(z) {vagany.Nev} vágány nem ta");
+            throw new ArgumentException($"A(z) {vagany.Nev} vágány nem található a lezárási táblázatban");
         }
         return ValtoAllasok[vagany][valto];
     }
+
+    public Vagany? GetVagany(Valto valto, ValtoAllas valtoAllas)
+        => ValtoAllasok
+            .Where(item => item.Value.TryGetValue(valto, out ValtoAllas? vaganyValtoAllas) && vaganyValtoAllas == valtoAllas)
+            .Select(item => item.Key)
+            .SingleOrDefault();
 }

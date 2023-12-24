@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.AllomasNS;
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 
 [TestClass]
-public class ValtozarasBiztberFactoryTests
+public class ValtozarasBiztberFactoryTests : SzimulaciosTestBase
 {
     [DataTestMethod]
     [DataRow(AllomasNev.Viragvolgy)]

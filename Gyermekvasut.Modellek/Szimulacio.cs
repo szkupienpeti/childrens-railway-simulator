@@ -4,6 +4,8 @@ namespace Gyermekvasut.Modellek;
 
 public sealed class Szimulacio
 {
+
+
     private static Szimulacio? _instance;
     public static Szimulacio Instance => _instance!;
 
@@ -14,7 +16,9 @@ public sealed class Szimulacio
     private Szimulacio(int sebessegSzorzo)
     {
         SebessegSzorzo = sebessegSzorzo;
-        Ora = new(sebessegSzorzo, new TimerWrapper());
+        double interval = IdoUtil.MinutesToTimerInterval(1, SebessegSzorzo);
+        ITimer timer = new TimerWrapper(true, interval);
+        Ora = new(timer);
     }
 
     public void Start(TimeOnly kezdoIdo)
@@ -36,7 +40,7 @@ public sealed class Szimulacio
         _instance = new Szimulacio(sebessegSzorzo);
     }
 
-    public static void CleanUp()
+    public static void Cleanup()
     {
         _instance = null;
     }

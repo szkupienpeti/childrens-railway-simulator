@@ -77,7 +77,6 @@ public class AllomasiTopologia
         Valtok.Add(valto);
         valto.KiteroSzomszedolas(kiteroSzar);
         kiteroSzar.Szomszedolas(valto.CsucsIrany, valto);
-        // TODO Lezárási táblázathoz hozzáad: gyök felé elindul mindkét száron, ha vágányt talál, add
     }
 
     public HashSet<Szakasz> GetHianyzoHosszuSzakaszok()

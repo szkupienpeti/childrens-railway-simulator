@@ -1,6 +1,4 @@
-﻿using System.Timers;
-
-namespace Gyermekvasut.Modellek.Ido;
+﻿namespace Gyermekvasut.Modellek.Ido;
 
 public interface ITimer
 {
