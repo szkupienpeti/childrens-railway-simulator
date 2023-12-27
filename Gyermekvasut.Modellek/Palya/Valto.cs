@@ -4,7 +4,6 @@ namespace Gyermekvasut.Modellek.Palya;
 
 public class Valto : PalyaElem, IHelyhezKotottPalyaElem
 {
-    private static readonly int MILLISECONDS_IN_SECOND = 1000;
     // Dinamikus
     private ValtoAllas? _vegallas;
     public ValtoAllas? Vegallas

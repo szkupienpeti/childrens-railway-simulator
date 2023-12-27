@@ -119,13 +119,13 @@ public abstract class ValtozarasBiztberTestBase : SzimulaciosTestBase
         => Biztber!.EmeltyuCsoportok[irany].BejaratiJelzoEmeltyu2;
 
     // Assertek
-    protected void AssertSikertelenAllitasEredmeny(EmeltyuAllitasEredmeny expected, EmeltyuAllitasEredmenyek eredmenyek)
+    protected static void AssertSikertelenAllitasEredmeny(EmeltyuAllitasEredmeny expected, EmeltyuAllitasEredmenyek eredmenyek)
     {
         Assert.AreEqual(expected, eredmenyek.BiztberEredmeny);
         Assert.AreEqual(expected, eredmenyek.AllitasEredmeny);
     }
 
-    protected void AssertSikeresAllitasEredmeny(EmeltyuAllitasEredmenyek eredmenyek)
+    protected static void AssertSikeresAllitasEredmeny(EmeltyuAllitasEredmenyek eredmenyek)
     {
         Assert.AreEqual(EmeltyuAllitasEredmeny.Allithato, eredmenyek.BiztberEredmeny);
         Assert.AreEqual(EmeltyuAllitasEredmeny.Atallitva, eredmenyek.AllitasEredmeny);

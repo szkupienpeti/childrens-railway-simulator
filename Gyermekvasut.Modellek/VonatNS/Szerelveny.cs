@@ -100,7 +100,7 @@ public class Szerelveny
     private void VegeTimerLeptet()
     {
         int foglaltSzakaszokOsszHossz = Szakaszok.Sum(sz => sz.Hossz);
-        int utolsoFoglaltSzakaszHossz = Szakaszok.Last().Hossz;
+        int utolsoFoglaltSzakaszHossz = GetUtolsoSzakasz().Hossz;
         int osszHosszUtolsoNelkul = foglaltSzakaszokOsszHossz - utolsoFoglaltSzakaszHossz;
         int utolsoSzakaszraJutoFoglaltsag = Hossz - osszHosszUtolsoNelkul;
         if (utolsoSzakaszraJutoFoglaltsag <= 0)
@@ -119,11 +119,11 @@ public class Szerelveny
     private void VegeTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
     {
         // Régi utolsó felszabadítása
-        Szakasz felszabadulo = Szakaszok.Last();
+        Szakasz felszabadulo = GetUtolsoSzakasz();
         felszabadulo.Felszabadit(this);
         Szakaszok.Remove(felszabadulo);
         // Új utolsó ekkor teljesen foglalt
-        UtolsoSzakaszElfoglaltHossz = Szakaszok.Last().Hossz;
+        UtolsoSzakaszElfoglaltHossz = GetUtolsoSzakasz().Hossz;
         // Továbblépés
         VegeTimerLeptet();
     }
@@ -160,6 +160,9 @@ public class Szerelveny
             Tovabblep();
         }
     }
+
+    private Szakasz GetUtolsoSzakasz()
+        => Szakaszok[^1];
 
     public override string ToString() => Nev;
 }
