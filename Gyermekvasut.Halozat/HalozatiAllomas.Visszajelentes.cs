@@ -3,6 +3,8 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek;
+using Gyermekvasut.Grpc.Client;
+using Gyermekvasut.Halozat.Factory;
 
 namespace Gyermekvasut.Halozat;
 
@@ -16,12 +18,8 @@ public partial class HalozatiAllomas : Allomas
 
     public void Visszajelent(Irany irany, string vonatszam, string nev)
     {
-        VisszajelentesRequest request = new()
-        {
-            Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev),
-            Vonatszam = vonatszam,
-            Nev = nev
-        };
-        GetSzomszedClient(irany).Visszajelentes(request);
+        VisszajelentesRequest request = GrpcRequestFactory.CreateVisszajelentesRequest(AllomasNev, vonatszam, nev);
+        GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);
+        szomszedClient.Visszajelentes(request);
     }
 }

@@ -3,6 +3,8 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek;
+using Gyermekvasut.Halozat.Factory;
+using Gyermekvasut.Grpc.Client;
 
 namespace Gyermekvasut.Halozat;
 
@@ -16,14 +18,8 @@ public partial class HalozatiAllomas : Allomas
 
     public void EngedelytMegtagad(Irany irany, string vonatszam, string ok, int percMulva, string nev)
     {
-        EngedelyMegtagadasRequest request = new()
-        {
-            Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev),
-            Vonatszam = vonatszam,
-            Ok = ok,
-            PercMulva = percMulva,
-            Nev = nev
-        };
-        GetSzomszedClient(irany).EngedelyMegtagadas(request);
+        EngedelyMegtagadasRequest request = GrpcRequestFactory.CreateEngedelyMegtagadasRequest(AllomasNev, vonatszam, ok, percMulva, nev);
+        GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);
+        szomszedClient.EngedelyMegtagadas(request);
     }
 }

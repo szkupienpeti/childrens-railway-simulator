@@ -6,6 +6,8 @@ using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.VonatNS;
 using System.Diagnostics;
+using Gyermekvasut.Halozat.Factory;
+using Gyermekvasut.Grpc.Client;
 
 namespace Gyermekvasut.Halozat;
 
@@ -34,11 +36,8 @@ public partial class HalozatiAllomas : Allomas
 
     public void VonatotAllomaskozolKileptet(Irany irany, string vonatszam)
     {
-        VonatAllomaskozbolKilepRequest request = new()
-        {
-            Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev),
-            Vonatszam = vonatszam
-        };
-        GetSzomszedClient(irany).VonatAllomaskozbolKilep(request);
+        VonatAllomaskozbolKilepRequest request = GrpcRequestFactory.CreateVonatAllomaskozbolKilepRequest(AllomasNev, vonatszam);
+        GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);
+        szomszedClient.VonatAllomaskozbolKilep(request);
     }
 }

@@ -1,14 +1,13 @@
 using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
 public class HalozatiAllomasCsengetesTests
-    : HalozatiAllomasSzomszedTestBase<CsengetesEventArgs>
+    : RealHalozatiAllomasSzomszedTestBase<CsengetesEventArgs>
 {
     protected override Action<EventHandler<CsengetesEventArgs>> Subscriber()
         => handler => SzomszedAllomas.CsengetesEvent += handler;
@@ -49,12 +48,4 @@ public class HalozatiAllomasCsengetesTests
         var expectedCsengetes = GetCsengetes(irany);
         CollectionAssert.AreEqual(expectedCsengetes, EventArgs!.Csengetesek);
     }
-
-    private static List<Csengetes> GetCsengetes(Irany irany)
-        => irany switch
-        {
-            Irany.KezdopontFele => EGY_HOSSZU,
-            Irany.VegpontFele => KET_HOSSZU,
-            _ => throw new NotImplementedException()
-        };
 }

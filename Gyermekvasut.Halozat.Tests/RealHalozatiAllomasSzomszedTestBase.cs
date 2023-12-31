@@ -1,12 +1,11 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.VonatNS;
 
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
-public abstract class HalozatiAllomasSzomszedTestBase<TEventArgs> : HalozatiAllomasTestBase
+public abstract class RealHalozatiAllomasSzomszedTestBase<TEventArgs> : RealHalozatiAllomasTestBase
     where TEventArgs : HalozatiAllomasEventArgs
 {
     private HalozatiAllomas? _szomszedAllomas;
@@ -54,11 +53,4 @@ public abstract class HalozatiAllomasSzomszedTestBase<TEventArgs> : HalozatiAllo
         base.TestCleanup();
         StopIfNotNull(_szomszedAllomas);
     }
-}
-
-public record TestVonatInfo(string Vonatszam, Menetrend Menetrend)
-{
-    public TestVonatInfo(string vonatszam, VonatIrany vonatIrany)
-        : this(vonatszam, new Menetrend(vonatszam, vonatIrany))
-    { }
 }

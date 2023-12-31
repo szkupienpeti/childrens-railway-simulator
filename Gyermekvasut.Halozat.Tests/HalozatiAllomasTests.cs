@@ -4,7 +4,7 @@ using Gyermekvasut.Tests.Util;
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
-public class HalozatiAllomasTests : HalozatiAllomasTestBase
+public class HalozatiAllomasTests : RealHalozatiAllomasTestBase
 {
     [TestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevValues), typeof(DynamicTestDataUtil))]

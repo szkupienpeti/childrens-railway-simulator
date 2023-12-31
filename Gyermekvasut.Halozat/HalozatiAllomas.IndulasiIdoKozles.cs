@@ -3,6 +3,8 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek;
+using Gyermekvasut.Grpc.Client;
+using Gyermekvasut.Halozat.Factory;
 
 namespace Gyermekvasut.Halozat;
 
@@ -16,13 +18,8 @@ public partial class HalozatiAllomas : Allomas
 
     public void IndulasiIdotKozol(Irany irany, string vonatszam, TimeOnly ido, string nev)
     {
-        IndulasiIdoKozlesRequest request = new()
-        {
-            Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev),
-            Vonatszam = vonatszam,
-            Ido = ModelToGrpcMapper.MapTimeOnly(ido),
-            Nev = nev
-        };
-        GetSzomszedClient(irany).IndulasiIdoKozles(request);
+        IndulasiIdoKozlesRequest request = GrpcRequestFactory.CreateIndulasiIdoKozlesRequest(AllomasNev, vonatszam, ido, nev);
+        GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);
+        szomszedClient.IndulasiIdoKozles(request);
     }
 }

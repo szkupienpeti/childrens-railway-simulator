@@ -9,7 +9,7 @@ namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
 public class HalozatiAllomasAllomaskozSzerelvenyChangedErkezoTests
-    : HalozatiAllomasSzomszedTestBase<VonatAllomaskozbolKilepEventArgs>
+    : RealHalozatiAllomasSzomszedTestBase<VonatAllomaskozbolKilepEventArgs>
 {
     private Szakasz? _allomaskoz;
     private Szakasz Allomaskoz => _allomaskoz!;

@@ -1,29 +1,26 @@
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Grpc.Client;
-using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Halozat.Factory;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.VonatNS;
 using Gyermekvasut.Tests.Util;
 using Moq;
 
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
-public class HalozatiAllomasVonatAllomaskozbolKilepEventTests : HalozatiAllomasTestBase
+public class HalozatiAllomasGrpcVonatAllomaskozbolKilepEventTests : MockHalozatiAllomasTestBase
 {
     [TestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void VonatAllomaskozbolKilepEvent_WhenAzonosVonatszam_ShouldFelszabaditWithoutRaise(AllomasNev allomasNev, Irany irany)
+    public void GrpcVonatAllomaskozbolKilepEvent_WhenAzonosVonatszam_ShouldFelszabaditWithoutRaise(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
         var vonat = CreateInduloTestVonatAllomaskozben(irany);
         // Act
-        ActRaiseVonatAllomaskozbolKilepEvent(irany, vonat.Nev);
+        ActRaiseGrpcVonatAllomaskozbolKilepEvent(irany, vonat.Nev);
         // Assert
         var allomaskoz = Allomas.Topologia.Allomaskozok[irany]!;
         Assert.IsNull(allomaskoz.Szerelveny);
@@ -36,36 +33,32 @@ public class HalozatiAllomasVonatAllomaskozbolKilepEventTests : HalozatiAllomasT
 
     [TestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void VonatAllomaskozbolKilepEvent_WhenElteroVonatszam_ShouldThrow(AllomasNev allomasNev, Irany irany)
+    public void GrpcVonatAllomaskozbolKilepEvent_WhenElteroVonatszam_ShouldThrow(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
         var vonat = CreateInduloTestVonatAllomaskozben(irany);
         // Act and assert
         var elteroVonatszam = $"{vonat.Nev}_OTHER";
-        Assert.ThrowsException<ArgumentException>(() => ActRaiseVonatAllomaskozbolKilepEvent(irany, elteroVonatszam),
+        Assert.ThrowsException<ArgumentException>(() => ActRaiseGrpcVonatAllomaskozbolKilepEvent(irany, elteroVonatszam),
             $"Nem az állomásköz szerelvényét ({vonat.Nev}) próbálja kiléptetni, hanem a(z) {elteroVonatszam} sz. vonatot");
     }
 
     [TestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void VonatAllomaskozbolKilepEvent_WhenSzabad_ShouldThrow(AllomasNev allomasNev, Irany irany)
+    public void GrpcVonatAllomaskozbolKilepEvent_WhenSzabad_ShouldThrow(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
         // Act and assert
         var nemLetezoVonatszam = "NON_EXISTING_VONAT";
-        Assert.ThrowsException<InvalidOperationException>(() => ActRaiseVonatAllomaskozbolKilepEvent(irany, nemLetezoVonatszam),
+        Assert.ThrowsException<InvalidOperationException>(() => ActRaiseGrpcVonatAllomaskozbolKilepEvent(irany, nemLetezoVonatszam),
             $"Az állomásköz üres, így nem léptethetõ ki a(z) {nemLetezoVonatszam} sz. vonat");
     }
 
-    private void ActRaiseVonatAllomaskozbolKilepEvent(Irany irany, string vonatszam)
+    private void ActRaiseGrpcVonatAllomaskozbolKilepEvent(Irany irany, string vonatszam)
     {
-        var request = new VonatAllomaskozbolKilepRequest()
-        {
-            Kuldo = ModelToGrpcMapper.MapAllomasNev(Allomas.AllomasNev.Szomszed(irany)!.Value),
-            Vonatszam = vonatszam
-        };
+        var request = GrpcRequestFactory.CreateVonatAllomaskozbolKilepRequest(GetSzomszedAllomasNev(irany), vonatszam);
         var eventArgs = new GrpcVonatAllomaskozbolKilepEventArgs(request);
         GrpcServerMock.Raise(a => a.GrpcVonatAllomaskozbolKilepEvent += null, eventArgs);
     }

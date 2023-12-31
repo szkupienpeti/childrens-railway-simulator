@@ -1,12 +1,8 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Gyermekvasut.Grpc.Client;
-using Gyermekvasut.Grpc.Server;
-using Gyermekvasut.Modellek;
+﻿using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Modellek.VonatNS;
-using Moq;
 
 namespace Gyermekvasut.Halozat.Tests;
 
@@ -26,44 +22,8 @@ public abstract class HalozatiAllomasTestBase
         { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros) },
     };
 
-    private static readonly string MOCK_ADDRESS = "https://0.0.0.0:0";
-
-    private HalozatiAllomasFactory? _allomasFactory;
-    protected HalozatiAllomasFactory AllomasFactory => _allomasFactory!;
-
-    private HalozatiAllomas? _allomas;
+    protected HalozatiAllomas? _allomas;
     protected HalozatiAllomas Allomas => _allomas!;
-
-    private Mock<IGrpcAllomasServer>? _grpcServerMock;
-    protected Mock<IGrpcAllomasServer> GrpcServerMock => _grpcServerMock!;
-
-    private Mock<GrpcAllomasClient>? _kpClientMock;
-    protected Mock<GrpcAllomasClient> KpClientMock => _kpClientMock!;
-
-    private Mock<GrpcAllomasClient>? _vpClientMock;
-    protected Mock<GrpcAllomasClient> VpClientMock => _vpClientMock!;
-
-    protected void AllomasFelepit(AllomasNev allomasNev)
-    {
-        _allomasFactory = new();
-        _allomas = AllomasFactory.Create(allomasNev);
-    }
-
-    protected void MockAllomasFelepit(AllomasNev allomasNev)
-    {
-        _grpcServerMock = new Mock<IGrpcAllomasServer>();
-        _kpClientMock = new Mock<GrpcAllomasClient>(MOCK_ADDRESS);
-        _vpClientMock = new Mock<GrpcAllomasClient>(MOCK_ADDRESS);
-        _allomas = new(allomasNev, _grpcServerMock.Object, _kpClientMock.Object, _vpClientMock.Object);
-    }
-
-    protected Mock<GrpcAllomasClient> GetMockSzomszedClient(Irany irany)
-        => irany switch
-        {
-            Irany.KezdopontFele => KpClientMock,
-            Irany.VegpontFele => VpClientMock,
-            _ => throw new NotImplementedException()
-        };
 
     [TestCleanup]
     public virtual void TestCleanup()
@@ -102,4 +62,22 @@ public abstract class HalozatiAllomasTestBase
         var vonat = new Vonat(vonatInfo.Vonatszam, vonatIrany, SZERELVENY, menetrendek);
         return vonat;
     }
+
+    protected static List<Csengetes> GetCsengetes(Irany irany)
+        => irany switch
+        {
+            Irany.KezdopontFele => EGY_HOSSZU,
+            Irany.VegpontFele => KET_HOSSZU,
+            _ => throw new NotImplementedException()
+        };
+
+    protected AllomasNev GetSzomszedAllomasNev(Irany irany)
+        => Allomas.AllomasNev.Szomszed(irany)!.Value;
+}
+
+public record TestVonatInfo(string Vonatszam, Menetrend Menetrend)
+{
+    public TestVonatInfo(string vonatszam, VonatIrany vonatIrany)
+        : this(vonatszam, new Menetrend(vonatszam, vonatIrany))
+    { }
 }

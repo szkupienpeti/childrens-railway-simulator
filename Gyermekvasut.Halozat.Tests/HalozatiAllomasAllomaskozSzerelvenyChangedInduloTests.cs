@@ -8,7 +8,7 @@ namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
 public class HalozatiAllomasAllomaskozSzerelvenyChangedInduloTests
-    : HalozatiAllomasSzomszedTestBase<VonatAllomaskozbeBelepEventArgs>
+    : RealHalozatiAllomasSzomszedTestBase<VonatAllomaskozbeBelepEventArgs>
 {
     private Vonat? _vonat;
     private Vonat Vonat => _vonat!;
