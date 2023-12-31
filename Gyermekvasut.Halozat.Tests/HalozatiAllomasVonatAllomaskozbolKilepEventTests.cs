@@ -21,7 +21,7 @@ public class HalozatiAllomasVonatAllomaskozbolKilepEventTests : HalozatiAllomasT
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
-        var vonat = CreateTestVonatAllomaskozben(irany);
+        var vonat = CreateInduloTestVonatAllomaskozben(irany);
         // Act
         ActRaiseVonatAllomaskozbolKilepEvent(irany, vonat.Nev);
         // Assert
@@ -40,7 +40,7 @@ public class HalozatiAllomasVonatAllomaskozbolKilepEventTests : HalozatiAllomasT
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
-        var vonat = CreateTestVonatAllomaskozben(irany);
+        var vonat = CreateInduloTestVonatAllomaskozben(irany);
         // Act and assert
         var elteroVonatszam = $"{vonat.Nev}_OTHER";
         Assert.ThrowsException<ArgumentException>(() => ActRaiseVonatAllomaskozbolKilepEvent(irany, elteroVonatszam),

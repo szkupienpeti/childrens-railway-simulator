@@ -14,8 +14,19 @@ public partial class HalozatiAllomas : Allomas
     private void AllomasServer_GrpcVonatAllomaskozbeBelepEvent(object? sender, GrpcVonatAllomaskozbeBelepEventArgs grpcEventArgs)
     {
         VonatAllomaskozbeBelepEventArgs e = VonatAllomaskozbeBelepEventArgs.FromGrpcEventArgs(grpcEventArgs);
+        IranyKonzisztenciaCheck(e.Kuldo, e.Vonat.Irany);
         BelepoVonatotAllomaskozbeLehelyez(e.Vonat);
         VonatAllomaskozbeBelepEvent?.Invoke(this, e);
+    }
+
+    private void IranyKonzisztenciaCheck(AllomasNev kuldo, Irany vonatIrany)
+    {
+        Irany kuldoIrany = AllomasNev.GetSzomszedIrany(kuldo)!.Value;
+        if (kuldoIrany == vonatIrany)
+        {
+            throw new InvalidOperationException(
+                $"{AllomasNev}: Állomásközbe belépő vonat irány inkonzisztencia: {kuldo} felöl, {vonatIrany} irányú vonat");
+        }
     }
 
     private void BelepoVonatotAllomaskozbeLehelyez(Vonat vonat)

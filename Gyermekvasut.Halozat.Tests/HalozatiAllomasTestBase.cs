@@ -1,4 +1,5 @@
-﻿using Gyermekvasut.Grpc.Client;
+﻿using Google.Protobuf.WellKnownTypes;
+using Gyermekvasut.Grpc.Client;
 using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
@@ -75,18 +76,30 @@ public abstract class HalozatiAllomasTestBase
         allomas?.Stop();
     }
 
-    protected Vonat CreateTestVonatAllomaskozben(Irany irany)
+    protected Vonat CreateInduloTestVonatAllomaskozben(Irany allomasOldal)
+        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal);
+
+    protected Vonat CreateErkezoTestVonatAllomaskozben(Irany allomasOldal)
+        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal.Fordit());
+
+    private Vonat CreateTestVonatAllomaskozben(Irany allomasOldal, Irany vonatIrany)
     {
-        var allomaskoz = Allomas.Topologia.Allomaskozok[irany]!;
-        return CreateTestVonat(irany, allomaskoz);
+        var allomaskoz = Allomas.Topologia.Allomaskozok[allomasOldal]!;
+        return CreateTestVonat(vonatIrany, allomaskoz);
     }
 
-    protected static Vonat CreateTestVonat(Irany irany, Szakasz allomaskoz)
+    protected static Vonat CreateTestVonat(Irany vonatIrany, Szakasz allomaskoz)
     {
-        var vonatInfo = VONAT_INFOS[irany];
-        var menetrendek = new[] { vonatInfo.Menetrend };
-        var vonat = new Vonat(vonatInfo.Vonatszam, irany, SZERELVENY, menetrendek);
+        var vonat = CreateTestVonat(vonatIrany);
         vonat.Lehelyez(allomaskoz);
+        return vonat;
+    }
+
+    protected static Vonat CreateTestVonat(Irany vonatIrany)
+    {
+        var vonatInfo = VONAT_INFOS[vonatIrany];
+        var menetrendek = new[] { vonatInfo.Menetrend };
+        var vonat = new Vonat(vonatInfo.Vonatszam, vonatIrany, SZERELVENY, menetrendek);
         return vonat;
     }
 }
