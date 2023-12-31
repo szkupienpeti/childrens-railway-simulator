@@ -23,6 +23,6 @@ public partial class HalozatiAllomas : Allomas
             Ido = ModelToGrpcMapper.MapTimeOnly(ido),
             Nev = nev
         };
-        GetSzomszedClient(irany).IndulasiIdoKozlesVetelAsync(request);
+        GetSzomszedClient(irany).IndulasiIdoKozlesVetel(request);
     }
 }

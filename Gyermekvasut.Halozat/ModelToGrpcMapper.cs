@@ -1,5 +1,7 @@
 ﻿using Google.Protobuf.Collections;
+using Grpc.Core;
 using Gyermekvasut.Grpc;
+using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Modellek.VonatNS;
@@ -34,13 +36,11 @@ public static class ModelToGrpcMapper
     }
 
     public static GrpcIdo MapTimeOnly(TimeOnly timeOnly)
-    {
-        return new()
+        => new()
         {
             Ora = timeOnly.Hour,
             Perc = timeOnly.Minute
         };
-    }
 
     public static GrpcEngedelyKeresTipus MapEngedelyKeresTipus(EngedelyKeresTipus engedelyKeresTipus)
     {
@@ -65,10 +65,67 @@ public static class ModelToGrpcMapper
 
     public static GrpcVonat MapVonat(Vonat vonat)
     {
-        // TODO Map Vonat
-        throw new NotImplementedException();
+        GrpcVonat grpcVonat = new()
+        {
+            Nev = vonat.Nev,
+            Irany = MapIrany(vonat.Irany),
+            Hossz = vonat.Hossz
+        };
+        FillRepeated(grpcVonat.Jarmuvek, vonat.Jarmuvek, MapJarmu);
+        FillRepeated(grpcVonat.Menetrendek, vonat.Menetrendek, MapMenetrend);
+        return grpcVonat;
     }
+
+    public static GrpcIrany MapIrany(Irany irany)
+        => irany switch
+        {
+            Irany.KezdopontFele => GrpcIrany.KezdopontFele,
+            Irany.VegpontFele => GrpcIrany.VegpontFele,
+            _ => throw new ArgumentException($"Illegal {nameof(Irany)}: {irany}")
+        };
+
+    public static GrpcJarmu MapJarmu(Jarmu jarmu)
+        => new()
+        {
+            Nev = jarmu.Nev,
+            Tipus = MapJarmuTipus(jarmu.Tipus)
+        };
+
+    public static string MapJarmuTipus(JarmuTipus jarmuTipus)
+        => Enum.GetName(jarmuTipus)!;
+
+    public static GrpcMenetrend MapMenetrend(Menetrend menetrend)
+    {
+        GrpcMenetrend grpcMenetrend = new()
+        {
+            Vonatszam = menetrend.Vonatszam,
+            Irany = MapVonatIrany(menetrend.Irany)
+        };
+        FillRepeated(grpcMenetrend.Sorok, menetrend.Sorok, MapAllomasiMenetrendSor);
+        return grpcMenetrend;
+    }
+
+    public static GrpcVonatIrany MapVonatIrany(VonatIrany vonatIrany)
+        => vonatIrany switch
+        {
+            VonatIrany.Paratlan => GrpcVonatIrany.Paratlan,
+            VonatIrany.Paros => GrpcVonatIrany.Paros,
+            _ => throw new ArgumentException($"Illegal {nameof(VonatIrany)}: {vonatIrany}")
+        };
+
+    public static GrpcAllomasiMenetrendSor MapAllomasiMenetrendSor(AllomasiMenetrendSor allomasiMenetrendSor)
+        => new()
+        {
+            Allomas = MapAllomasNev(allomasiMenetrendSor.Allomas),
+            Erkezes = MapOptionalStruct(allomasiMenetrendSor.Erkezes, MapTimeOnly),
+            Indulas = MapTimeOnly(allomasiMenetrendSor.Indulas)
+        };
 
     public static void FillRepeated<TGrpc, TModel>(RepeatedField<TGrpc> grpcRepeatedField, List<TModel> modelList, Func<TModel, TGrpc> mapper)
         => modelList.ForEach(model => grpcRepeatedField.Add(mapper(model)));
+
+    public static TGrpc? MapOptionalStruct<TModel, TGrpc>(TModel? modelField, Func<TModel, TGrpc> mapper)
+            where TModel : struct
+            where TGrpc : class
+        => modelField.HasValue ? mapper(modelField.Value) : null;
 }

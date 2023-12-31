@@ -2,8 +2,6 @@
 using Gyermekvasut.Grpc.Client;
 using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek.AllomasNS;
-using Microsoft.Extensions.Configuration;
-using Gyermekvasut.Halozat.Factory;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.VonatNS;
@@ -12,9 +10,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas : Allomas
 {
-    private static readonly string HALOZAT_CONFIG_FILE = "gyermekvasut.halozat.settings.json";
-    private IConfiguration Configuration { get; }
-    private GrpcAllomasServer AllomasServer { get; }
+    private IGrpcAllomasServer AllomasServer { get; }
     private GrpcAllomasClient? KpAllomasClient { get; }
     private GrpcAllomasClient? VpAllomasClient { get; }
 
@@ -30,18 +26,20 @@ public partial class HalozatiAllomas : Allomas
     public event EventHandler<VonatAllomaskozbeBelepEventArgs>? VonatAllomaskozbeBelepEvent;
     public event EventHandler<VonatAllomaskozbolKilepEventArgs>? VonatAllomaskozbolKilepEvent;
 
-    public HalozatiAllomas(AllomasNev nev) : base(nev)
+    public HalozatiAllomas(AllomasNev nev, IGrpcAllomasServer allomasServer,
+            GrpcAllomasClient? kpAllomasClient, GrpcAllomasClient? vpAllomasClient)
+        : base(nev)
     {
-        Configuration = new ConfigurationBuilder()
-            .AddJsonFile(HALOZAT_CONFIG_FILE)
-            .Build();
-        GrpcAllomasServerFactory serverFactory = new(Configuration);
-        AllomasServer = serverFactory.CreateAndStart(AllomasNev);
+        AllomasServer = allomasServer;
         SubscribeToServerEvents();
         SubscribeToAllomaskozEvents();
-        GrpcAllomasClientFactory clientFactory = new(Configuration);
-        KpAllomasClient = clientFactory.CreateOptional(AllomasNev.KpSzomszed());
-        VpAllomasClient = clientFactory.CreateOptional(AllomasNev.VpSzomszed());
+        KpAllomasClient = kpAllomasClient;
+        VpAllomasClient = vpAllomasClient;
+    }
+
+    public void Stop()
+    {
+        AllomasServer.Stop();
     }
 
     private void SubscribeToServerEvents()

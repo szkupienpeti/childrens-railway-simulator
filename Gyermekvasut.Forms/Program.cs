@@ -15,6 +15,7 @@ internal static class Program
         string[] allomasKodok = allomasKodokStr.Split(',');
         HashSet<AllomasNev> allomasNevek = new();
         List<HalozatiAllomas> allomasok = new();
+        HalozatiAllomasFactory halozatiAllomasFactory = new();
         foreach (var allomasKod in allomasKodok)
         {
             AllomasNev allomasNev = AllomasNevFromKod(allomasKod);
@@ -23,7 +24,7 @@ internal static class Program
                 throw new ArgumentException($"{allomasNev.Nev()} állomás {allomasKod} kódja többször szerepel a parancssori paraméterben: {allomasKodokStr}");
             }
             allomasNevek.Add(allomasNev);
-            HalozatiAllomas allomas = new(allomasNev);
+            HalozatiAllomas allomas = halozatiAllomasFactory.Create(allomasNev);
             allomasok.Add(allomas);
         }
         ApplicationConfiguration.Initialize();

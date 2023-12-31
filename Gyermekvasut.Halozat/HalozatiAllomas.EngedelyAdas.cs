@@ -26,6 +26,6 @@ public partial class HalozatiAllomas : Allomas
             Vonatszam = vonatszam,
             Nev = nev
         };
-        GetSzomszedClient(irany).EngedelyAdasAsync(request);
+        GetSzomszedClient(irany).EngedelyAdas(request);
     }
 }

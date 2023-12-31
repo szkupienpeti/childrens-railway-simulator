@@ -24,10 +24,7 @@ public class AllomasiMenetrendSor
     public AllomasNev Allomas { get; }
     public TimeOnly? Erkezes { get; }
     public TimeOnly Indulas { get; }
-    public bool Athalad
-    {
-        get => Erkezes == null;
-    }
+    public bool Athalad => Erkezes == null;
 
     public AllomasiMenetrendSor(AllomasNev allomas, TimeOnly? erkezes, TimeOnly indulas)
     {

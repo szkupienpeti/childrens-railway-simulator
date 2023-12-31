@@ -1,6 +1,8 @@
 ﻿using Google.Protobuf.Collections;
 using Gyermekvasut.Grpc;
+using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
+using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Modellek.VonatNS;
 
@@ -59,9 +61,47 @@ public static class GrpcToModelMapper
 
     public static Vonat MapVonat(GrpcVonat grpcVonat)
     {
-        // TODO Map Vonat
-        throw new NotImplementedException();
+        Irany irany = MapIrany(grpcVonat.Irany);
+        Jarmu[] jarmuvek = MapRepeated(grpcVonat.Jarmuvek, MapJarmu).ToArray();
+        Menetrend[] menetrendek = MapRepeated(grpcVonat.Menetrendek, MapMenetrend).ToArray();
+        Vonat vonat = new(grpcVonat.Nev, irany, jarmuvek, menetrendek);
+        if (grpcVonat.Hossz != vonat.Hossz)
+        {
+            throw new InvalidOperationException(
+                $"A gRPC-n küldtt vonathossz ({grpcVonat.Hossz}) és a felépített vonathossz ({vonat.Hossz}) eltérnek.");
+        }
+        return vonat;
     }
+
+    public static Irany MapIrany(GrpcIrany grpcIrany)
+        => grpcIrany switch
+        {
+            GrpcIrany.KezdopontFele => Irany.KezdopontFele,
+            GrpcIrany.VegpontFele => Irany.VegpontFele,
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcIrany)}: {grpcIrany}")
+        };
+
+    public static Jarmu MapJarmu(GrpcJarmu grpcJarmu)
+        => new(grpcJarmu.Nev, MapJarmuTipus(grpcJarmu.Tipus));
+
+    public static JarmuTipus MapJarmuTipus(string grpcJarmuTipus)
+        => Enum.Parse<JarmuTipus>(grpcJarmuTipus);
+
+    public static Menetrend MapMenetrend(GrpcMenetrend grpcMenetrend)
+        => new(grpcMenetrend.Vonatszam, MapVonatIrany(grpcMenetrend.Irany),
+            MapRepeated(grpcMenetrend.Sorok, MapAllomasiMenetrendSor).ToArray());
+
+    public static VonatIrany MapVonatIrany(GrpcVonatIrany grpcVonatIrany)
+        => grpcVonatIrany switch
+        {
+            GrpcVonatIrany.Paratlan => VonatIrany.Paratlan,
+            GrpcVonatIrany.Paros => VonatIrany.Paros,
+            _ => throw new ArgumentException($"Illegal {nameof(GrpcVonatIrany)}: {grpcVonatIrany}")
+        };
+
+    public static AllomasiMenetrendSor MapAllomasiMenetrendSor(GrpcAllomasiMenetrendSor grpcAllomasiMenetrendSor)
+        => new(MapAllomasNev(grpcAllomasiMenetrendSor.Allomas),
+            MapIdo(grpcAllomasiMenetrendSor.Erkezes), MapIdo(grpcAllomasiMenetrendSor.Indulas));
 
     public static List<TModel> MapRepeated<TGrpc, TModel>(RepeatedField<TGrpc> repeatedField, Func<TGrpc, TModel> mapper)
         => repeatedField.Select(mapper).ToList();

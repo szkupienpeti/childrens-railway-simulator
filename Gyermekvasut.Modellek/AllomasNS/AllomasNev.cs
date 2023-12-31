@@ -81,6 +81,29 @@ public static class AllomasNevExtensions
         return VONAL[index + 1];
     }
 
+    public static IEnumerable<Irany> SzomszedIranyok(this AllomasNev allomasNev)
+    {
+        foreach (var irany in Enum.GetValues<Irany>())
+        {
+            if (allomasNev.Szomszed(irany).HasValue)
+            {
+                yield return irany;
+            }
+        }
+    }
+
+    public static Irany? GetSzomszedIrany(this AllomasNev allomasNev, AllomasNev szomszed)
+    {
+        foreach (var irany in Enum.GetValues<Irany>())
+        {
+            if (allomasNev.Szomszed(irany) == szomszed)
+            {
+                return irany;
+            }
+        }
+        return null;
+    }
+
     public static bool Vegallomas(this AllomasNev allomasNev)
         => allomasNev is AllomasNev.Szechenyihegy or AllomasNev.Huvosvolgy;
 }

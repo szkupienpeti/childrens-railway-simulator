@@ -32,7 +32,7 @@ public static class AllomasiTopologiaFactory
         topologia.EgyenesFeltolt(kiteroElemek);
         ValtoKiteroSzomszedol(topologia, kpElemek);
         ValtoKiteroSzomszedol(topologia, vpElemek);
-        SzakaszHosszSzamolo.HianyzoHosszokatKiszamol(topologia.GetHianyzoHosszuSzakaszok());
+        SzakaszHosszSzamolo.HianyzoHosszokatKiszamol(topologia.GetHianyzoHosszuSzakaszok(), topologiaAdatok);
         return topologia;
     }
 

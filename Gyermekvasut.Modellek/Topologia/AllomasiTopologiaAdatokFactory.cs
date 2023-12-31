@@ -208,7 +208,7 @@ public static class AllomasiTopologiaAdatokFactory
             .AddSzelvenyszam(KijaratiJelzoSzerep.V2,    new(112, 74))
             .AddSzelvenyszam(ValtoSzerep.Valto1,        new(113, 20))
             // TODO 1-es váltó és/vagy E1 törpe szelvényszáma nem stimmel
-            .AddSzelvenyszam(TolatasjelzoSzerep.E1,     new(113, 15))
+            .AddSzelvenyszam(TolatasjelzoSzerep.E1,     new(113, 25))
             .AddSzelvenyszam(TolatasjelzoSzerep.T1,     new(113, 30))
             .Build();
 }

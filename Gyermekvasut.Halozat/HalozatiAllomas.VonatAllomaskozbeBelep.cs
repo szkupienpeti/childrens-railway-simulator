@@ -4,6 +4,7 @@ using Gyermekvasut.Grpc;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek.VonatNS;
 using Gyermekvasut.Modellek;
+using Gyermekvasut.Modellek.Palya;
 
 namespace Gyermekvasut.Halozat;
 
@@ -12,7 +13,15 @@ public partial class HalozatiAllomas : Allomas
     private void AllomasServer_GrpcVonatAllomaskozbeBelepEvent(object? sender, GrpcVonatAllomaskozbeBelepEventArgs grpcEventArgs)
     {
         VonatAllomaskozbeBelepEventArgs e = VonatAllomaskozbeBelepEventArgs.FromGrpcEventArgs(grpcEventArgs);
+        BelepoVonatotAllomaskozbeLehelyez(e.Vonat);
         VonatAllomaskozbeBelepEvent?.Invoke(this, e);
+    }
+
+    private void BelepoVonatotAllomaskozbeLehelyez(Vonat vonat)
+    {
+        Irany allomasOldalIrany = vonat.Irany.Fordit();
+        Szakasz allomaskoz = Topologia.Allomaskozok[allomasOldalIrany]!;
+        vonat.Lehelyez(allomaskoz);
     }
 
     public void VonatotAllomaskozbeBeleptet(Irany irany, Vonat vonat)
@@ -22,6 +31,6 @@ public partial class HalozatiAllomas : Allomas
             Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev),
             Vonat = ModelToGrpcMapper.MapVonat(vonat)
         };
-        GetSzomszedClient(irany).VonatAllomaskozbeBelepAsync(request);
+        GetSzomszedClient(irany).VonatAllomaskozbeBelep(request);
     }
 }

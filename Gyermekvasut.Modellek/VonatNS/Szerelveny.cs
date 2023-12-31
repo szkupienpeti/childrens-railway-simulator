@@ -28,8 +28,9 @@ public class Szerelveny
     }
     public List<Szakasz> Szakaszok { get; } = new();
     private int UtolsoSzakaszElfoglaltHossz { get; set; }
+    public bool Megszuntetve { get; private set; }
 
-    public Szerelveny(string szerelvenyNev, Irany irany, Szakasz szakasz, params Jarmu[] jarmuvek)
+    public Szerelveny(string szerelvenyNev, Irany irany, params Jarmu[] jarmuvek)
     {
         SzerelvenyNev = szerelvenyNev;
         Irany = irany;
@@ -37,6 +38,12 @@ public class Szerelveny
         {
             Jarmuvek.Add(jarmu);
         }
+        ElejeTimer.Elapsed += ElejeTimer_Elapsed;
+        VegeTimer.Elapsed += VegeTimer_Elapsed;
+    }
+
+    public void Lehelyez(Szakasz szakasz)
+    {
         if (szakasz.Hossz < Hossz)
         {
             throw new ArgumentException("A szerelvény lehelyezési szakasza rövidebb, mint a szerelvény");
@@ -44,8 +51,6 @@ public class Szerelveny
         Szakaszok.Add(szakasz);
         UtolsoSzakaszElfoglaltHossz = Hossz;
         szakasz.Elfoglal(this);
-        ElejeTimer.Elapsed += ElejeTimer_Elapsed;
-        VegeTimer.Elapsed += VegeTimer_Elapsed;
     }
 
     public void Tovabblep()
@@ -95,6 +100,14 @@ public class Szerelveny
                 }
             }
         }
+    }
+
+    public void Megszuntet()
+    {
+        ElejeTimer.Stop();
+        VegeTimer.Stop();
+        Szakaszok.ForEach(sz => sz.Felszabadit(this));
+        Megszuntetve = true;
     }
 
     private void VegeTimerLeptet()

@@ -4,6 +4,7 @@ using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek;
+using Gyermekvasut.Grpc.Client;
 
 namespace Gyermekvasut.Halozat;
 
@@ -22,6 +23,7 @@ public partial class HalozatiAllomas : Allomas
             Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev)
         };
         ModelToGrpcMapper.FillRepeated(request.Csengetesek, csengetesek, ModelToGrpcMapper.MapCsengetes);
-        GetSzomszedClient(irany).CsengetesAsync(request);
+        GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);
+        szomszedClient.Csengetes(request);
     }
 }

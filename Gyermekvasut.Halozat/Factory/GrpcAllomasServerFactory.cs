@@ -6,23 +6,34 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Gyermekvasut.Halozat.Factory;
 
-internal class GrpcAllomasServerFactory : GrpcAllomasFactoryBase
+public class GrpcAllomasServerFactory : GrpcAllomasFactoryBase
 {
     public GrpcAllomasServerFactory(IConfiguration configuration) : base(configuration) { }
 
-    public GrpcAllomasServer CreateAndStart(AllomasNev allomasNev)
+    public static GrpcAllomasServer CreateOnly()
+    {
+        return new();
+    }
+
+    public void Start(GrpcAllomasServer grpcAllomasServer, AllomasNev allomasNev)
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddGrpc();
-        GrpcAllomasServer grpcAllomasServer = new();
         builder.Services.AddSingleton(grpcAllomasServer);
 
         var app = builder.Build();
         app.MapGrpcService<GrpcAllomasServer>();
         app.MapGet("/", () => "Gyermekvasut.Grpc.Server.GrpcAllomasServer is working.");
-
+        grpcAllomasServer.SetApp(app);
+        
         string address = GetAllomasAddress(allomasNev);
         app.RunAsync(address);
+    }
+
+    public GrpcAllomasServer CreateAndStart(AllomasNev allomasNev)
+    {
+        GrpcAllomasServer grpcAllomasServer = CreateOnly();
+        Start(grpcAllomasServer, allomasNev);
         return grpcAllomasServer;
     }
 }

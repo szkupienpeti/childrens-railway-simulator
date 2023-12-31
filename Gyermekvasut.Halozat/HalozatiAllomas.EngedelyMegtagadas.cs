@@ -24,6 +24,6 @@ public partial class HalozatiAllomas : Allomas
             PercMulva = percMulva,
             Nev = nev
         };
-        GetSzomszedClient(irany).EngedelyMegtagadasAsync(request);
+        GetSzomszedClient(irany).EngedelyMegtagadas(request);
     }
 }

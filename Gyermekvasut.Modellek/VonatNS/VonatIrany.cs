@@ -2,6 +2,6 @@
 
 public enum VonatIrany
 {
-    Paros = 0,
     Paratlan = 1,
+    Paros = 2
 }

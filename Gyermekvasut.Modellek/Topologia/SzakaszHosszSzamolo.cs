@@ -4,7 +4,7 @@ namespace Gyermekvasut.Modellek.Topologia;
 
 public static class SzakaszHosszSzamolo
 {
-    public static void HianyzoHosszokatKiszamol(ICollection<Szakasz> szakaszok)
+    public static void HianyzoHosszokatKiszamol(ICollection<Szakasz> szakaszok, AllomasiTopologiaAdatok topologiaAdatok)
     {
         foreach (var szakasz in szakaszok)
         {
@@ -22,10 +22,26 @@ public static class SzakaszHosszSzamolo
                 Irany vaganyIrany = helyhezKotottSzomszedIrany.Fordit();
                 Vagany vagany = GetTipusosSzomszed<Vagany>(szakasz, vaganyIrany)!;
                 int vaganyHossz = vagany.Hossz;
-                int vaganyonTuliSzelvenyMeter = GetVaganyonTuliSzelvenyOsszMeter(szakasz, vaganyIrany);
-                int osszTavolsag = Math.Abs(vaganyonTuliSzelvenyMeter - szomszedSzelvenyMeter);
-                int hianyzoTavolsagokOssz = osszTavolsag - vaganyHossz;
-                hossz = Convert.ToInt32((double)hianyzoTavolsagokOssz / 2);
+                if (VaganyonTulHelyhezKotott(vagany, vaganyIrany))
+                {
+                    // Pl. váltó - gyök szakasz - vágány - kijárati jelző
+                    int vaganyTulvegeSzelvenyMeter = GetSzomszedSzelvenyOsszMeter(vagany, vaganyIrany);
+                    int osszTavolsag = Math.Abs(vaganyTulvegeSzelvenyMeter - szomszedSzelvenyMeter);
+                    hossz = osszTavolsag - vaganyHossz;
+                }
+                else
+                {
+                    // Pl. váltó - gyök szakasz - vágány - gyök szakasz - váltó
+                    int vaganyonTuliSzelvenyMeter = GetVaganyonTuliSzelvenyOsszMeter(szakasz, vaganyIrany);
+                    int osszTavolsag = Math.Abs(vaganyonTuliSzelvenyMeter - szomszedSzelvenyMeter);
+                    int hianyzoTavolsagokOssz = osszTavolsag - vaganyHossz;
+                    hossz = Convert.ToInt32((double)hianyzoTavolsagokOssz / 2);
+                }
+            }
+            else if (VegallomasZaroSzakasz(szakasz))
+            {
+                Irany allomasOldal = GetSzomszedNelkuliIrany(szakasz)!.Value;
+                hossz = topologiaAdatok.AllomasOldalAdatok[allomasOldal].AllomaskozHossz;
             }
             else
             {
@@ -33,6 +49,21 @@ public static class SzakaszHosszSzamolo
             }
             szakasz.SetHossz(hossz);
         }
+    }
+
+    private static bool VegallomasZaroSzakasz(Szakasz szakasz)
+        => GetSzomszedNelkuliIrany(szakasz).HasValue;
+
+    private static Irany? GetSzomszedNelkuliIrany(PalyaElem elem)
+    {
+        foreach (Irany irany in Enum.GetValues<Irany>())
+        {
+            if (elem.Kovetkezo(irany) == null)
+            {
+                return irany;
+            }
+        }
+        return null;
     }
 
     private static bool HelyhezKotottEsVaganyKozott(Szakasz szakasz)
@@ -75,4 +106,7 @@ public static class SzakaszHosszSzamolo
         Szakasz tavoliSzakasz = GetTipusosSzomszed<Szakasz>(vagany, irany)!;
         return GetSzomszedSzelvenyOsszMeter(tavoliSzakasz, irany);
     }
+
+    private static bool VaganyonTulHelyhezKotott(Vagany vagany, Irany irany)
+        => vagany.Kovetkezo(irany) is IHelyhezKotottPalyaElem;
 }

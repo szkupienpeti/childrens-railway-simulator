@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Gyermekvasut.Halozat.Factory;
 
-internal class GrpcAllomasClientFactory : GrpcAllomasFactoryBase
+public class GrpcAllomasClientFactory : GrpcAllomasFactoryBase
 {
     public GrpcAllomasClientFactory(IConfiguration configuration) : base(configuration) { }
 

@@ -98,7 +98,8 @@ public abstract class ValtozarasBiztberTestBase : SzimulaciosTestBase
     // Vonat ki-/behaladás
     protected void VonatBehalad(Irany irany)
     {
-        var vonat = new Szerelveny(VONATSZAM, irany.Fordit(), Allomas.Topologia.Allomaskozok[irany]!, GEP);
+        var vonat = new Szerelveny(VONATSZAM, irany.Fordit(), GEP);
+        vonat.Lehelyez(Allomas.Topologia.Allomaskozok[irany]!);
         var valtokezelo = GetValtokezelo(irany);
         valtokezelo.GetOldoSzakaszElottiSzakasz().Elfoglal(vonat);
         valtokezelo.GetOldoSzakasz().Elfoglal(vonat);

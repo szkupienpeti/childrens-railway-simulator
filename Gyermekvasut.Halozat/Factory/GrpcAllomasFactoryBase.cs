@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Gyermekvasut.Halozat.Factory;
 
-internal abstract class GrpcAllomasFactoryBase
+public abstract class GrpcAllomasFactoryBase
 {
     private IConfiguration Configuration { get; }
 

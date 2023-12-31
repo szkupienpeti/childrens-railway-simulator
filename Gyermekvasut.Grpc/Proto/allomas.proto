@@ -126,11 +126,37 @@ message VonatAllomaskozbolKilepRequest {
 
 message GrpcVonat {
   string nev = 1;
-  int32 hossz = 2;
-  repeated GrpcJarmu jarmuvek = 3;
-  // TODO Menetrend stb.?
+  GrpcIrany irany = 2;
+  int32 hossz = 3;
+  repeated GrpcJarmu jarmuvek = 4;
+  repeated GrpcMenetrend menetrendek = 5;
+}
+
+enum GrpcIrany {
+  GRPC_IRANY_UNSPECIFIED = 0;
+  KezdopontFele = 1;
+  VegpontFele = 2;
 }
 
 message GrpcJarmu {
-  string tipus = 1;
+  string nev = 1;
+  string tipus = 2;
+}
+
+message GrpcMenetrend {
+  string vonatszam = 1;
+  GrpcVonatIrany irany = 2;
+  repeated GrpcAllomasiMenetrendSor sorok = 3;
+}
+
+enum GrpcVonatIrany {
+  GRPC_VONAT_IRANY_UNSPECIFIED = 0;
+  Paratlan = 1;
+  Paros = 2;
+}
+
+message GrpcAllomasiMenetrendSor {
+  GrpcAllomasNev allomas = 1;
+  optional GrpcIdo erkezes = 2;
+  GrpcIdo indulas = 3;
 }

@@ -1,11 +1,16 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Microsoft.AspNetCore.Builder;
+using System.Diagnostics;
 
 namespace Gyermekvasut.Grpc.Server;
 
-public sealed class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase
+public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 {
+    private WebApplication? _app;
+    private WebApplication App => _app!;
+
     // Events
     public event EventHandler<GrpcCsengetesEventArgs>? GrpcCsengetesEvent;
     public event EventHandler<GrpcVisszaCsengetesEventArgs>? GrpcVisszaCsengetesEvent;
@@ -18,6 +23,24 @@ public sealed class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase
     public event EventHandler<GrpcVisszajelentesVetelEventArgs>? GrpcVisszajelentesVetelEvent;
     public event EventHandler<GrpcVonatAllomaskozbeBelepEventArgs>? GrpcVonatAllomaskozbeBelepEvent;
     public event EventHandler<GrpcVonatAllomaskozbolKilepEventArgs>? GrpcVonatAllomaskozbolKilepEvent;
+
+    public GrpcAllomasServer()
+    {
+        Trace.WriteLine("GrpcAllomasServer created");
+    }
+
+    public void SetApp(WebApplication app)
+    {
+        if (_app != null)
+        {
+            throw new InvalidOperationException("A WebApplication példány már be lett állítva");
+        }
+        _app = app;
+    }
+    public void Stop()
+    {
+        App.StopAsync().Wait();
+    }
 
     // Override gRPC methods: invoke events
     public sealed override Task<Empty> Csengetes(CsengetesRequest request, ServerCallContext context)

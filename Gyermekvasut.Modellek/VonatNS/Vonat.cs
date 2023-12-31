@@ -16,8 +16,8 @@ public class Vonat : Szerelveny
         ? AktualisMenetrend.Vonatszam
         : base.Nev;
 
-    public Vonat(string nev, Irany irany, Szakasz szakasz, Jarmu[] jarmuvek, Menetrend[] menetrendek)
-        : base(nev, irany, szakasz, jarmuvek)
+    public Vonat(string nev, Irany irany, Jarmu[] jarmuvek, Menetrend[] menetrendek)
+        : base(nev, irany, jarmuvek)
     {
         foreach (var menetrend in menetrendek)
         {

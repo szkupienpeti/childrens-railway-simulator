@@ -68,7 +68,7 @@ public class Szakasz : EgyenesPalyaElem
     {
         if (Szerelveny != szerelveny)
         {
-            throw new ArgumentException("Nem a szakasz szerelvénye próbálja felszabadítani a szakaszt");
+            throw new ArgumentException($"Nem a szakasz szerelvénye ({Szerelveny}) próbálja felszabadítani a szakaszt, hanem a {szerelveny}");
         }
         Szerelveny = null;
         Trace.WriteLine($"{szerelveny} elhagyta {this} szakaszt");

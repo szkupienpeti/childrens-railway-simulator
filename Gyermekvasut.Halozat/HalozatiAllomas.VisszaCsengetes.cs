@@ -22,6 +22,6 @@ public partial class HalozatiAllomas : Allomas
             Kuldo = ModelToGrpcMapper.MapAllomasNev(AllomasNev)
         };
         ModelToGrpcMapper.FillRepeated(request.Csengetesek, csengetesek, ModelToGrpcMapper.MapCsengetes);
-        GetSzomszedClient(irany).VisszaCsengetesAsync(request);
+        GetSzomszedClient(irany).VisszaCsengetes(request);
     }
 }
