@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.Telefon;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
 
-public class CsengetesEventArgs : TelefonEventArgs
+public class CsengetesEventArgs : HalozatiAllomasEventArgs
 {
     public List<Csengetes> Csengetesek { get; }
 

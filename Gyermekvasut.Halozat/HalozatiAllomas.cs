@@ -5,6 +5,7 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.VonatNS;
+using System.Diagnostics;
 
 namespace Gyermekvasut.Halozat;
 
@@ -70,16 +71,19 @@ public partial class HalozatiAllomas : Allomas
 
     private void Allomaskoz_SzerelvenyChanged(object? sender, SzakaszSzerelvenyChangedEventArgs e)
     {
+        Trace.WriteLine($"{AllomasNev}: {sender} SzerelvenyChanged");
         Szakasz allomaskoz = (sender as Szakasz)!;
         Irany allomaskozIrany = Topologia.GetAllomaskozIrany(allomaskoz);
         if (e.ElozoSzerelveny == null && allomaskoz.Szerelveny!.Irany == allomaskozIrany)
         {
             // Induló vonat
+            Trace.WriteLine($"{AllomasNev}: Induló vonatot állomásközbe beléptet {allomaskoz.Szerelveny}");
             VonatotAllomaskozbeBeleptet(allomaskozIrany, (allomaskoz.Szerelveny as Vonat)!);
         }
         else if (allomaskoz.Szerelveny == null && e.ElozoSzerelveny!.Irany != allomaskozIrany)
         {
             // Érkező vonat
+            Trace.WriteLine($"{AllomasNev}: Érkező vonatot állomásközből kiléptet {allomaskoz.Szerelveny}");
             VonatotAllomaskozolKileptet(allomaskozIrany, (e.ElozoSzerelveny as Vonat)!.Nev);
         }
     }

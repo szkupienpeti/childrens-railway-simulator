@@ -1,6 +1,6 @@
 ﻿using Gyermekvasut.Modellek;
 
-namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
+namespace Gyermekvasut.Tests.Util;
 
 [TestClass]
 public abstract class SzimulaciosTestBase

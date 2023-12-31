@@ -1,7 +1,7 @@
 ﻿using Gyermekvasut.Modellek.AllomasNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
-public abstract class KozlemenyEventArgs : TelefonEventArgs
+public abstract class KozlemenyEventArgs : HalozatiAllomasEventArgs
 {
     public string Vonatszam { get; }
     public string Nev { get; }

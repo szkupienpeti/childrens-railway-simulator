@@ -1,6 +1,7 @@
 ﻿using Gyermekvasut.Biztberek.Emeltyus.Emeltyuk;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
+using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
 

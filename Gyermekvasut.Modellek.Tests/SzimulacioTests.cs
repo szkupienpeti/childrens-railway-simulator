@@ -1,4 +1,4 @@
-﻿using Gyermekvasut.Biztberek.Valtozaras.Tests;
+﻿using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Modellek.Tests;
 

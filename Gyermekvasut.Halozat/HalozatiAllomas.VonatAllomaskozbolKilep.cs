@@ -5,6 +5,7 @@ using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.VonatNS;
+using System.Diagnostics;
 
 namespace Gyermekvasut.Halozat;
 
@@ -27,6 +28,7 @@ public partial class HalozatiAllomas : Allomas
         {
             throw new ArgumentException($"Nem az állomásköz szerelvényét ({szerelveny}) próbálja kiléptetni, hanem a(z) {vonatszam} sz. vonatot");
         }
+        Trace.WriteLine($"{AllomasNev}: {allomaskoz} állomásközből kilépő vonat megszüntetése: {szerelveny}");
         szerelveny.Megszuntet();
     }
 

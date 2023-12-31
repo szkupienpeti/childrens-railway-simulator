@@ -4,7 +4,7 @@ using Gyermekvasut.Modellek.AllomasNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
 
-public class VonatAllomaskozbolKilepEventArgs : TelefonEventArgs
+public class VonatAllomaskozbolKilepEventArgs : HalozatiAllomasEventArgs
 {
     public string Vonatszam { get; }
     public VonatAllomaskozbolKilepEventArgs(AllomasNev kuldo, string vonatszam) : base(kuldo)

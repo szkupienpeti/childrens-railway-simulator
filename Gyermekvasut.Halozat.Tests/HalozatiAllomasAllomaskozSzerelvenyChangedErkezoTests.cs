@@ -42,7 +42,7 @@ public class HalozatiAllomasAllomaskozSzerelvenyChangedErkezoTests
 
     private void AssertAllomaskozbolKilepRaised()
     {
-        AssertEventRaised();
+        AssertEventRaisedByAllomas();
         Assert.AreEqual(Vonat.Nev, EventArgs!.Vonatszam);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gyermekvasut.Modellek;
+﻿using Gyermekvasut.Halozat.EventArgsNS;
+using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.VonatNS;
 
@@ -6,7 +7,7 @@ namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
 public abstract class HalozatiAllomasSzomszedTestBase<TEventArgs> : HalozatiAllomasTestBase
-    where TEventArgs : EventArgs
+    where TEventArgs : HalozatiAllomasEventArgs
 {
     private HalozatiAllomas? _szomszedAllomas;
     protected HalozatiAllomas SzomszedAllomas => _szomszedAllomas!;
@@ -40,7 +41,13 @@ public abstract class HalozatiAllomasSzomszedTestBase<TEventArgs> : HalozatiAllo
 
     protected void AssertEventNotRaised()
         => Assert.IsNull(EventArgs);
-    
+
+    protected void AssertEventRaisedByAllomas()
+    {
+        AssertEventRaised();
+        Assert.AreEqual(Allomas.AllomasNev, EventArgs!.Kuldo);
+    }
+
     [TestCleanup]
     public override void TestCleanup()
     {

@@ -1,11 +1,11 @@
 ﻿using Gyermekvasut.Modellek.AllomasNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
-public abstract class TelefonEventArgs : EventArgs
+public abstract class HalozatiAllomasEventArgs : EventArgs
 {
     public AllomasNev Kuldo { get; }
 
-    protected TelefonEventArgs(AllomasNev kuldo)
+    protected HalozatiAllomasEventArgs(AllomasNev kuldo)
     {
         Kuldo = kuldo;
     }

@@ -5,7 +5,7 @@ using Gyermekvasut.Modellek.VonatNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
 
-public class VonatAllomaskozbeBelepEventArgs : TelefonEventArgs
+public class VonatAllomaskozbeBelepEventArgs : HalozatiAllomasEventArgs
 {
     public Vonat Vonat { get; }
     public VonatAllomaskozbeBelepEventArgs(AllomasNev kuldo, Vonat vonat) : base(kuldo)

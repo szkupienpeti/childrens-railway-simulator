@@ -5,6 +5,7 @@ using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Modellek.VonatNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.Palya;
+using System.Diagnostics;
 
 namespace Gyermekvasut.Halozat;
 
@@ -21,6 +22,7 @@ public partial class HalozatiAllomas : Allomas
     {
         Irany allomasOldalIrany = vonat.Irany.Fordit();
         Szakasz allomaskoz = Topologia.Allomaskozok[allomasOldalIrany]!;
+        Trace.WriteLine($"{AllomasNev}: Belépő {vonat} vonat lehelyezése {allomaskoz} állomásközbe");
         vonat.Lehelyez(allomaskoz);
     }
 

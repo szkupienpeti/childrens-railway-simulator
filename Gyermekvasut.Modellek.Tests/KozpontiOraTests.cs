@@ -1,5 +1,5 @@
-﻿using Gyermekvasut.Biztberek.Valtozaras.Tests;
-using Gyermekvasut.Modellek.Ido;
+﻿using Gyermekvasut.Modellek.Ido;
+using Gyermekvasut.Tests.Util;
 using Moq;
 
 namespace Gyermekvasut.Modellek.Tests;

@@ -17,6 +17,15 @@ public class Menetrend
             Sorok.Add(sor);
         }
     }
+
+    public override bool Equals(object? obj)
+        => obj is Menetrend menetrend
+            && Vonatszam == menetrend.Vonatszam
+            && Irany == menetrend.Irany
+            && Enumerable.SequenceEqual(Sorok, menetrend.Sorok);
+
+    public override int GetHashCode()
+        => HashCode.Combine(Vonatszam, Irany, Sorok);
 }
 
 public class AllomasiMenetrendSor
@@ -32,4 +41,13 @@ public class AllomasiMenetrendSor
         Erkezes = erkezes;
         Indulas = indulas;
     }
+
+    public override bool Equals(object? obj)
+        => obj is AllomasiMenetrendSor sor
+            && Allomas == sor.Allomas
+            && EqualityComparer<TimeOnly?>.Default.Equals(Erkezes, sor.Erkezes)
+            && Indulas.Equals(sor.Indulas) && Athalad == sor.Athalad;
+
+    public override int GetHashCode()
+        => HashCode.Combine(Allomas, Erkezes, Indulas, Athalad);
 }

@@ -1,4 +1,5 @@
-﻿namespace Gyermekvasut.Modellek.VonatNS;
+﻿
+namespace Gyermekvasut.Modellek.VonatNS;
 
 public class Jarmu
 {
@@ -11,5 +12,13 @@ public class Jarmu
     }
 
     public override string ToString() => Nev;
+
+    public override bool Equals(object? obj)
+        => obj is Jarmu jarmu
+            && Nev == jarmu.Nev
+            && Tipus == jarmu.Tipus;
+    
+    public override int GetHashCode()
+        => HashCode.Combine(Nev, Tipus);
 }
 

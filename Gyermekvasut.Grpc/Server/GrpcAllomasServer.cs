@@ -24,11 +24,6 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
     public event EventHandler<GrpcVonatAllomaskozbeBelepEventArgs>? GrpcVonatAllomaskozbeBelepEvent;
     public event EventHandler<GrpcVonatAllomaskozbolKilepEventArgs>? GrpcVonatAllomaskozbolKilepEvent;
 
-    public GrpcAllomasServer()
-    {
-        Trace.WriteLine("GrpcAllomasServer created");
-    }
-
     public void SetApp(WebApplication app)
     {
         if (_app != null)

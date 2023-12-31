@@ -5,6 +5,7 @@ using Gyermekvasut.Modellek.BiztberNS;
 using Gyermekvasut.Modellek.Ido;
 using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.VonatNS;
+using Gyermekvasut.Tests.Util;
 using Moq;
 
 namespace Gyermekvasut.Biztberek.Valtozaras.Tests;
