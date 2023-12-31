@@ -5,14 +5,12 @@ using Gyermekvasut.Modellek.Telefon;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
 
-public class VisszaCsengetesEventArgs : EventArgs
+public class VisszaCsengetesEventArgs : HalozatiAllomasEventArgs
 {
-    public AllomasNev Kuldo { get; }
     public List<Csengetes> Csengetesek { get; }
 
-    public VisszaCsengetesEventArgs(AllomasNev kuldo, List<Csengetes> csengetesek)
+    public VisszaCsengetesEventArgs(AllomasNev kuldo, List<Csengetes> csengetesek) : base(kuldo)
     {
-        Kuldo = kuldo;
         Csengetesek = csengetesek;
     }
 

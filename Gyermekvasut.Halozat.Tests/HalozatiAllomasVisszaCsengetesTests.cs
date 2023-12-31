@@ -6,42 +6,42 @@ using Gyermekvasut.Tests.Util;
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
-public class HalozatiAllomasCsengetesTests
-    : RealHalozatiAllomasSzomszedTestBase<CsengetesEventArgs>
+public class HalozatiAllomasVisszaCsengetesTests
+    : RealHalozatiAllomasSzomszedTestBase<VisszaCsengetesEventArgs>
 {
-    protected override Action<EventHandler<CsengetesEventArgs>> Subscriber()
-        => handler => SzomszedAllomas.CsengetesEvent += handler;
+    protected override Action<EventHandler<VisszaCsengetesEventArgs>> Subscriber()
+        => handler => SzomszedAllomas.VisszaCsengetesEvent += handler;
 
     [TestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void Csengetes_WhenHasSzomszed_ShouldRaiseEvent(AllomasNev allomasNev, Irany irany)
+    public void VisszaCsengetes_WhenHasSzomszed_ShouldRaiseEvent(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         AllomasokFelepit(allomasNev, irany);
         // Act
-        ActCsengetes(irany);
+        ActVisszaCsengetes(irany);
         // Assert
-        AssertCsengetesRaised(irany);
+        AssertVisszaCsengetesRaised(irany);
     }
 
     [DataTestMethod]
     [DataRow(AllomasNev.Szechenyihegy,  Irany.KezdopontFele)]
     [DataRow(AllomasNev.Huvosvolgy,     Irany.VegpontFele)]
-    public void Csengetes_WhenNoSzomszed_ShouldThrow(AllomasNev allomasNev, Irany irany)
+    public void VisszaCsengetes_WhenNoSzomszed_ShouldThrow(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         AllomasFelepit(allomasNev);
         // Act and assert
-        Assert.ThrowsException<NullReferenceException>(() => ActCsengetes(irany));
+        Assert.ThrowsException<NullReferenceException>(() => ActVisszaCsengetes(irany));
     }
 
-    private void ActCsengetes(Irany irany)
+    private void ActVisszaCsengetes(Irany irany)
     {
         var csengetes = GetCsengetes(irany);
-        Allomas.Csenget(irany, csengetes);
+        Allomas.VisszaCsenget(irany, csengetes);
     }
 
-    private void AssertCsengetesRaised(Irany irany)
+    private void AssertVisszaCsengetesRaised(Irany irany)
     {
         AssertEventRaisedByAllomas();
         var expectedCsengetes = GetCsengetes(irany);

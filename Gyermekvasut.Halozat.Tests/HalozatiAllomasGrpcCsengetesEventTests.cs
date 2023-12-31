@@ -19,7 +19,6 @@ public class HalozatiAllomasGrpcCsengetesEventTests : MockHalozatiAllomasEventTe
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
-        Allomas.CsengetesEvent += (sender, args) => EventArgs = args;
         // Act
         ActRaiseGrpcCsengetesEvent(irany);
         // Assert
