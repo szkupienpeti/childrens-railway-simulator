@@ -16,11 +16,14 @@ public abstract class HalozatiAllomasTestBase
     private static readonly string PAROS_VONATSZAM = "TEST_2";
     private static readonly string GEP_NEV = "TEST_Mk45";
     private static readonly Jarmu[] SZERELVENY = new Jarmu[] { new(GEP_NEV, JarmuTipus.Mk45) };
-    protected static Dictionary<Irany, TestVonatInfo> VONAT_INFOS = new()
+    protected static readonly Dictionary<Irany, TestVonatInfo> VONAT_INFOS = new()
     {
         { Irany.KezdopontFele, new(PARATLAN_VONATSZAM, VonatIrany.Paratlan) },
         { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros) },
     };
+
+    protected static readonly TimeOnly TEST_IDO = new(9, 10);
+    protected static readonly string TEST_NEV = "TEST_NEV";
 
     protected HalozatiAllomas? _allomas;
     protected HalozatiAllomas Allomas => _allomas!;
