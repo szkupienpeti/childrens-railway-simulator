@@ -86,8 +86,6 @@ public abstract class ValtozarasBiztberTestBase : SzimulaciosTestBase
             case ValtoAllas.Kitero:
                 GetBejaratiJelzoEmeltyu2(irany).AllitasiKiserlet(Biztber);
                 break;
-            default:
-                break;
         }
     }
 
@@ -109,16 +107,16 @@ public abstract class ValtozarasBiztberTestBase : SzimulaciosTestBase
 
     // Getterek
     private ValtozarasValtokezelo GetValtokezelo(Irany irany)
-        => Biztber!.EmeltyuCsoportok[irany].Valtokezelo;
+        => Biztber.EmeltyuCsoportok[irany].Valtokezelo;
 
     protected KetfogalmuElojelzoEmeltyu<ValtozarasBiztber> GetElojelzoEmeltyu(Irany irany)
-        => Biztber!.EmeltyuCsoportok[irany].ElojelzoEmeltyu;
+        => Biztber.EmeltyuCsoportok[irany].ElojelzoEmeltyu;
 
     protected BejaratiJelzoEmeltyu1<ValtozarasBiztber> GetBejaratiJelzoEmeltyu1(Irany irany)
-        => Biztber!.EmeltyuCsoportok[irany].BejaratiJelzoEmeltyu1;
+        => Biztber.EmeltyuCsoportok[irany].BejaratiJelzoEmeltyu1;
 
     protected BejaratiJelzoEmeltyu2<ValtozarasBiztber> GetBejaratiJelzoEmeltyu2(Irany irany)
-        => Biztber!.EmeltyuCsoportok[irany].BejaratiJelzoEmeltyu2;
+        => Biztber.EmeltyuCsoportok[irany].BejaratiJelzoEmeltyu2;
 
     // Assertek
     protected static void AssertSikertelenAllitasEredmeny(EmeltyuAllitasEredmeny expected, EmeltyuAllitasEredmenyek eredmenyek)
