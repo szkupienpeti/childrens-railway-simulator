@@ -1,6 +1,6 @@
 ﻿using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.Topologia;
-using Gyermekvasut.Valtokezelo;
+using Gyermekvasut.ValtokezeloNS;
 
 namespace Gyermekvasut.Biztberek.Emeltyus;
 

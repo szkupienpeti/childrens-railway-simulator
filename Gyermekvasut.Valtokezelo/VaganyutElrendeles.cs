@@ -1,7 +1,7 @@
 ﻿using Gyermekvasut.Modellek.BiztberNS;
 using Gyermekvasut.Modellek.Palya;
 
-namespace Gyermekvasut.Valtokezelo;
+namespace Gyermekvasut.ValtokezeloNS;
 
 public class VaganyutElrendeles
 {

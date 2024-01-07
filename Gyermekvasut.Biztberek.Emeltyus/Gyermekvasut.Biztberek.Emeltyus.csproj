@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
-    <ProjectReference Include="..\Gyermekvasut.Valtokezelo\Gyermekvasut.Valtokezelo.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Valtokezelo\Gyermekvasut.ValtokezeloNS.csproj" />
   </ItemGroup>
 
 </Project>

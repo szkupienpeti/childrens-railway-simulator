@@ -1,6 +1,6 @@
 ﻿using Gyermekvasut.Modellek.Palya;
 
-namespace Gyermekvasut.Valtokezelo;
+namespace Gyermekvasut.ValtokezeloNS;
 
 internal class OldoSzakaszok
 {

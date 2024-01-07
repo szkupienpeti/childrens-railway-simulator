@@ -20,7 +20,7 @@ public class AllomasiTopologiaAdatokFactoryTests : SzimulaciosTestBase
             AllomasNev? szomszedAllomasNev = allomasNev.Szomszed(irany);
             if (szomszedAllomasNev.HasValue)
             {
-                var szomszedAdatok = AllomasiTopologiaAdatokFactory.Create(szomszedAllomasNev!.Value);
+                var szomszedAdatok = AllomasiTopologiaAdatokFactory.Create(szomszedAllomasNev.Value);
                 AssertAllomaskozEgyezes(adatok, irany, szomszedAdatok);
             }
         }

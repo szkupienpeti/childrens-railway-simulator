@@ -56,7 +56,7 @@ public class KozpontiOraTests : SzimulaciosTestBase
         var timer = new Mock<ITimer>();
         var ora = new KozpontiOra(timer.Object);
         var eventRaised = false;
-        ora.KozpontiIdoChanged += delegate (object? sender, EventArgs e)
+        ora.KozpontiIdoChanged += delegate
         {
             eventRaised = true;
         };

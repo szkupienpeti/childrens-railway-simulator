@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gyermekvasut.Biztberek.Emeltyus\Gyermekvasut.Biztberek.Emeltyus.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
-    <ProjectReference Include="..\Gyermekvasut.Valtokezelo\Gyermekvasut.Valtokezelo.csproj" />
+    <ProjectReference Include="..\Gyermekvasut.Valtokezelo\Gyermekvasut.ValtokezeloNS.csproj" />
   </ItemGroup>
 
 </Project>

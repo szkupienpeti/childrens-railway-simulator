@@ -4,7 +4,7 @@ using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
 
-namespace Gyermekvasut.Valtokezelo;
+namespace Gyermekvasut.ValtokezeloNS;
 
 public abstract class ValtokezeloFactory<TValtokezelo>
     where TValtokezelo : Valtokezelo

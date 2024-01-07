@@ -2,7 +2,7 @@
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
 using Gyermekvasut.Modellek.Ido;
-using Gyermekvasut.Valtokezelo;
+using Gyermekvasut.ValtokezeloNS;
 
 namespace Gyermekvasut.Biztberek.Reteszes;
 
