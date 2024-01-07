@@ -4,7 +4,7 @@ using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Palya.Jelzok;
 using Gyermekvasut.Modellek.Topologia;
 
-namespace Gyermekvasut.ValtokezeloNS;
+namespace Gyermekvasut.Valtokezelo;
 
 public abstract class Valtokezelo
 {
@@ -135,15 +135,15 @@ public abstract class Valtokezelo
 
     private void OldoSzakasz_SzerelvenyChanged(object? sender, SzakaszSzerelvenyChangedEventArgs e)
     {
-       if (e.ElozoSzerelveny == null && e.UjSzerelveny != null && e.UjSzerelveny.Nev == AktualisVaganyutElrendeles!.Vonatszam)
-       {
+        if (e.ElozoSzerelveny == null && e.UjSzerelveny != null && e.UjSzerelveny.Nev == AktualisVaganyutElrendeles!.Vonatszam)
+        {
             // Vonat az oldási szakaszra lépett
             Szakasz oldoSzakasz = (sender as Szakasz)!;
             oldoSzakasz.SzerelvenyChanged -= OldoSzakasz_SzerelvenyChanged;
             // Feliratkozás az előző szakaszról lehaladásra
             Szakasz oldoSzakaszElottiSzakasz = GetOldoSzakaszElottiSzakasz();
             oldoSzakaszElottiSzakasz.SzerelvenyChanged += OldoSzakaszElottiSzakasz_SzerelvenyChanged;
-       }
+        }
     }
 
     private void OldoSzakaszElottiSzakasz_SzerelvenyChanged(object? sender, SzakaszSzerelvenyChangedEventArgs e)

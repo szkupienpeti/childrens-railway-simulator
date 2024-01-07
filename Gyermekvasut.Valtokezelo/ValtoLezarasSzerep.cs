@@ -1,4 +1,4 @@
-﻿namespace Gyermekvasut.ValtokezeloNS;
+﻿namespace Gyermekvasut.Valtokezelo;
 
 public enum ValtoLezarasSzerep
 {
