@@ -76,10 +76,10 @@ public static class AllomasiTopologiaFactory
         Ismetlojelzo? ism = CreateIsmetlojelzo(altalanosAllomasAdatok, bejaratiJelzoSzerep);
         if (ism != null)
         {
-            Szakasz ej_ism = CreateSzakasz(ej, ism!, allomasOldal);
-            Szakasz ism_bej = CreateSzakasz(ism!, bej, allomasOldal);
+            Szakasz ej_ism = CreateSzakasz(ej, ism, allomasOldal);
+            Szakasz ism_bej = CreateSzakasz(ism, bej, allomasOldal);
             atmenoElemek.Add(ej_ism);
-            atmenoElemek.Add(ism!);
+            atmenoElemek.Add(ism);
             atmenoElemek.Add(ism_bej);
         }
         else
@@ -116,10 +116,10 @@ public static class AllomasiTopologiaFactory
                 switch (altalanosAllomasAdatok.VaganyValtoAllasok[vagany])
                 {
                     case ValtoAllas.Egyenes:
-                        atmenoElemek.Add(kij!);
+                        atmenoElemek.Add(kij);
                         break;
                     case ValtoAllas.Kitero:
-                        kiteroElemek.Add(kij!);
+                        kiteroElemek.Add(kij);
                         break;
                 }
             }
@@ -169,7 +169,7 @@ public static class AllomasiTopologiaFactory
 
     private static Ismetlojelzo? CreateIsmetlojelzo(AltalanosAllomasiTopologiaAdat altalanosAdatok, FojelzoSzerep fojelzoSzerep)
     {
-        IsmetlojelzoSzerep? ismetlojelzoSzerep = fojelzoSzerep.Ismetlojelzo!;
+        IsmetlojelzoSzerep ismetlojelzoSzerep = fojelzoSzerep.Ismetlojelzo!;
         if (altalanosAdatok.Szelvenyszamok.ContainsKey(ismetlojelzoSzerep))
         {
             string nev = GetNev(ismetlojelzoSzerep, altalanosAdatok);

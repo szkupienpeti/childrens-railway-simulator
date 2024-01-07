@@ -2,7 +2,6 @@
 using Grpc.Core;
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Microsoft.AspNetCore.Builder;
-using System.Diagnostics;
 
 namespace Gyermekvasut.Grpc.Server;
 

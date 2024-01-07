@@ -1,6 +1,4 @@
-﻿using Gyermekvasut.Modellek.VonatNS;
-
-namespace Gyermekvasut.Modellek.Palya;
+﻿namespace Gyermekvasut.Modellek.Palya;
 
 public class Valto : PalyaElem, IHelyhezKotottPalyaElem
 {

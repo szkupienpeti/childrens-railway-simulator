@@ -1,5 +1,4 @@
 ﻿using Google.Protobuf.Collections;
-using Grpc.Core;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;

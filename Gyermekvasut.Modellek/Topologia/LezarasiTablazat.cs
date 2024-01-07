@@ -4,8 +4,6 @@ namespace Gyermekvasut.Modellek.Topologia;
 
 public class LezarasiTablazat
 {
-    public LezarasiTablazat() { }
-
     private Dictionary<Vagany, Dictionary<Valto, ValtoAllas?>> ValtoAllasok { get; } = new();
 
     public void AddValtoAllas(Vagany vagany, Valto valto, ValtoAllas valtoAllas)

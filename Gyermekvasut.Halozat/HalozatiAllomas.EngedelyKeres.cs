@@ -9,7 +9,7 @@ using Gyermekvasut.Grpc.Client;
 
 namespace Gyermekvasut.Halozat;
 
-public partial class HalozatiAllomas : Allomas
+public partial class HalozatiAllomas
 {
     private void AllomasServer_GrpcEngedelyKeresEvent(object? sender, GrpcEngedelyKeresEventArgs grpcEventArgs)
     {

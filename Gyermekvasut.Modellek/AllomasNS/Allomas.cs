@@ -1,5 +1,4 @@
-﻿using Gyermekvasut.Modellek.Palya;
-using Gyermekvasut.Modellek.Topologia;
+﻿using Gyermekvasut.Modellek.Topologia;
 
 namespace Gyermekvasut.Modellek.AllomasNS;
 

@@ -9,7 +9,7 @@ public class Szakasz : EgyenesPalyaElem
 
     public int Hossz { get; private set; }
     public bool HosszHianyzik { get => Hossz == HIANYZO_HOSSZ; }
-    private Szerelveny? _szerelveny = null;
+    private Szerelveny? _szerelveny;
     public Szerelveny? Szerelveny
     {
         get => _szerelveny;

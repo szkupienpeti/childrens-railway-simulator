@@ -20,7 +20,7 @@ public abstract class PalyaElem : IPalyaElem
         while ((iter = iter.Kovetkezo(irany)) != null)
         {
             if (iter is TPalyaElem tipusosIter
-                && (feltetel == null || feltetel!.Invoke(tipusosIter)))
+                && (feltetel == null || feltetel.Invoke(tipusosIter)))
             {
                 return tipusosIter;
             }

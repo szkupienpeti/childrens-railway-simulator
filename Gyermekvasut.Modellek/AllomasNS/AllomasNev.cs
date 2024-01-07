@@ -1,5 +1,4 @@
-﻿using Gyermekvasut.Modellek.Topologia;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
 namespace Gyermekvasut.Modellek.AllomasNS;
 

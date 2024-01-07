@@ -2,7 +2,6 @@
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Modellek.VonatNS;
 

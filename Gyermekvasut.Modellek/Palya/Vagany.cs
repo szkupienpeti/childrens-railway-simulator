@@ -6,7 +6,7 @@ namespace Gyermekvasut.Modellek.Palya;
 public class Vagany : Szakasz
 {
     public AllomasNev AllomasNev { get; }
-    private bool _menesztes = false;
+    private bool _menesztes;
     public bool Menesztes
     {
         get => _menesztes;

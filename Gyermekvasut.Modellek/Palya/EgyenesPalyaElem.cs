@@ -2,8 +2,8 @@
 
 public abstract class EgyenesPalyaElem : PalyaElem
 {
-    private PalyaElem? kpSzomszed = null;
-    private PalyaElem? vpSzomszed = null;
+    private PalyaElem? kpSzomszed;
+    private PalyaElem? vpSzomszed;
 
     protected EgyenesPalyaElem(string nev) : base(nev) { }
 

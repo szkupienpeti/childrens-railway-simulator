@@ -14,7 +14,7 @@ public class AllomasiTopologia
     public LezarasiTablazat LezarasiTablazat
     {
         get => _lezarasiTablazat!;
-        set => _lezarasiTablazat = value!;
+        set => _lezarasiTablazat = value;
     }
 
     internal AllomasiTopologia(Szakasz? kpAllomaskoz, Szakasz? vpAllomaskoz)

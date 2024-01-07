@@ -1,6 +1,4 @@
-﻿using Gyermekvasut.Modellek.VonatNS;
-
-namespace Gyermekvasut.Modellek.Palya.Jelzok;
+﻿namespace Gyermekvasut.Modellek.Palya.Jelzok;
 
 public class Ismetlojelzo : Jelzo
 {
