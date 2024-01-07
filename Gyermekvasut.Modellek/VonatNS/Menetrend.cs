@@ -6,12 +6,15 @@ public class Menetrend
 {
     public string Vonatszam { get; }
     public VonatIrany Irany { get; }
+    public bool Koruljar { get; }
     public List<AllomasiMenetrendSor> Sorok { get; } = new();
 
-    public Menetrend(string vonatszam, VonatIrany irany, params AllomasiMenetrendSor[] sorok)
+    public Menetrend(string vonatszam, VonatIrany irany, 
+        bool koruljar, params AllomasiMenetrendSor[] sorok)
     {
         Vonatszam = vonatszam;
         Irany = irany;
+        Koruljar = koruljar;
         foreach (var sor in sorok)
         {
             Sorok.Add(sor);
@@ -22,10 +25,11 @@ public class Menetrend
         => obj is Menetrend menetrend
             && Vonatszam == menetrend.Vonatszam
             && Irany == menetrend.Irany
+            && Koruljar == menetrend.Koruljar
             && Enumerable.SequenceEqual(Sorok, menetrend.Sorok);
 
     public override int GetHashCode()
-        => HashCode.Combine(Vonatszam, Irany, Sorok);
+        => HashCode.Combine(Vonatszam, Irany, Koruljar, Sorok);
 }
 
 public class AllomasiMenetrendSor

@@ -88,7 +88,7 @@ public static class GrpcToModelMapper
         => Enum.Parse<JarmuTipus>(grpcJarmuTipus);
 
     public static Menetrend MapMenetrend(GrpcMenetrend grpcMenetrend)
-        => new(grpcMenetrend.Vonatszam, MapVonatIrany(grpcMenetrend.Irany),
+        => new(grpcMenetrend.Vonatszam, MapVonatIrany(grpcMenetrend.Irany), grpcMenetrend.Koruljar,
             MapRepeated(grpcMenetrend.Sorok, MapAllomasiMenetrendSor).ToArray());
 
     public static VonatIrany MapVonatIrany(GrpcVonatIrany grpcVonatIrany)

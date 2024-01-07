@@ -99,7 +99,8 @@ public static class ModelToGrpcMapper
         GrpcMenetrend grpcMenetrend = new()
         {
             Vonatszam = menetrend.Vonatszam,
-            Irany = MapVonatIrany(menetrend.Irany)
+            Irany = MapVonatIrany(menetrend.Irany),
+            Koruljar = menetrend.Koruljar
         };
         FillRepeated(grpcMenetrend.Sorok, menetrend.Sorok, MapAllomasiMenetrendSor);
         return grpcMenetrend;

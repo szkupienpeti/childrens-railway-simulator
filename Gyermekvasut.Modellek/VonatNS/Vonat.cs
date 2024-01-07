@@ -1,12 +1,10 @@
-﻿using Gyermekvasut.Modellek.Palya;
-
-namespace Gyermekvasut.Modellek.VonatNS;
+﻿namespace Gyermekvasut.Modellek.VonatNS;
 
 public class Vonat : Szerelveny
 {
     public bool Koruljar { get; }
     public List<Menetrend> Menetrendek { get; } = new();
-    private Menetrend? kovetkezoMenetrend = null;
+    private Menetrend? kovetkezoMenetrend;
 
     public Menetrend? AktualisMenetrend { get; set; }
     public bool VeglegFeloszlott

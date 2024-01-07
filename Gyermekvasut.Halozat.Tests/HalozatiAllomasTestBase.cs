@@ -18,8 +18,8 @@ public abstract class HalozatiAllomasTestBase
     private static readonly Jarmu[] SZERELVENY = new Jarmu[] { new(GEP_NEV, JarmuTipus.Mk45) };
     protected static readonly Dictionary<Irany, TestVonatInfo> VONAT_INFOS = new()
     {
-        { Irany.KezdopontFele, new(PARATLAN_VONATSZAM, VonatIrany.Paratlan) },
-        { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros) },
+        { Irany.KezdopontFele, new(PARATLAN_VONATSZAM, VonatIrany.Paratlan, true) },
+        { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros, true) },
     };
 
     protected static readonly TimeOnly TEST_IDO = new(9, 10);
@@ -80,7 +80,7 @@ public abstract class HalozatiAllomasTestBase
 
 public record TestVonatInfo(string Vonatszam, Menetrend Menetrend)
 {
-    public TestVonatInfo(string vonatszam, VonatIrany vonatIrany)
-        : this(vonatszam, new Menetrend(vonatszam, vonatIrany))
+    public TestVonatInfo(string vonatszam, VonatIrany vonatIrany, bool koruljar)
+        : this(vonatszam, new Menetrend(vonatszam, vonatIrany, koruljar))
     { }
 }

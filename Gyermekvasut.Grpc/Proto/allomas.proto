@@ -146,7 +146,8 @@ message GrpcJarmu {
 message GrpcMenetrend {
   string vonatszam = 1;
   GrpcVonatIrany irany = 2;
-  repeated GrpcAllomasiMenetrendSor sorok = 3;
+  bool koruljar = 3;
+  repeated GrpcAllomasiMenetrendSor sorok = 4;
 }
 
 enum GrpcVonatIrany {
