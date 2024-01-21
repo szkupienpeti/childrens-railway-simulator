@@ -1,6 +1,7 @@
 using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Halozat.Factory;
+using Gyermekvasut.Halozat.Tests.CsengetesNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Tests.Util;
@@ -28,7 +29,7 @@ public class HalozatiAllomasGrpcVisszaCsengetesEventTests : MockHalozatiAllomasE
 
     private void ActRaiseGrpcVisszaCsengetesEvent(Irany irany)
     {
-        var request = GrpcRequestFactory.CreateVisszaCsengetesRequest(GetSzomszedAllomasNev(irany), GetCsengetes(irany));
+        var request = GrpcRequestFactory.CreateVisszaCsengetesRequest(GetSzomszedAllomasNev(irany), CsengetesTestsUtil.GetKimenoCsengetes(irany));
         var eventArgs = new GrpcVisszaCsengetesEventArgs(request);
         GrpcServerMock.Raise(a => a.GrpcVisszaCsengetesEvent += null, eventArgs);
     }
@@ -36,6 +37,6 @@ public class HalozatiAllomasGrpcVisszaCsengetesEventTests : MockHalozatiAllomasE
     private void AssertVisszaCsengetesRaised(Irany irany)
     {
         AssertEventRaisedBySzomszed(irany);
-        CollectionAssert.AreEqual(GetCsengetes(irany), EventArgs!.Csengetesek);
+        CollectionAssert.AreEqual(CsengetesTestsUtil.GetKimenoCsengetes(irany), EventArgs!.Csengetesek);
     }
 }

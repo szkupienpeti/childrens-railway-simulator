@@ -1,4 +1,5 @@
 using Gyermekvasut.Halozat.EventArgsNS;
+using Gyermekvasut.Halozat.Tests.CsengetesNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Tests.Util;
@@ -37,14 +38,14 @@ public class HalozatiAllomasVisszaCsengetesTests
 
     private void ActVisszaCsengetes(Irany irany)
     {
-        var csengetes = GetCsengetes(irany);
+        var csengetes = CsengetesTestsUtil.GetKimenoCsengetes(irany);
         Allomas.VisszaCsenget(irany, csengetes);
     }
 
     private void AssertVisszaCsengetesRaised(Irany irany)
     {
         AssertEventRaisedByAllomas();
-        var expectedCsengetes = GetCsengetes(irany);
+        var expectedCsengetes = CsengetesTestsUtil.GetKimenoCsengetes(irany);
         CollectionAssert.AreEqual(expectedCsengetes, EventArgs!.Csengetesek);
     }
 }

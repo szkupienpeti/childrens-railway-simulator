@@ -14,7 +14,7 @@ public class CsengetesEventArgs : HalozatiAllomasEventArgs
         Csengetesek = csengetesek;
     }
 
-    public static CsengetesEventArgs FromGrpcEventArgs(GrpcCsengetesEventArgs grpcEventArgs)
+    public static CsengetesEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<CsengetesRequest> grpcEventArgs)
     {
         CsengetesRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

@@ -11,7 +11,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas : Allomas
 {
-    private IGrpcAllomasServer AllomasServer { get; }
+    public IGrpcAllomasServer AllomasServer { get; }
     private GrpcAllomasClient? KpAllomasClient { get; }
     private GrpcAllomasClient? VpAllomasClient { get; }
 

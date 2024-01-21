@@ -1,11 +1,13 @@
-﻿using Gyermekvasut.Grpc.Server.EventArgsNS;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
+using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Microsoft.AspNetCore.Builder;
 
 namespace Gyermekvasut.Grpc.Server;
 
 public interface IGrpcAllomasServer
 {
-    event EventHandler<GrpcCsengetesEventArgs>? GrpcCsengetesEvent;
+    event EventHandler<GrpcRequestEventArgs<CsengetesRequest>>? GrpcCsengetesEvent;
     event EventHandler<GrpcVisszaCsengetesEventArgs>? GrpcVisszaCsengetesEvent;
     event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
     event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
@@ -19,4 +21,6 @@ public interface IGrpcAllomasServer
 
     void SetApp(WebApplication app);
     void Stop();
+
+    Task<Empty> Csengetes(CsengetesRequest request, ServerCallContext context);
 }

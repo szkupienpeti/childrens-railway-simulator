@@ -10,7 +10,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas
 {
-    private void AllomasServer_GrpcCsengetesEvent(object? sender, GrpcCsengetesEventArgs grpcEventArgs)
+    private void AllomasServer_GrpcCsengetesEvent(object? sender, GrpcRequestEventArgs<CsengetesRequest> grpcEventArgs)
     {
         CsengetesEventArgs e = CsengetesEventArgs.FromGrpcEventArgs(grpcEventArgs);
         CsengetesEvent?.Invoke(this, e);

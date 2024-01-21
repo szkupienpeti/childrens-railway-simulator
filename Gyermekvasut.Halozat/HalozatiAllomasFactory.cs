@@ -8,15 +8,11 @@ namespace Gyermekvasut.Halozat;
 
 public class HalozatiAllomasFactory
 {
-    private static readonly string HALOZAT_CONFIG_FILE = "gyermekvasut.halozat.settings.json";
-
     private IConfiguration Configuration { get; }
 
-    public HalozatiAllomasFactory()
+    public HalozatiAllomasFactory(IConfiguration configuration)
     {
-        Configuration = new ConfigurationBuilder()
-            .AddJsonFile(HALOZAT_CONFIG_FILE)
-            .Build();
+        Configuration = configuration;
     }
 
     public HalozatiAllomas Create(AllomasNev allomasNev)

@@ -9,9 +9,6 @@ namespace Gyermekvasut.Halozat.Tests;
 [TestClass]
 public abstract class HalozatiAllomasTestBase
 {
-    protected static readonly List<Csengetes> EGY_HOSSZU = new() { Csengetes.Hosszu };
-    protected static readonly List<Csengetes> KET_HOSSZU = new() { Csengetes.Hosszu, Csengetes.Hosszu };
-
     private static readonly string PARATLAN_VONATSZAM = "TEST_1";
     private static readonly string PAROS_VONATSZAM = "TEST_2";
     private static readonly string GEP_NEV = "TEST_Mk45";
@@ -65,14 +62,6 @@ public abstract class HalozatiAllomasTestBase
         var vonat = new Vonat(vonatInfo.Vonatszam, vonatIrany, SZERELVENY, menetrendek);
         return vonat;
     }
-
-    protected static List<Csengetes> GetCsengetes(Irany irany)
-        => irany switch
-        {
-            Irany.KezdopontFele => EGY_HOSSZU,
-            Irany.VegpontFele => KET_HOSSZU,
-            _ => throw new NotImplementedException()
-        };
 
     protected AllomasNev GetSzomszedAllomasNev(Irany irany)
         => Allomas.AllomasNev.Szomszed(irany)!.Value;

@@ -124,6 +124,9 @@ public static class ModelToGrpcMapper
     public static void FillRepeated<TGrpc, TModel>(RepeatedField<TGrpc> grpcRepeatedField, List<TModel> modelList, Func<TModel, TGrpc> mapper)
         => modelList.ForEach(model => grpcRepeatedField.Add(mapper(model)));
 
+    public static List<TGrpc> MapList<TModel, TGrpc>(List<TModel> modelList, Func<TModel, TGrpc> mapper)
+        => modelList.Select(mapper).ToList();
+
     public static TGrpc? MapOptionalStruct<TModel, TGrpc>(TModel? modelField, Func<TModel, TGrpc> mapper)
             where TModel : struct
             where TGrpc : class

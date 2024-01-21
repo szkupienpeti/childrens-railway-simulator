@@ -1,10 +1,13 @@
 using Gyermekvasut.Halozat;
 using Gyermekvasut.Modellek.AllomasNS;
+using Microsoft.Extensions.Configuration;
 
 namespace Gyermekvasut.Forms;
 
 internal static class Program
 {
+    private static readonly string HALOZAT_CONFIG_FILE = "gyermekvasut.halozat.settings.json";
+
     /// <summary>
     ///  The main entry point for the application.
     /// </summary>
@@ -15,7 +18,10 @@ internal static class Program
         string[] allomasKodok = allomasKodokStr.Split(',');
         HashSet<AllomasNev> allomasNevek = new();
         List<HalozatiAllomas> allomasok = new();
-        HalozatiAllomasFactory halozatiAllomasFactory = new();
+        IConfiguration configuration = new HalozatConfigurationBuilder()
+            .AddJsonFile(HALOZAT_CONFIG_FILE)
+            .Build();
+        HalozatiAllomasFactory halozatiAllomasFactory = new(configuration);
         foreach (var allomasKod in allomasKodok)
         {
             AllomasNev allomasNev = AllomasNevFromKod(allomasKod);

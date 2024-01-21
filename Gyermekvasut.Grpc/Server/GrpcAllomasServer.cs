@@ -11,7 +11,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
     private WebApplication App => _app!;
 
     // Events
-    public event EventHandler<GrpcCsengetesEventArgs>? GrpcCsengetesEvent;
+    public event EventHandler<GrpcRequestEventArgs<CsengetesRequest>>? GrpcCsengetesEvent;
     public event EventHandler<GrpcVisszaCsengetesEventArgs>? GrpcVisszaCsengetesEvent;
     public event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
     public event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
@@ -39,7 +39,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
     // Override gRPC methods: invoke events
     public sealed override Task<Empty> Csengetes(CsengetesRequest request, ServerCallContext context)
     {
-        GrpcCsengetesEvent?.Invoke(this, new GrpcCsengetesEventArgs(request));
+        GrpcCsengetesEvent?.Invoke(this, new GrpcRequestEventArgs<CsengetesRequest>(request));
         return Task.FromResult(new Empty());
     }
 
