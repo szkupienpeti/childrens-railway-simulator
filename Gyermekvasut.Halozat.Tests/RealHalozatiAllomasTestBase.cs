@@ -34,7 +34,7 @@ public abstract class RealHalozatiAllomasTestBase : HalozatiAllomasTestBase
         _szomszedClient = clientFactory.CreateOptional(allomasNev)!;
     }
 
-    private IConfiguration BuildTestConfig()
+    private static IConfiguration BuildTestConfig()
     {
         var configBuilder = new HalozatConfigurationBuilder();
         configBuilder.AddJsonFile(HALOZAT_CONFIG_FILE);

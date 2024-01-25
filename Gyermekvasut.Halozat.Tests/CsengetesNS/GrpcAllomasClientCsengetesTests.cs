@@ -1,11 +1,7 @@
-﻿using Grpc.Core;
-using Gyermekvasut.Grpc;
-using Gyermekvasut.Halozat.Factory;
+﻿using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Tests.Util;
-using Moq;
 
 namespace Gyermekvasut.Halozat.Tests.CsengetesNS;
 

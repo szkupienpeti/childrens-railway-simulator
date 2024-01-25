@@ -14,7 +14,7 @@ public class VisszaCsengetesEventArgs : HalozatiAllomasEventArgs
         Csengetesek = csengetesek;
     }
 
-    public static VisszaCsengetesEventArgs FromGrpcEventArgs(GrpcVisszaCsengetesEventArgs grpcEventArgs)
+    public static VisszaCsengetesEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<VisszaCsengetesRequest> grpcEventArgs)
     {
         VisszaCsengetesRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

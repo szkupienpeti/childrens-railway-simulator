@@ -12,7 +12,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 
     // Events
     public event EventHandler<GrpcRequestEventArgs<CsengetesRequest>>? GrpcCsengetesEvent;
-    public event EventHandler<GrpcVisszaCsengetesEventArgs>? GrpcVisszaCsengetesEvent;
+    public event EventHandler<GrpcRequestEventArgs<VisszaCsengetesRequest>>? GrpcVisszaCsengetesEvent;
     public event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
     public event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
     public event EventHandler<GrpcEngedelyMegtagadasEventArgs>? GrpcEngedelyMegtagadasEvent;
@@ -45,7 +45,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 
     public sealed override Task<Empty> VisszaCsengetes(VisszaCsengetesRequest request, ServerCallContext context)
     {
-        GrpcVisszaCsengetesEvent?.Invoke(this, new GrpcVisszaCsengetesEventArgs(request));
+        GrpcVisszaCsengetesEvent?.Invoke(this, new GrpcRequestEventArgs<VisszaCsengetesRequest>(request));
         return Task.FromResult(new Empty());
     }
 

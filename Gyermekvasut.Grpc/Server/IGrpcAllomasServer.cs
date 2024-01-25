@@ -8,7 +8,7 @@ namespace Gyermekvasut.Grpc.Server;
 public interface IGrpcAllomasServer
 {
     event EventHandler<GrpcRequestEventArgs<CsengetesRequest>>? GrpcCsengetesEvent;
-    event EventHandler<GrpcVisszaCsengetesEventArgs>? GrpcVisszaCsengetesEvent;
+    event EventHandler<GrpcRequestEventArgs<VisszaCsengetesRequest>>? GrpcVisszaCsengetesEvent;
     event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
     event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
     event EventHandler<GrpcEngedelyMegtagadasEventArgs>? GrpcEngedelyMegtagadasEvent;
