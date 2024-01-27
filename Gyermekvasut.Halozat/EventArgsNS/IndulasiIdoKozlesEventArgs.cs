@@ -14,7 +14,7 @@ public class IndulasiIdoKozlesEventArgs : KozlemenyEventArgs
         Ido = ido;
     }
 
-    public static IndulasiIdoKozlesEventArgs FromGrpcEventArgs(GrpcIndulasiIdoKozlesEventArgs grpcEventArgs)
+    public static IndulasiIdoKozlesEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<IndulasiIdoKozlesRequest> grpcEventArgs)
     {
         IndulasiIdoKozlesRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

@@ -11,9 +11,7 @@ public class GrpcAllomasServerFactory : GrpcAllomasFactoryBase
     public GrpcAllomasServerFactory(IConfiguration configuration) : base(configuration) { }
 
     public static GrpcAllomasServer CreateOnly()
-    {
-        return new();
-    }
+        => new();
 
     public void Start(GrpcAllomasServer grpcAllomasServer, AllomasNev allomasNev)
     {

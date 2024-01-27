@@ -1,27 +1,15 @@
-﻿using Gyermekvasut.Modellek;
+﻿using Gyermekvasut.Grpc.Server;
+using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Palya;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Modellek.VonatNS;
+using Gyermekvasut.Tests.Util;
 
 namespace Gyermekvasut.Halozat.Tests;
 
 [TestClass]
 public abstract class HalozatiAllomasTestBase
 {
-    private static readonly string PARATLAN_VONATSZAM = "TEST_1";
-    private static readonly string PAROS_VONATSZAM = "TEST_2";
-    private static readonly string GEP_NEV = "TEST_Mk45";
-    private static readonly Jarmu[] SZERELVENY = new Jarmu[] { new(GEP_NEV, JarmuTipus.Mk45) };
-    protected static readonly Dictionary<Irany, TestVonatInfo> VONAT_INFOS = new()
-    {
-        { Irany.KezdopontFele, new(PARATLAN_VONATSZAM, VonatIrany.Paratlan, true) },
-        { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros, true) },
-    };
-
-    protected static readonly TimeOnly TEST_IDO = new(9, 10);
-    protected static readonly string TEST_NEV = "TEST_NEV";
-
     protected HalozatiAllomas? _allomas;
     protected HalozatiAllomas Allomas => _allomas!;
 
@@ -45,31 +33,10 @@ public abstract class HalozatiAllomasTestBase
     private Vonat CreateTestVonatAllomaskozben(Irany allomasOldal, Irany vonatIrany)
     {
         var allomaskoz = Allomas.Topologia.Allomaskozok[allomasOldal]!;
-        return CreateTestVonat(vonatIrany, allomaskoz);
-    }
-
-    protected static Vonat CreateTestVonat(Irany vonatIrany, Szakasz allomaskoz)
-    {
-        var vonat = CreateTestVonat(vonatIrany);
-        vonat.Lehelyez(allomaskoz);
-        return vonat;
-    }
-
-    protected static Vonat CreateTestVonat(Irany vonatIrany)
-    {
-        var vonatInfo = VONAT_INFOS[vonatIrany];
-        var menetrendek = new[] { vonatInfo.Menetrend };
-        var vonat = new Vonat(vonatInfo.Vonatszam, vonatIrany, SZERELVENY, menetrendek);
+        var vonat = VonatTestsUtil.CreateTestVonat(vonatIrany, allomaskoz);
         return vonat;
     }
 
     protected AllomasNev GetSzomszedAllomasNev(Irany irany)
         => Allomas.AllomasNev.Szomszed(irany)!.Value;
-}
-
-public record TestVonatInfo(string Vonatszam, Menetrend Menetrend)
-{
-    public TestVonatInfo(string vonatszam, VonatIrany vonatIrany, bool koruljar)
-        : this(vonatszam, new Menetrend(vonatszam, vonatIrany, koruljar))
-    { }
 }

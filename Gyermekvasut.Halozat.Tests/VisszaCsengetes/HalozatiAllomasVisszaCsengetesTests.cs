@@ -5,7 +5,7 @@ using Gyermekvasut.Grpc;
 using Grpc.Core;
 using Gyermekvasut.Tests.Util;
 
-namespace Gyermekvasut.Halozat.Tests.VisszaCsengetesNS;
+namespace Gyermekvasut.Halozat.Tests.VisszaCsengetes;
 
 [TestClass]
 public class HalozatiAllomasVisszaCsengetesTests : MockHalozatiAllomasTestBase
@@ -16,7 +16,7 @@ public class HalozatiAllomasVisszaCsengetesTests : MockHalozatiAllomasTestBase
     /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void AllomasCsenget_WhenHasSzomszed_ShouldCallClient(AllomasNev allomasNev, Irany irany)
+    public void AllomasVisszaCsenget_WhenHasSzomszed_ShouldCallClient(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
@@ -25,12 +25,12 @@ public class HalozatiAllomasVisszaCsengetesTests : MockHalozatiAllomasTestBase
             .Setup(client => client.VisszaCsengetes(It.IsAny<VisszaCsengetesRequest>(), null, null, default))
             .Callback<VisszaCsengetesRequest, Metadata, DateTime?, CancellationToken>((req, _, _, _) => grpcRequest = req);
         // Act
-        var csengetesek = VisszaCsengetesTestsUtil.GetKimenoVisszaCsengetes(irany);
+        var csengetesek = TelefonTestsUtil.GetKimenoVisszaCsengetes(irany);
         Allomas.VisszaCsenget(irany, csengetesek);
         // Assert
         GetMockSzomszedClient(irany).Verify(a => a.VisszaCsengetes(It.IsAny<VisszaCsengetesRequest>(), null, null, default), Times.Once());
         Assert.IsNotNull(grpcRequest);
-        Assert.AreEqual(ModelToGrpcMapper.MapAllomasNev(allomasNev), grpcRequest.Kuldo);
+        Assert.AreEqual(allomasNev, GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo));
         CollectionAssert.AreEqual(csengetesek, GrpcToModelMapper.MapRepeated(grpcRequest.Csengetesek, GrpcToModelMapper.MapCsengetes));
     }
 }

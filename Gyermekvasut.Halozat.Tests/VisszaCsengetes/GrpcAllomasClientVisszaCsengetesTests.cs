@@ -1,13 +1,11 @@
 ﻿using Grpc.Core;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Halozat.Factory;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Telefon;
 using Gyermekvasut.Tests.Util;
 using Moq;
 
-namespace Gyermekvasut.Halozat.Tests.VisszaCsengetesNS;
+namespace Gyermekvasut.Halozat.Tests.VisszaCsengetes;
 
 [TestClass]
 public class GrpcAllomasClientVisszaCsengetesTests : RealHalozatiAllomasTestBase
@@ -25,13 +23,15 @@ public class GrpcAllomasClientVisszaCsengetesTests : RealHalozatiAllomasTestBase
     {
         // Arrange
         AllomasEsSzomszedClientFelepit(allomasNev);
-        var eventCapturer = new GrpcRequestEventCapturer<VisszaCsengetesRequest>(handler => Allomas.AllomasServer.GrpcVisszaCsengetesEvent += handler);
+        VisszaCsengetesRequest? requestReceived = null;
+        GrpcServerMock
+            .Setup(server => server.VisszaCsengetes(It.IsAny<VisszaCsengetesRequest>(), It.IsAny<ServerCallContext>()))
+            .Callback<VisszaCsengetesRequest, ServerCallContext>((req, _) => requestReceived = req);
         // Act
-        var requestToSend = VisszaCsengetesTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
+        var requestToSend = HalozatTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
         SzomszedClient.VisszaCsengetes(requestToSend);
         // Assert
-        Assert.IsTrue(eventCapturer.WasEventRaised);
-        var requestReceived = eventCapturer.CapturedRequest!;
+        Assert.IsNotNull(requestReceived);
         Assert.AreEqual(requestToSend, requestReceived);
     }
 }

@@ -8,11 +8,15 @@ using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Tests.Util;
 using Moq;
 
-namespace Gyermekvasut.Halozat.Tests.VisszaCsengetesNS;
+namespace Gyermekvasut.Halozat.Tests.VisszaCsengetes;
 
 [TestClass]
 public class GrpcAllomasServerVisszaCsengetesTests : MockHalozatiAllomasTestBase
 {
+    /// <summary>
+    /// Ha a GrpcAllomasServer objektumon VisszaCsengetes() függvényt hívunk, akkor az triggereli
+    /// a GrpcVisszaCsengetesEvent eseményt, az eredeti VisszaCsengetesRequest objektummal
+    /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
     public void ServerVisszaCsengetes_ShouldRaiseGrpcEvent(AllomasNev allomasNev, Irany irany)
@@ -21,7 +25,7 @@ public class GrpcAllomasServerVisszaCsengetesTests : MockHalozatiAllomasTestBase
         var server = new GrpcAllomasServer();
         var eventCapturer = new GrpcRequestEventCapturer<VisszaCsengetesRequest>(handler => server.GrpcVisszaCsengetesEvent += handler);
         // Act
-        var grpcRequest = VisszaCsengetesTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
+        var grpcRequest = HalozatTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
         server.VisszaCsengetes(grpcRequest, Mock.Of<ServerCallContext>());
         // Assert
         Assert.IsTrue(eventCapturer.WasEventRaised);
@@ -29,6 +33,10 @@ public class GrpcAllomasServerVisszaCsengetesTests : MockHalozatiAllomasTestBase
         Assert.AreEqual(grpcRequest, eventArgsRequest);
     }
 
+    /// <summary>
+    /// Ha triggereljük a GrpcAllomasServer objektum GrpcVisszaCsengetesEvent eseményét, akkor az triggereli
+    /// a HalozatiAllomas objektum VisszaCsengetesEvent eseményét, megfelelő tartalmú VisszaCsengetesEventArgs objektummal
+    /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
     public void GrpcVisszaCsengetesEvent_ShouldRaiseModelEvent(AllomasNev allomasNev, Irany irany)
@@ -37,7 +45,7 @@ public class GrpcAllomasServerVisszaCsengetesTests : MockHalozatiAllomasTestBase
         MockAllomasFelepit(allomasNev);
         var eventCapturer = new EventCapturer<VisszaCsengetesEventArgs>(handler => Allomas.VisszaCsengetesEvent += handler);
         // Act
-        var grpcRequest = VisszaCsengetesTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
+        var grpcRequest = HalozatTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
         GrpcServerMock.Raise(a => a.GrpcVisszaCsengetesEvent += null, new GrpcRequestEventArgs<VisszaCsengetesRequest>(grpcRequest));
         // Assert
         Assert.IsTrue(eventCapturer.WasEventRaised);

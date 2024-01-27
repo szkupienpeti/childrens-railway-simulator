@@ -9,7 +9,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas
 {
-    private void AllomasServer_GrpcIndulasiIdoKozlesEvent(object? sender, GrpcIndulasiIdoKozlesEventArgs grpcEventArgs)
+    private void AllomasServer_GrpcIndulasiIdoKozlesEvent(object? sender, GrpcRequestEventArgs<IndulasiIdoKozlesRequest> grpcEventArgs)
     {
         IndulasiIdoKozlesEventArgs e = IndulasiIdoKozlesEventArgs.FromGrpcEventArgs(grpcEventArgs);
         IndulasiIdoKozlesEvent?.Invoke(this, e);

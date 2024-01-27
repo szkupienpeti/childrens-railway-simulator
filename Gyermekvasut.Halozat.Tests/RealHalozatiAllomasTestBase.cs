@@ -1,8 +1,9 @@
 ﻿using Gyermekvasut.Grpc.Client;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Halozat.Factory;
-using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Microsoft.Extensions.Configuration;
+using Moq;
 
 namespace Gyermekvasut.Halozat.Tests;
 
@@ -11,26 +12,22 @@ public abstract class RealHalozatiAllomasTestBase : HalozatiAllomasTestBase
 {
     private static readonly string HALOZAT_CONFIG_FILE = "gyermekvasut.halozat.settings.json";
 
-    // TODO törölni
-    private HalozatiAllomasFactory? _allomasFactory;
-    protected HalozatiAllomasFactory AllomasFactory => _allomasFactory!;
-
     private GrpcAllomasClient? _szomszedClient;
     protected GrpcAllomasClient SzomszedClient => _szomszedClient!;
 
-    // TODO törölni
-    protected void AllomasFelepit(AllomasNev allomasNev)
-    {
-        _allomasFactory = new(BuildTestConfig());
-        _allomas = AllomasFactory.Create(allomasNev);
-    }
+    private Mock<GrpcAllomasServer>? _grpcServerMock;
+    protected Mock<GrpcAllomasServer> GrpcServerMock => _grpcServerMock!;
 
     protected void AllomasEsSzomszedClientFelepit(AllomasNev allomasNev)
     {
         var testConfig = BuildTestConfig();
-        var allomasFactory = new HalozatiAllomasFactory(testConfig);
-        _allomas = allomasFactory.Create(allomasNev);
+        _grpcServerMock = new Mock<GrpcAllomasServer>() { CallBase = true };
+        var serverFactory = new GrpcAllomasServerFactory(testConfig);
+        serverFactory.Start(GrpcServerMock.Object, allomasNev);
         var clientFactory = new GrpcAllomasClientFactory(testConfig);
+        var kpClient = clientFactory.CreateOptional(allomasNev.KpSzomszed());
+        var vpClient = clientFactory.CreateOptional(allomasNev.VpSzomszed());
+        _allomas = new(allomasNev, GrpcServerMock.Object, kpClient, vpClient);
         _szomszedClient = clientFactory.CreateOptional(allomasNev)!;
     }
 

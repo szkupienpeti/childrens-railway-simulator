@@ -12,7 +12,7 @@ public interface IGrpcAllomasServer
     event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
     event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
     event EventHandler<GrpcEngedelyMegtagadasEventArgs>? GrpcEngedelyMegtagadasEvent;
-    event EventHandler<GrpcIndulasiIdoKozlesEventArgs>? GrpcIndulasiIdoKozlesEvent;
+    event EventHandler<GrpcRequestEventArgs<IndulasiIdoKozlesRequest>>? GrpcIndulasiIdoKozlesEvent;
     event EventHandler<GrpcIndulasiIdoKozlesVetelEventArgs>? GrpcIndulasiIdoKozlesVetelEvent;
     event EventHandler<GrpcVisszajelentesEventArgs>? GrpcVisszajelentesEvent;
     event EventHandler<GrpcVisszajelentesVetelEventArgs>? GrpcVisszajelentesVetelEvent;

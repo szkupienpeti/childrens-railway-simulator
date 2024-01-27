@@ -13,6 +13,10 @@ namespace Gyermekvasut.Halozat.Tests.CsengetesNS;
 [TestClass]
 public class GrpcAllomasServerCsengetesTests : MockHalozatiAllomasTestBase
 {
+    /// <summary>
+    /// Ha a GrpcAllomasServer objektumon Csengetes() függvényt hívunk, akkor az triggereli
+    /// a GrpcCsengetesEvent eseményt, az eredeti CsengetesRequest objektummal
+    /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
     public void ServerCsengetes_ShouldRaiseGrpcEvent(AllomasNev allomasNev, Irany irany)
@@ -21,7 +25,7 @@ public class GrpcAllomasServerCsengetesTests : MockHalozatiAllomasTestBase
         var server = new GrpcAllomasServer();
         var eventCapturer = new GrpcRequestEventCapturer<CsengetesRequest>(handler => server.GrpcCsengetesEvent += handler);
         // Act
-        var grpcRequest = CsengetesTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
+        var grpcRequest = HalozatTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
         server.Csengetes(grpcRequest, Mock.Of<ServerCallContext>());
         // Assert
         Assert.IsTrue(eventCapturer.WasEventRaised);
@@ -29,6 +33,10 @@ public class GrpcAllomasServerCsengetesTests : MockHalozatiAllomasTestBase
         Assert.AreEqual(grpcRequest, eventArgsRequest);
     }
 
+    /// <summary>
+    /// Ha triggereljük a GrpcAllomasServer objektum GrpcCsengetesEvent eseményét, akkor az triggereli
+    /// a HalozatiAllomas objektum CsengetesEvent eseményét, megfelelő tartalmú CsengetesEventArgs objektummal
+    /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
     public void GrpcCsengetesEvent_ShouldRaiseModelEvent(AllomasNev allomasNev, Irany irany)
@@ -37,7 +45,7 @@ public class GrpcAllomasServerCsengetesTests : MockHalozatiAllomasTestBase
         MockAllomasFelepit(allomasNev);
         var eventCapturer = new EventCapturer<CsengetesEventArgs>(handler => Allomas.CsengetesEvent += handler);
         // Act
-        var grpcRequest = CsengetesTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
+        var grpcRequest = HalozatTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
         GrpcServerMock.Raise(a => a.GrpcCsengetesEvent += null, new GrpcRequestEventArgs<CsengetesRequest>(grpcRequest));
         // Assert
         Assert.IsTrue(eventCapturer.WasEventRaised);

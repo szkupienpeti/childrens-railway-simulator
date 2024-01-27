@@ -9,19 +9,21 @@ namespace Gyermekvasut.Halozat;
 public class HalozatiAllomasFactory
 {
     private IConfiguration Configuration { get; }
+    private GrpcAllomasServerFactory ServerFactory { get; }
+    private GrpcAllomasClientFactory ClientFactory { get; }
 
     public HalozatiAllomasFactory(IConfiguration configuration)
     {
         Configuration = configuration;
+        ServerFactory = new(Configuration);
+        ClientFactory = new(Configuration);
     }
 
     public HalozatiAllomas Create(AllomasNev allomasNev)
     {
-        GrpcAllomasServerFactory serverFactory = new(Configuration);
-        IGrpcAllomasServer allomasServer = serverFactory.CreateAndStart(allomasNev);
-        GrpcAllomasClientFactory clientFactory = new(Configuration);
-        GrpcAllomasClient? kpAllomasClient = clientFactory.CreateOptional(allomasNev.KpSzomszed());
-        GrpcAllomasClient? vpAllomasClient = clientFactory.CreateOptional(allomasNev.VpSzomszed());
+        IGrpcAllomasServer allomasServer = ServerFactory.CreateAndStart(allomasNev);
+        GrpcAllomasClient? kpAllomasClient = ClientFactory.CreateOptional(allomasNev.KpSzomszed());
+        GrpcAllomasClient? vpAllomasClient = ClientFactory.CreateOptional(allomasNev.VpSzomszed());
         return new(allomasNev, allomasServer, kpAllomasClient, vpAllomasClient);
     }
 }

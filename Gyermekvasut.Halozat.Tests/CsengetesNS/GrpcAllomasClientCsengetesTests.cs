@@ -1,7 +1,9 @@
-﻿using Gyermekvasut.Grpc;
+﻿using Grpc.Core;
+using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Tests.Util;
+using Moq;
 
 namespace Gyermekvasut.Halozat.Tests.CsengetesNS;
 
@@ -21,13 +23,15 @@ public class GrpcAllomasClientCsengetesTests : RealHalozatiAllomasTestBase
     {
         // Arrange
         AllomasEsSzomszedClientFelepit(allomasNev);
-        var eventCapturer = new GrpcRequestEventCapturer<CsengetesRequest>(handler => Allomas.AllomasServer.GrpcCsengetesEvent += handler);
+        CsengetesRequest? requestReceived = null;
+        GrpcServerMock
+            .Setup(server => server.Csengetes(It.IsAny<CsengetesRequest>(), It.IsAny<ServerCallContext>()))
+            .Callback<CsengetesRequest, ServerCallContext>((req, _) => requestReceived = req);
         // Act
-        var requestToSend = CsengetesTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
+        var requestToSend = HalozatTestsUtil.CreateBejovoCsengetesRequest(allomasNev, irany);
         SzomszedClient.Csengetes(requestToSend);
         // Assert
-        Assert.IsTrue(eventCapturer.WasEventRaised);
-        var requestReceived = eventCapturer.CapturedRequest!;
+        Assert.IsNotNull(requestReceived);
         Assert.AreEqual(requestToSend, requestReceived);
     }
 }

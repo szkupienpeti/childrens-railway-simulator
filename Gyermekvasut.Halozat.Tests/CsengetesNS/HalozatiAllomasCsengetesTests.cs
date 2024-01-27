@@ -25,12 +25,12 @@ public class HalozatiAllomasCsengetesTests : MockHalozatiAllomasTestBase
             .Setup(client => client.Csengetes(It.IsAny<CsengetesRequest>(), null, null, default))
             .Callback<CsengetesRequest, Metadata, DateTime?, CancellationToken>((req, _, _, _) => grpcRequest = req);
         // Act
-        var csengetesek = CsengetesTestsUtil.GetKimenoCsengetes(irany);
+        var csengetesek = TelefonTestsUtil.GetKimenoCsengetes(irany);
         Allomas.Csenget(irany, csengetesek);
         // Assert
         GetMockSzomszedClient(irany).Verify(a => a.Csengetes(It.IsAny<CsengetesRequest>(), null, null, default), Times.Once());
         Assert.IsNotNull(grpcRequest);
-        Assert.AreEqual(ModelToGrpcMapper.MapAllomasNev(allomasNev), grpcRequest.Kuldo);
+        Assert.AreEqual(allomasNev, GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo));
         CollectionAssert.AreEqual(csengetesek, GrpcToModelMapper.MapRepeated(grpcRequest.Csengetesek, GrpcToModelMapper.MapCsengetes));
     }
 }
