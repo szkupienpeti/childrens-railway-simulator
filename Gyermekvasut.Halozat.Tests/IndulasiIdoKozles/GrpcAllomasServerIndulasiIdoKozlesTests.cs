@@ -34,23 +34,25 @@ public class GrpcAllomasServerIndulasiIdoKozlesTests : MockHalozatiAllomasTestBa
     }
 
     /// <summary>
-    /// Ha triggereljük a GrpcAllomasServer objektum GrpcVisszaCsengetesEvent eseményét, akkor az triggereli
-    /// a HalozatiAllomas objektum VisszaCsengetesEvent eseményét, megfelelő tartalmú VisszaCsengetesEventArgs objektummal
+    /// Ha triggereljük a GrpcAllomasServer objektum GrpcIndulasiIdoKozlesEvent eseményét, akkor az triggereli
+    /// a HalozatiAllomas objektum IndulasiIdoKozlesEvent eseményét, megfelelő tartalmú IndulasiIdoKozlesEventArgs objektummal
     /// </summary>
     [DataTestMethod]
     [DynamicData(nameof(DynamicTestDataUtil.AllomasNevSzomszedIranyok), typeof(DynamicTestDataUtil))]
-    public void GrpcVisszaCsengetesEvent_ShouldRaiseModelEvent(AllomasNev allomasNev, Irany irany)
+    public void GrpcIndulasiIdoKozlesEvent_ShouldRaiseModelEvent(AllomasNev allomasNev, Irany irany)
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
-        var eventCapturer = new EventCapturer<VisszaCsengetesEventArgs>(handler => Allomas.VisszaCsengetesEvent += handler);
+        var eventCapturer = new EventCapturer<IndulasiIdoKozlesEventArgs>(handler => Allomas.IndulasiIdoKozlesEvent += handler);
         // Act
-        var grpcRequest = HalozatTestsUtil.CreateBejovoVisszaCsengetesRequest(allomasNev, irany);
-        GrpcServerMock.Raise(a => a.GrpcVisszaCsengetesEvent += null, new GrpcRequestEventArgs<VisszaCsengetesRequest>(grpcRequest));
+        var grpcRequest = HalozatTestsUtil.CreateBejovoIndulasiIdoKozlesRequest(allomasNev, irany);
+        GrpcServerMock.Raise(a => a.GrpcIndulasiIdoKozlesEvent += null, new GrpcRequestEventArgs<IndulasiIdoKozlesRequest>(grpcRequest));
         // Assert
         Assert.IsTrue(eventCapturer.WasEventRaised);
         var modelEventArgs = eventCapturer.CapturedEventArgs!;
-        Assert.AreEqual(GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo), modelEventArgs.Kuldo);
-        CollectionAssert.AreEqual(grpcRequest.Csengetesek, ModelToGrpcMapper.MapList(modelEventArgs.Csengetesek, ModelToGrpcMapper.MapCsengetes));
+        Assert.AreEqual(grpcRequest.Kuldo, ModelToGrpcMapper.MapAllomasNev(modelEventArgs.Kuldo));
+        Assert.AreEqual(grpcRequest.Vonatszam, modelEventArgs.Vonatszam);
+        Assert.AreEqual(grpcRequest.Ido, ModelToGrpcMapper.MapTimeOnly(modelEventArgs.Ido));
+        Assert.AreEqual(grpcRequest.Nev, modelEventArgs.Nev);
     }
 }
