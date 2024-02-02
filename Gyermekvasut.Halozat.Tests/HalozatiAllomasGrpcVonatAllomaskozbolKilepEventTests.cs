@@ -40,7 +40,9 @@
 //        var vonat = CreateInduloTestVonatAllomaskozben(irany);
 //        // Act and assert
 //        var elteroVonatszam = $"{vonat.Nev}_OTHER";
-//        Assert.ThrowsException<ArgumentException>(() => ActRaiseGrpcVonatAllomaskozbolKilepEvent(irany, elteroVonatszam),
+//        Assert.
+//
+//        <ArgumentException>(() => ActRaiseGrpcVonatAllomaskozbolKilepEvent(irany, elteroVonatszam),
 //            $"Nem az állomásköz szerelvényét ({vonat.Nev}) próbálja kiléptetni, hanem a(z) {elteroVonatszam} sz. vonatot");
 //    }
 

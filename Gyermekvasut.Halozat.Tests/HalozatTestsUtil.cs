@@ -31,8 +31,16 @@ internal static class HalozatTestsUtil
 
     public static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)
     {
-        var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetInduloVonat(irany);
-        return GrpcRequestFactory.CreateVonatAllomaskozbolKilepRequest(kuldo, vonatInfo.Vonatszam);
+        return CreateBejovoVonatAllomaskozbolKilepRequest(allomasNev, irany, vonatInfo.Vonatszam);
+    }
+
+    public static VonatAllomaskozbolKilepRequest CreateElteroBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)
+        => CreateBejovoVonatAllomaskozbolKilepRequest(allomasNev, irany, VonatTestsUtil.MASIK_VONATSZAM);
+
+    private static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany, string vonatszam)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        return GrpcRequestFactory.CreateVonatAllomaskozbolKilepRequest(kuldo, vonatszam);
     }
 }

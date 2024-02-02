@@ -40,7 +40,8 @@
 //        MockAllomasFelepit(allomasNev);
 //        var vonat = CreateTestVonat(irany);
 //        // Act and assert
-//        Assert.ThrowsException<InvalidOperationException>(() => ActRaiseGrpcVonatAllomaskozbeBelepEvent(irany, vonat),
+//        Assert.
+//        <InvalidOperationException>(() => ActRaiseGrpcVonatAllomaskozbeBelepEvent(irany, vonat),
 //            $"Állomásközbe belépõ vonat irány inkonzisztencia: {allomasNev.Szomszed(irany)} felöl, {irany} irányú vonat");
 //    }
 

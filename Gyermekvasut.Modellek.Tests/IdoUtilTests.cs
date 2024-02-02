@@ -41,16 +41,16 @@ public class IdoUtilTests
     public void SecondsToTimerInterval_WhenNegativSeconds_ShouldThrow()
     {
         // Act and assert
-        Assert.ThrowsException<ArgumentException>(() => IdoUtil.SecondsToTimerInterval(-1, 1),
-            "Az időintervallum pozitív kell, hogy legyen");
+        var exception = Assert.ThrowsException<ArgumentException>(() => IdoUtil.SecondsToTimerInterval(-1, 1));
+        Assert.AreEqual("Az időintervallum pozitív kell, hogy legyen", exception.Message);
     }
 
     [TestMethod]
     public void SecondsToTimerInterval_WhenNegativSzorzo_ShouldThrow()
     {
         // Act and assert
-        Assert.ThrowsException<ArgumentException>(() => IdoUtil.SecondsToTimerInterval(1, -1),
-            "A sebességszorzó pozitív kell, hogy legyen");
+        var exception = Assert.ThrowsException<ArgumentException>(() => IdoUtil.SecondsToTimerInterval(1, -1));
+        Assert.AreEqual("A sebességszorzó pozitív kell, hogy legyen", exception.Message);
     }
 
     [DataTestMethod]

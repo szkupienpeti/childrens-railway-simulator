@@ -37,16 +37,16 @@ public abstract class HalozatiAllomasTestBase<TGrpcServer>
         allomas?.Stop();
     }
 
-    protected Vonat CreateInduloTestVonatAllomaskozben(Irany allomasOldal)
-        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal);
+    protected Vonat CreateInduloTestVonatAllomaskozben(Irany allomasOldal, string? vonatszam = null)
+        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal, vonatszam);
 
-    protected Vonat CreateErkezoTestVonatAllomaskozben(Irany allomasOldal)
-        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal.Fordit());
+    protected Vonat CreateErkezoTestVonatAllomaskozben(Irany allomasOldal, string? vonatszam = null)
+        => CreateTestVonatAllomaskozben(allomasOldal, allomasOldal.Fordit(), vonatszam);
 
-    private Vonat CreateTestVonatAllomaskozben(Irany allomasOldal, Irany vonatIrany)
+    private Vonat CreateTestVonatAllomaskozben(Irany allomasOldal, Irany vonatIrany, string? vonatszam = null)
     {
         var allomaskoz = Allomas.Topologia.Allomaskozok[allomasOldal]!;
-        var vonat = VonatTestsUtil.CreateTestVonat(vonatIrany, allomaskoz);
+        var vonat = VonatTestsUtil.CreateTestVonat(vonatIrany, allomaskoz, vonatszam);
         return vonat;
     }
 

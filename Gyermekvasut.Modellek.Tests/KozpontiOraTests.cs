@@ -32,8 +32,8 @@ public class KozpontiOraTests : SzimulaciosTestBase
         var ora = new KozpontiOra(timer.Object);
         ora.Start(KezdoIdo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => ora.Start(KezdoIdo),
-            "A központi órát már elindították");
+        var exception = Assert.ThrowsException<InvalidOperationException>(() => ora.Start(KezdoIdo));
+        Assert.AreEqual("A központi órát már elindították", exception.Message);
     }
 
     [TestMethod]

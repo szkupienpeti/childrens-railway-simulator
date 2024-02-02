@@ -25,8 +25,8 @@ public class SzimulacioTests : SzimulaciosTestBase
         // Arrange
         Szimulacio.Build(SebessegSzorzo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Build(SebessegSzorzo),
-            "A szimuláció már felépült");
+        var exception = Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Build(SebessegSzorzo));
+        Assert.AreEqual("A szimuláció már felépült", exception.Message);
     }
 
     [TestMethod]
@@ -48,8 +48,8 @@ public class SzimulacioTests : SzimulaciosTestBase
         Szimulacio.Build(SebessegSzorzo);
         Szimulacio.Instance.Start(KezdoIdo);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Instance.Start(KezdoIdo),
-            "A szimulációt már elindították");
+        var exception = Assert.ThrowsException<InvalidOperationException>(() => Szimulacio.Instance.Start(KezdoIdo));
+        Assert.AreEqual("A szimulációt már elindították", exception.Message);
     }
 
     [TestMethod]

@@ -32,8 +32,8 @@ public class ValtozarKulcsTaroloTests : SzimulaciosTestBase
         var valto = CreateValto(valtoAllas, ValtoLezaras.Lezarva);
         var tarolo = new ValtozarKulcsTarolo(valto, valtoAllas);
         // Act and assert
-        Assert.ThrowsException<ArgumentException>(() => tarolo.ValtozarKulcsBetesz(valtoAllas),
-            $"A(z) {valtoAllas} nem tehetõ be, mert már bent van a(z) {valtoAllas}");
+        var exception = Assert.ThrowsException<ArgumentException>(() => tarolo.ValtozarKulcsBetesz(valtoAllas));
+        Assert.AreEqual($"A(z) {valtoAllas} nem tehetõ be, mert már bent van a(z) {valtoAllas}", exception.Message);
     }
 
     [DataTestMethod]
@@ -45,8 +45,8 @@ public class ValtozarKulcsTaroloTests : SzimulaciosTestBase
         var valto = CreateValto(valtoAllas, ValtoLezaras.Feloldva);
         var tarolo = new ValtozarKulcsTarolo(valto, null);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => tarolo.ValtozarKulcsBetesz(valtozarKulcs),
-            $"A váltó {valtoAllas} végállásban van, de {valtozarKulcs} állásba próbálták lezárni");
+        var exception = Assert.ThrowsException<InvalidOperationException>(() => tarolo.ValtozarKulcsBetesz(valtozarKulcs));
+        Assert.AreEqual($"A váltó {valtoAllas} végállásban van, de {valtozarKulcs} állásba próbálták lezárni", exception.Message);
     }
 
     [TestMethod]
@@ -71,7 +71,7 @@ public class ValtozarKulcsTaroloTests : SzimulaciosTestBase
         var valto = CreateValto(valtoAllas, ValtoLezaras.Feloldva);
         var tarolo = new ValtozarKulcsTarolo(valto, null);
         // Act and assert
-        Assert.ThrowsException<InvalidOperationException>(() => tarolo.ValtozarKulcsKivesz(),
-            "Nincs bent váltózárkulcs");
+        var exception = Assert.ThrowsException<InvalidOperationException>(() => tarolo.ValtozarKulcsKivesz());
+        Assert.AreEqual("Nincs bent váltózárkulcs", exception.Message);
     }
 }
