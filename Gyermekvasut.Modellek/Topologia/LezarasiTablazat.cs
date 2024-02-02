@@ -8,25 +8,22 @@ public class LezarasiTablazat
 
     public void AddValtoAllas(Vagany vagany, Valto valto, ValtoAllas valtoAllas)
     {
-        if (!ValtoAllasok.ContainsKey(vagany))
-        {
-            ValtoAllasok[vagany] = new();
-        }
+        ValtoAllasok.TryAdd(vagany, new());
         Dictionary<Valto, ValtoAllas?> vaganyValtoAllasok = ValtoAllasok[vagany];
         if (vaganyValtoAllasok.ContainsKey(valto))
         {
             throw new ArgumentException($"A(z) {vagany.Nev} vágányra a(z) {valto.Nev} váltónak már meg van adva a szükséges lezárása: {vaganyValtoAllasok[valto]}");
         }
-        vaganyValtoAllasok[valto] = valtoAllas;
+        vaganyValtoAllasok.Add(valto, valtoAllas);
     }
 
     public ValtoAllas? GetValtoAllas(Vagany vagany, Valto valto)
     {
-        if (!ValtoAllasok.ContainsKey(vagany))
+        if (!ValtoAllasok.TryGetValue(vagany, out Dictionary<Valto, ValtoAllas?>? vaganyValtoAllasok))
         {
             throw new ArgumentException($"A(z) {vagany.Nev} vágány nem található a lezárási táblázatban");
         }
-        return ValtoAllasok[vagany][valto];
+        return vaganyValtoAllasok[valto];
     }
 
     public Vagany? GetVagany(Valto valto, ValtoAllas valtoAllas)

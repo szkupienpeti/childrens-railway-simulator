@@ -170,10 +170,10 @@ public static class AllomasiTopologiaFactory
     private static Ismetlojelzo? CreateIsmetlojelzo(AltalanosAllomasiTopologiaAdat altalanosAdatok, FojelzoSzerep fojelzoSzerep)
     {
         IsmetlojelzoSzerep ismetlojelzoSzerep = fojelzoSzerep.Ismetlojelzo!;
-        if (altalanosAdatok.Szelvenyszamok.ContainsKey(ismetlojelzoSzerep))
+        if (altalanosAdatok.Szelvenyszamok.TryGetValue(ismetlojelzoSzerep, out Szelvenyszam szelvenyszam))
         {
             string nev = GetNev(ismetlojelzoSzerep, altalanosAdatok);
-            return new(nev, fojelzoSzerep.JelzoIrany, altalanosAdatok.Szelvenyszamok[ismetlojelzoSzerep]);
+            return new(nev, fojelzoSzerep.JelzoIrany, szelvenyszam);
         }
         else
         {
@@ -200,11 +200,11 @@ public static class AllomasiTopologiaFactory
         VaganySzerep vaganySzerep, Irany allomasOldal)
     {
         KijaratiJelzoSzerep kijaratiJelzoSzerep = KijaratiJelzoSzerep.GetByVaganyOldal(vaganySzerep, allomasOldal);
-        if (altalanosAdatok.Szelvenyszamok.ContainsKey(kijaratiJelzoSzerep))
+        if (altalanosAdatok.Szelvenyszamok.TryGetValue(kijaratiJelzoSzerep, out Szelvenyszam szelvenyszam))
         {
             string nev = GetNev(kijaratiJelzoSzerep, altalanosAdatok);
             return new(nev, allomasOldal, altalanosAdatok.JelzoForma,
-            FojelzoRendeltetes.Kijarati, altalanosAdatok.Szelvenyszamok[kijaratiJelzoSzerep]);
+                FojelzoRendeltetes.Kijarati, szelvenyszam);
         }
         else
         {
@@ -216,9 +216,9 @@ public static class AllomasiTopologiaFactory
         VaganySzerep vaganySzerep)
     {
         string nev = GetNev(vaganySzerep, altalanosAdatok);
-        if (altalanosAdatok.VaganyHosszok.ContainsKey(vaganySzerep))
+        if (altalanosAdatok.VaganyHosszok.TryGetValue(vaganySzerep, out int hossz))
         {
-            return new(nev, altalanosAdatok.AllomasNev, altalanosAdatok.VaganyHosszok[vaganySzerep]);
+            return new(nev, altalanosAdatok.AllomasNev, hossz);
         }
         else
         {
