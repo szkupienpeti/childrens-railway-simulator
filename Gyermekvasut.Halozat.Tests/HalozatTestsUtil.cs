@@ -28,4 +28,11 @@ internal static class HalozatTestsUtil
         var vonatInfo = VonatTestsUtil.GetErkezoVonat(irany);
         return GrpcRequestFactory.CreateIndulasiIdoKozlesRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
     }
+
+    public static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonat(irany);
+        return GrpcRequestFactory.CreateVonatAllomaskozbolKilepRequest(kuldo, vonatInfo.Vonatszam);
+    }
 }

@@ -13,7 +13,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas
 {
-    private void AllomasServer_GrpcVonatAllomaskozbolKilepEvent(object? sender, GrpcVonatAllomaskozbolKilepEventArgs grpcEventArgs)
+    private void AllomasServer_GrpcVonatAllomaskozbolKilepEvent(object? sender, GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest> grpcEventArgs)
     {
         VonatAllomaskozbolKilepEventArgs e = VonatAllomaskozbolKilepEventArgs.FromGrpcEventArgs(grpcEventArgs);
         AllomaskozbolKilepoVonatotMegszuntet(e.Kuldo, e.Vonatszam);

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,6 +21,12 @@
     <ProjectReference Include="..\Gyermekvasut.Halozat\Gyermekvasut.Halozat.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Modellek\Gyermekvasut.Modellek.csproj" />
     <ProjectReference Include="..\Gyermekvasut.Tests.Util\Gyermekvasut.Tests.Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="gyermekvasut.halozat.settings.test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -21,7 +21,7 @@ public class HalozatiAllomasIndulasiIdoKozlesTests : MockHalozatiAllomasTestBase
         // Arrange
         MockAllomasFelepit(allomasNev);
         IndulasiIdoKozlesRequest? grpcRequest = null;
-        GetMockSzomszedClient(irany)
+        GetMockClient(irany)
             .Setup(client => client.IndulasiIdoKozles(It.IsAny<IndulasiIdoKozlesRequest>(), null, null, default))
             .Callback<IndulasiIdoKozlesRequest, Metadata, DateTime?, CancellationToken>((req, _, _, _) => grpcRequest = req);
         // Act
@@ -31,7 +31,7 @@ public class HalozatiAllomasIndulasiIdoKozlesTests : MockHalozatiAllomasTestBase
         var nev = VonatTestsUtil.TEST_NEV;
         Allomas.IndulasiIdotKozol(irany, vonatszam, ido, nev);
         // Assert
-        GetMockSzomszedClient(irany).Verify(a => a.IndulasiIdoKozles(It.IsAny<IndulasiIdoKozlesRequest>(), null, null, default), Times.Once());
+        GetMockClient(irany).Verify(a => a.IndulasiIdoKozles(It.IsAny<IndulasiIdoKozlesRequest>(), null, null, default), Times.Once());
         Assert.IsNotNull(grpcRequest);
         Assert.AreEqual(allomasNev, GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo));
         Assert.AreEqual(vonatszam, grpcRequest.Vonatszam);

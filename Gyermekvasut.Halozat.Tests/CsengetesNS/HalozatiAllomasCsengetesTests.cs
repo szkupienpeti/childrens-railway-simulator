@@ -21,14 +21,14 @@ public class HalozatiAllomasCsengetesTests : MockHalozatiAllomasTestBase
         // Arrange
         MockAllomasFelepit(allomasNev);
         CsengetesRequest? grpcRequest = null;
-        GetMockSzomszedClient(irany)
+        GetMockClient(irany)
             .Setup(client => client.Csengetes(It.IsAny<CsengetesRequest>(), null, null, default))
             .Callback<CsengetesRequest, Metadata, DateTime?, CancellationToken>((req, _, _, _) => grpcRequest = req);
         // Act
         var csengetesek = TelefonTestsUtil.GetKimenoCsengetes(irany);
         Allomas.Csenget(irany, csengetesek);
         // Assert
-        GetMockSzomszedClient(irany).Verify(a => a.Csengetes(It.IsAny<CsengetesRequest>(), null, null, default), Times.Once());
+        GetMockClient(irany).Verify(a => a.Csengetes(It.IsAny<CsengetesRequest>(), null, null, default), Times.Once());
         Assert.IsNotNull(grpcRequest);
         Assert.AreEqual(allomasNev, GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo));
         CollectionAssert.AreEqual(csengetesek, GrpcToModelMapper.MapRepeated(grpcRequest.Csengetesek, GrpcToModelMapper.MapCsengetes));
