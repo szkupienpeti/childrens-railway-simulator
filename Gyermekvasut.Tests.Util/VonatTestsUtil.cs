@@ -17,21 +17,27 @@ public static class VonatTestsUtil
         { Irany.VegpontFele, new(PAROS_VONATSZAM, VonatIrany.Paros, true) },
     };
 
-    public static TestVonatInfo GetErkezoVonat(Irany irany)
-        => VONAT_INFOS[irany.Fordit()];
+    public static TestVonatInfo GetErkezoVonatInfo(Irany allomasOldal)
+        => VONAT_INFOS[allomasOldal.Fordit()];
 
-    public static TestVonatInfo GetInduloVonat(Irany irany)
-        => VONAT_INFOS[irany];
+    public static TestVonatInfo GetInduloVonatInfo(Irany allomasOldal)
+        => VONAT_INFOS[allomasOldal];
 
     public static readonly TimeOnly TEST_IDO = new(9, 10);
     public static readonly string TEST_NEV = "TEST_NEV";
 
-    public static Vonat CreateTestVonat(Irany vonatIrany, Szakasz allomaskoz, string? vonatszam = null)
+    public static Vonat CreateAndLehelyezTestVonat(Irany vonatIrany, Szakasz allomaskoz, string? vonatszam = null)
     {
         var vonat = CreateTestVonat(vonatIrany, vonatszam);
         vonat.Lehelyez(allomaskoz);
         return vonat;
     }
+
+    public static Vonat CreateInduloTestVonat(Irany allomasOldal, string? vonatszam = null)
+        => CreateTestVonat(allomasOldal, vonatszam);
+
+    public static Vonat CreateErkezoTestVonat(Irany allomasOldal, string? vonatszam = null)
+        => CreateTestVonat(allomasOldal.Fordit(), vonatszam);
 
     public static Vonat CreateTestVonat(Irany vonatIrany, string? vonatszam = null)
     {

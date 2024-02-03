@@ -46,7 +46,7 @@ public abstract class HalozatiAllomasTestBase<TGrpcServer>
     private Vonat CreateTestVonatAllomaskozben(Irany allomasOldal, Irany vonatIrany, string? vonatszam = null)
     {
         var allomaskoz = Allomas.Topologia.Allomaskozok[allomasOldal]!;
-        var vonat = VonatTestsUtil.CreateTestVonat(vonatIrany, allomaskoz, vonatszam);
+        var vonat = VonatTestsUtil.CreateAndLehelyezTestVonat(vonatIrany, allomaskoz, vonatszam);
         return vonat;
     }
 

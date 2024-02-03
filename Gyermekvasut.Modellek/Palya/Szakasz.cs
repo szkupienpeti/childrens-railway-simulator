@@ -58,7 +58,7 @@ public class Szakasz : EgyenesPalyaElem
     {
         if (Szerelveny != null)
         {
-            throw new ArgumentException("Foglalt szakaszt próbál elfoglalni egy szerelvény");
+            throw new InvalidOperationException("Foglalt szakaszt próbál elfoglalni egy szerelvény");
         }
         Szerelveny = szerelveny;
         Trace.WriteLine($"{szerelveny} elfoglalta {this} szakaszt");

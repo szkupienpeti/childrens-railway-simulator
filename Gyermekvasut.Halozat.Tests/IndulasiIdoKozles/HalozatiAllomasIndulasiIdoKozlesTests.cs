@@ -25,7 +25,7 @@ public class HalozatiAllomasIndulasiIdoKozlesTests : MockHalozatiAllomasTestBase
             .Setup(client => client.IndulasiIdoKozles(It.IsAny<IndulasiIdoKozlesRequest>(), null, null, default))
             .Callback<IndulasiIdoKozlesRequest, Metadata, DateTime?, CancellationToken>((req, _, _, _) => grpcRequest = req);
         // Act
-        var vonatInfo = VonatTestsUtil.GetInduloVonat(irany);
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
         var ido = VonatTestsUtil.TEST_IDO;
         var nev = VonatTestsUtil.TEST_NEV;

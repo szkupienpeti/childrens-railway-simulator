@@ -5,10 +5,10 @@ using Gyermekvasut.Grpc;
 using Grpc.Core;
 using Gyermekvasut.Tests.Util;
 
-namespace Gyermekvasut.Halozat.Tests.VonatAllomaskozbolKilep;
+namespace Gyermekvasut.Halozat.Tests.VonatAllomaskozbeBelep;
 
 [TestClass]
-public class HalozatiAllomasVonatAllomaskozbolKilepTests : MockHalozatiAllomasTestBase
+public class HalozatiAllomasVonatAllomaskozbeBelepTests : MockHalozatiAllomasTestBase
 {
     /// <summary>
     /// Ha a HalozatiAllomas objektumon VonatotAllomaskozbolKileptet() függvényt hívunk, akkor az meghívja

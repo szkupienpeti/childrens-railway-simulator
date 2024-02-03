@@ -20,7 +20,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
     public event EventHandler<GrpcIndulasiIdoKozlesVetelEventArgs>? GrpcIndulasiIdoKozlesVetelEvent;
     public event EventHandler<GrpcVisszajelentesEventArgs>? GrpcVisszajelentesEvent;
     public event EventHandler<GrpcVisszajelentesVetelEventArgs>? GrpcVisszajelentesVetelEvent;
-    public event EventHandler<GrpcVonatAllomaskozbeBelepEventArgs>? GrpcVonatAllomaskozbeBelepEvent;
+    public event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest>>? GrpcVonatAllomaskozbeBelepEvent;
     public event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest>>? GrpcVonatAllomaskozbolKilepEvent;
 
     public void SetApp(WebApplication app)
@@ -93,7 +93,7 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 
     public override Task<Empty> VonatAllomaskozbeBelep(VonatAllomaskozbeBelepRequest request, ServerCallContext context)
     {
-        GrpcVonatAllomaskozbeBelepEvent?.Invoke(this, new GrpcVonatAllomaskozbeBelepEventArgs(request));
+        GrpcVonatAllomaskozbeBelepEvent?.Invoke(this, new GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest>(request));
         return Task.FromResult(new Empty());
     }
 

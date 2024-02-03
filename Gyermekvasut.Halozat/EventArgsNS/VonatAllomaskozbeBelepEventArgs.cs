@@ -13,7 +13,7 @@ public class VonatAllomaskozbeBelepEventArgs : HalozatiAllomasEventArgs
         Vonat = vonat;
     }
 
-    public static VonatAllomaskozbeBelepEventArgs FromGrpcEventArgs(GrpcVonatAllomaskozbeBelepEventArgs grpcEventArgs)
+    public static VonatAllomaskozbeBelepEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest> grpcEventArgs)
     {
         VonatAllomaskozbeBelepRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

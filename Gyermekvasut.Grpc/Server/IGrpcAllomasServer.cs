@@ -16,7 +16,7 @@ public interface IGrpcAllomasServer
     event EventHandler<GrpcIndulasiIdoKozlesVetelEventArgs>? GrpcIndulasiIdoKozlesVetelEvent;
     event EventHandler<GrpcVisszajelentesEventArgs>? GrpcVisszajelentesEvent;
     event EventHandler<GrpcVisszajelentesVetelEventArgs>? GrpcVisszajelentesVetelEvent;
-    event EventHandler<GrpcVonatAllomaskozbeBelepEventArgs>? GrpcVonatAllomaskozbeBelepEvent;
+    event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest>>? GrpcVonatAllomaskozbeBelepEvent;
     event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest>>? GrpcVonatAllomaskozbolKilepEvent;
 
     void SetApp(WebApplication app);

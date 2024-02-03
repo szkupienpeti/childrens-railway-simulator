@@ -68,12 +68,11 @@ public class GrpcAllomasServerVonatAllomaskozbolKilepTests : MockHalozatiAllomas
         // Arrange
         MockAllomasFelepit(allomasNev);
         CreateInduloTestVonatAllomaskozben(irany);
-        var eventCapturer = new EventCapturer<VonatAllomaskozbolKilepEventArgs>(handler => Allomas.VonatAllomaskozbolKilepEvent += handler);
         // Act and assert
         var grpcRequest = HalozatTestsUtil.CreateElteroBejovoVonatAllomaskozbolKilepRequest(allomasNev, irany);
         var exception = Assert.ThrowsException<ArgumentException>(
             () => GrpcServerMock.Raise(a => a.GrpcVonatAllomaskozbolKilepEvent += null, new GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest>(grpcRequest)));
-        Assert.AreEqual($"Nem az állomásköz szerelvényét ({VonatTestsUtil.GetInduloVonat(irany).Vonatszam}) próbálja kiléptetni, hanem a(z) {VonatTestsUtil.MASIK_VONATSZAM} sz. vonatot", exception.Message);
+        Assert.AreEqual($"Nem az állomásköz szerelvényét ({VonatTestsUtil.GetInduloVonatInfo(irany).Vonatszam}) próbálja kiléptetni, hanem a(z) {VonatTestsUtil.MASIK_VONATSZAM} sz. vonatot", exception.Message);
     }
 
     /// <summary>
@@ -87,11 +86,10 @@ public class GrpcAllomasServerVonatAllomaskozbolKilepTests : MockHalozatiAllomas
     {
         // Arrange
         MockAllomasFelepit(allomasNev);
-        var eventCapturer = new EventCapturer<VonatAllomaskozbolKilepEventArgs>(handler => Allomas.VonatAllomaskozbolKilepEvent += handler);
         // Act and assert
         var grpcRequest = HalozatTestsUtil.CreateBejovoVonatAllomaskozbolKilepRequest(allomasNev, irany);
         var exception = Assert.ThrowsException<InvalidOperationException>(
             () => GrpcServerMock.Raise(a => a.GrpcVonatAllomaskozbolKilepEvent += null, new GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest>(grpcRequest)));
-        Assert.AreEqual($"Az állomásköz üres, így nem léptethető ki a(z) {VonatTestsUtil.GetInduloVonat(irany).Vonatszam} sz. vonat", exception.Message);
+        Assert.AreEqual($"Az állomásköz üres, így nem léptethető ki a(z) {VonatTestsUtil.GetInduloVonatInfo(irany).Vonatszam} sz. vonat", exception.Message);
     }
 }

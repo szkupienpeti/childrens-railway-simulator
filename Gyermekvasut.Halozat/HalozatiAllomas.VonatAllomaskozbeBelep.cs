@@ -13,7 +13,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas
 {
-    private void AllomasServer_GrpcVonatAllomaskozbeBelepEvent(object? sender, GrpcVonatAllomaskozbeBelepEventArgs grpcEventArgs)
+    private void AllomasServer_GrpcVonatAllomaskozbeBelepEvent(object? sender, GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest> grpcEventArgs)
     {
         VonatAllomaskozbeBelepEventArgs e = VonatAllomaskozbeBelepEventArgs.FromGrpcEventArgs(grpcEventArgs);
         IranyKonzisztenciaCheck(e.Kuldo, e.Vonat.Irany);
@@ -27,7 +27,7 @@ public partial class HalozatiAllomas
         if (kuldoIrany == vonatIrany)
         {
             throw new InvalidOperationException(
-                $"{AllomasNev}: Állomásközbe belépő vonat irány inkonzisztencia: {kuldo} felöl, {vonatIrany} irányú vonat");
+                $"{AllomasNev}: Állomásközbe belépő vonat irány inkonzisztencia: {kuldo} felől, {vonatIrany} irányú vonat");
         }
     }
 

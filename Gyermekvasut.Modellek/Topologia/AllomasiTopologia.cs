@@ -26,7 +26,7 @@ public class AllomasiTopologia
     public Fojelzo GetBejaratiJelzo(Irany allomasvegIrany)
     {
         return Jelzok.OfType<Fojelzo>()
-            // A KP állomásvég felöli jelző a VP fele néz
+            // A KP állomásvég felőli jelző a VP fele néz
             .Single(fojelzo => fojelzo.Rendeltetes == FojelzoRendeltetes.Bejarati
                 && fojelzo.Irany == allomasvegIrany.Fordit());
     }
@@ -34,7 +34,7 @@ public class AllomasiTopologia
     public Elojelzo GetElojelzo(Irany allomasvegIrany)
     {
         return Jelzok.OfType<Elojelzo>()
-            // A KP állomásvég felöli jelző a VP fele néz
+            // A KP állomásvég felőli jelző a VP fele néz
             .Single(elojelzo => elojelzo.Irany == allomasvegIrany.Fordit());
     }
 
