@@ -1,5 +1,5 @@
 ﻿using Gyermekvasut.Grpc;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek.AllomasNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;
@@ -16,7 +16,7 @@ public class EngedelyMegtagadasEventArgs : KozlemenyEventArgs
         PercMulva = percMulva;
     }
 
-    public static EngedelyMegtagadasEventArgs FromGrpcEventArgs(GrpcEngedelyMegtagadasEventArgs grpcEventArgs)
+    public static EngedelyMegtagadasEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<EngedelyMegtagadasRequest> grpcEventArgs)
     {
         EngedelyMegtagadasRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

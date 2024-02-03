@@ -1,7 +1,6 @@
 ﻿using Grpc.Core;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Grpc.Server;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;

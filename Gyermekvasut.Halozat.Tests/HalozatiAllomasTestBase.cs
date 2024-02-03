@@ -2,7 +2,6 @@
 using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Modellek.AllomasNS;
-using Gyermekvasut.Modellek.Palya;
 using Gyermekvasut.Modellek.VonatNS;
 using Gyermekvasut.Tests.Util;
 using Microsoft.Extensions.Configuration;
@@ -75,6 +74,6 @@ public abstract class HalozatiAllomasTestBase<TGrpcServer>
         var clientFactory = new MockGrpcAllomasClientFactory(config);
         _kpClientMock = clientFactory.CreateOptional(allomasNev.KpSzomszed(), callBase);
         _vpClientMock = clientFactory.CreateOptional(allomasNev.VpSzomszed(), callBase);
-        _allomas = new(allomasNev, GrpcServerMock.Object, KpClientMock?.Object, VpClientMock?.Object);
+        _allomas = new(allomasNev, GrpcServerMock.Object, _kpClientMock?.Object, _vpClientMock?.Object);
     }
 }

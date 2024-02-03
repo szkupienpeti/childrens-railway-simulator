@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf;
 
-namespace Gyermekvasut.Grpc.Server.EventArgsNS;
+namespace Gyermekvasut.Grpc.Server;
 
 public class GrpcRequestEventArgs<TRequest> : EventArgs
     where TRequest : IMessage<TRequest>

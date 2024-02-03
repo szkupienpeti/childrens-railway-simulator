@@ -1,6 +1,6 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Grpc;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Halozat.Factory;
 using Gyermekvasut.Grpc.Client;
@@ -9,7 +9,7 @@ namespace Gyermekvasut.Halozat;
 
 public partial class HalozatiAllomas
 {
-    private void AllomasServer_GrpcEngedelyMegtagadasEvent(object? sender, GrpcEngedelyMegtagadasEventArgs grpcEventArgs)
+    private void AllomasServer_GrpcEngedelyMegtagadasEvent(object? sender, GrpcRequestEventArgs<EngedelyMegtagadasRequest> grpcEventArgs)
     {
         EngedelyMegtagadasEventArgs e = EngedelyMegtagadasEventArgs.FromGrpcEventArgs(grpcEventArgs);
         EngedelyMegtagadasEvent?.Invoke(this, e);

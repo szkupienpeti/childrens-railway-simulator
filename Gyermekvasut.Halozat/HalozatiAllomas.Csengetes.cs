@@ -1,7 +1,7 @@
 ﻿using Gyermekvasut.Halozat.EventArgsNS;
 using Gyermekvasut.Grpc;
 using Gyermekvasut.Modellek.Telefon;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek;
 using Gyermekvasut.Grpc.Client;
 using Gyermekvasut.Halozat.Factory;

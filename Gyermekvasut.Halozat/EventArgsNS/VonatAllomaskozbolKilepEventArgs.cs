@@ -1,5 +1,5 @@
 ﻿using Gyermekvasut.Grpc;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek.AllomasNS;
 
 namespace Gyermekvasut.Halozat.EventArgsNS;

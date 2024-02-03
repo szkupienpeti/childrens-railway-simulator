@@ -1,5 +1,5 @@
 ﻿using Gyermekvasut.Grpc;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
+using Gyermekvasut.Grpc.Server;
 using Gyermekvasut.Modellek.AllomasNS;
 using Gyermekvasut.Modellek.Telefon;
 
@@ -19,7 +19,7 @@ public class EngedelyKeresEventArgs : KozlemenyEventArgs
         Ido = ido;
     }
 
-    public static EngedelyKeresEventArgs FromGrpcEventArgs(GrpcEngedelyKeresEventArgs grpcEventArgs)
+    public static EngedelyKeresEventArgs FromGrpcEventArgs(GrpcRequestEventArgs<EngedelyKeresRequest> grpcEventArgs)
     {
         EngedelyKeresRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);

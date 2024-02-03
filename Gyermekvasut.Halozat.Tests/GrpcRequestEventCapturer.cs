@@ -1,6 +1,8 @@
 ﻿using Google.Protobuf;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
-namespace Gyermekvasut.Tests.Util;
+using Gyermekvasut.Grpc.Server;
+using Gyermekvasut.Tests.Util;
+
+namespace Gyermekvasut.Halozat.Tests;
 
 public class GrpcRequestEventCapturer<TRequest> : EventCapturer<GrpcRequestEventArgs<TRequest>>
     where TRequest : class, IMessage<TRequest>

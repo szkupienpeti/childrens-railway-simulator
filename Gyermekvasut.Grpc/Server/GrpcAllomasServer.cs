@@ -1,6 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using Gyermekvasut.Grpc.Server.EventArgsNS;
 using Microsoft.AspNetCore.Builder;
 
 namespace Gyermekvasut.Grpc.Server;
@@ -13,13 +12,13 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
     // Events
     public event EventHandler<GrpcRequestEventArgs<CsengetesRequest>>? GrpcCsengetesEvent;
     public event EventHandler<GrpcRequestEventArgs<VisszaCsengetesRequest>>? GrpcVisszaCsengetesEvent;
-    public event EventHandler<GrpcEngedelyKeresEventArgs>? GrpcEngedelyKeresEvent;
-    public event EventHandler<GrpcEngedelyAdasEventArgs>? GrpcEngedelyAdasEvent;
-    public event EventHandler<GrpcEngedelyMegtagadasEventArgs>? GrpcEngedelyMegtagadasEvent;
+    public event EventHandler<GrpcRequestEventArgs<EngedelyKeresRequest>>? GrpcEngedelyKeresEvent;
+    public event EventHandler<GrpcRequestEventArgs<EngedelyAdasRequest>>? GrpcEngedelyAdasEvent;
+    public event EventHandler<GrpcRequestEventArgs<EngedelyMegtagadasRequest>>? GrpcEngedelyMegtagadasEvent;
     public event EventHandler<GrpcRequestEventArgs<IndulasiIdoKozlesRequest>>? GrpcIndulasiIdoKozlesEvent;
-    public event EventHandler<GrpcIndulasiIdoKozlesVetelEventArgs>? GrpcIndulasiIdoKozlesVetelEvent;
-    public event EventHandler<GrpcVisszajelentesEventArgs>? GrpcVisszajelentesEvent;
-    public event EventHandler<GrpcVisszajelentesVetelEventArgs>? GrpcVisszajelentesVetelEvent;
+    public event EventHandler<GrpcRequestEventArgs<IndulasiIdoKozlesVetelRequest>>? GrpcIndulasiIdoKozlesVetelEvent;
+    public event EventHandler<GrpcRequestEventArgs<VisszajelentesRequest>>? GrpcVisszajelentesEvent;
+    public event EventHandler<GrpcRequestEventArgs<VisszajelentesVetelRequest>>? GrpcVisszajelentesVetelEvent;
     public event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbeBelepRequest>>? GrpcVonatAllomaskozbeBelepEvent;
     public event EventHandler<GrpcRequestEventArgs<VonatAllomaskozbolKilepRequest>>? GrpcVonatAllomaskozbolKilepEvent;
 
@@ -51,19 +50,19 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 
     public override Task<Empty> EngedelyKeres(EngedelyKeresRequest request, ServerCallContext context)
     {
-        GrpcEngedelyKeresEvent?.Invoke(this, new GrpcEngedelyKeresEventArgs(request));
+        GrpcEngedelyKeresEvent?.Invoke(this, new GrpcRequestEventArgs<EngedelyKeresRequest>(request));
         return Task.FromResult(new Empty());
     }
 
     public override Task<Empty> EngedelyAdas(EngedelyAdasRequest request, ServerCallContext context)
     {
-        GrpcEngedelyAdasEvent?.Invoke(this, new GrpcEngedelyAdasEventArgs(request));
+        GrpcEngedelyAdasEvent?.Invoke(this, new GrpcRequestEventArgs<EngedelyAdasRequest>(request));
         return Task.FromResult(new Empty());
     }
 
     public override Task<Empty> EngedelyMegtagadas(EngedelyMegtagadasRequest request, ServerCallContext context)
     {
-        GrpcEngedelyMegtagadasEvent?.Invoke(this, new GrpcEngedelyMegtagadasEventArgs(request));
+        GrpcEngedelyMegtagadasEvent?.Invoke(this, new GrpcRequestEventArgs<EngedelyMegtagadasRequest>(request));
         return Task.FromResult(new Empty());
     }
 
@@ -75,19 +74,19 @@ public class GrpcAllomasServer : GrpcAllomas.GrpcAllomasBase, IGrpcAllomasServer
 
     public override Task<Empty> IndulasiIdoKozlesVetel(IndulasiIdoKozlesVetelRequest request, ServerCallContext context)
     {
-        GrpcIndulasiIdoKozlesVetelEvent?.Invoke(this, new GrpcIndulasiIdoKozlesVetelEventArgs(request));
+        GrpcIndulasiIdoKozlesVetelEvent?.Invoke(this, new GrpcRequestEventArgs<IndulasiIdoKozlesVetelRequest>(request));
         return Task.FromResult(new Empty());
     }
 
     public override Task<Empty> Visszajelentes(VisszajelentesRequest request, ServerCallContext context)
     {
-        GrpcVisszajelentesEvent?.Invoke(this, new GrpcVisszajelentesEventArgs(request));
+        GrpcVisszajelentesEvent?.Invoke(this, new GrpcRequestEventArgs<VisszajelentesRequest>(request));
         return Task.FromResult(new Empty());
     }
 
     public override Task<Empty> VisszajelentesVetel(VisszajelentesVetelRequest request, ServerCallContext context)
     {
-        GrpcVisszajelentesVetelEvent?.Invoke(this, new GrpcVisszajelentesVetelEventArgs(request));
+        GrpcVisszajelentesVetelEvent?.Invoke(this, new GrpcRequestEventArgs<VisszajelentesVetelRequest>(request));
         return Task.FromResult(new Empty());
     }
 
