@@ -8,10 +8,10 @@ namespace Gyermekvasut.Halozat.EventArgsNS;
 public class EngedelyAdasEventArgs : KozlemenyEventArgs
 {
     public EngedelyAdasTipus Tipus { get; }
-    public string UtolsoVonat { get;}
+    public string? UtolsoVonat { get;}
 
     public EngedelyAdasEventArgs(AllomasNev kuldo, EngedelyAdasTipus tipus,
-        string utolsoVonat, string vonatszam, string nev) : base(kuldo, vonatszam, nev)
+        string? utolsoVonat, string vonatszam, string nev) : base(kuldo, vonatszam, nev)
     {
         UtolsoVonat = utolsoVonat;
         Tipus = tipus;
@@ -26,6 +26,7 @@ public class EngedelyAdasEventArgs : KozlemenyEventArgs
         {
             throw new ArgumentException("Az utolsó vonatnak pontosan akkor kell hiányoznia, ha azonos irányú az engedélyadás");
         }
-        return new(kuldo, tipus, request.UtolsoVonat, request.Vonatszam, request.Nev);
+        string? utolsoVonat = tipus == EngedelyAdasTipus.AzonosIranyu ? null : request.UtolsoVonat;
+        return new(kuldo, tipus, utolsoVonat, request.Vonatszam, request.Nev);
     }
 }

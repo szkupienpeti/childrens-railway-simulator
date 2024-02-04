@@ -5,7 +5,6 @@ using Gyermekvasut.Grpc;
 using Grpc.Core;
 using Gyermekvasut.Tests.Util;
 using Gyermekvasut.Modellek.Telefon;
-using Google.Protobuf.WellKnownTypes;
 
 namespace Gyermekvasut.Halozat.Tests.EngedelyKeres;
 

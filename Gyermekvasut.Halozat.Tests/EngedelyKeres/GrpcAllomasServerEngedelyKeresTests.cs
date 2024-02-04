@@ -127,13 +127,13 @@ public class GrpcAllomasServerEngedelyKeresTests : MockHalozatiAllomasTestBase
         var modelEventArgs = eventCapturer.CapturedEventArgs!;
         Assert.AreEqual(GrpcToModelMapper.MapAllomasNev(grpcRequest.Kuldo), modelEventArgs.Kuldo);
         Assert.AreEqual(GrpcToModelMapper.MapEngedelyKeresTipus(grpcRequest.Tipus), modelEventArgs.Tipus);
-        if (modelEventArgs.Tipus == EngedelyKeresTipus.EllenkezoIranyuVolt || modelEventArgs.Tipus == EngedelyKeresTipus.EllenkezoIranyuVan)
+        if (modelEventArgs.Tipus == EngedelyKeresTipus.AzonosIranyuVolt)
         {
-            Assert.AreEqual(grpcRequest.UtolsoVonat, modelEventArgs.UtolsoVonat);
+            Assert.IsNull(modelEventArgs.UtolsoVonat);
         }
         else
         {
-            Assert.IsNull(modelEventArgs.UtolsoVonat);
+            Assert.AreEqual(grpcRequest.UtolsoVonat, modelEventArgs.UtolsoVonat);
         }
         Assert.AreEqual(grpcRequest.Vonatszam, modelEventArgs.Vonatszam);
         Assert.AreEqual(GrpcToModelMapper.MapIdo(grpcRequest.Ido), modelEventArgs.Ido);

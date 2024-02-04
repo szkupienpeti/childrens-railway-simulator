@@ -50,6 +50,22 @@ internal static class HalozatTestsUtil
             ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
     }
 
+    public static EngedelyAdasRequest CreateBejovoAzonosIranyuEngedelyAdasRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
+        return GrpcRequestFactory.CreateEngedelyAdasRequest(kuldo, EngedelyAdasTipus.AzonosIranyu, null, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+    }
+
+    public static EngedelyAdasRequest CreateBejovoEllenkezoIranyuEngedelyAdasRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
+        var ellenvonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
+        return GrpcRequestFactory.CreateEngedelyAdasRequest(kuldo, EngedelyAdasTipus.EllenkezoIranyu,
+            ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+    }
+
     public static IndulasiIdoKozlesRequest CreateBejovoIndulasiIdoKozlesRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;

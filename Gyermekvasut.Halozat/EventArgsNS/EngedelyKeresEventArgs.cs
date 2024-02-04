@@ -28,7 +28,7 @@ public class EngedelyKeresEventArgs : KozlemenyEventArgs
         {
             throw new ArgumentException("Az utolsó vonatnak pontosan akkor kell hiányoznia, ha azonos irányú az engedélykérés");
         }
-        string? utolsoVonat = tipus == EngedelyKeresTipus.EllenkezoIranyuVolt || tipus == EngedelyKeresTipus.EllenkezoIranyuVan ? request.UtolsoVonat : null;
+        string? utolsoVonat = tipus == EngedelyKeresTipus.AzonosIranyuVolt ? null : request.UtolsoVonat;
         TimeOnly ido = GrpcToModelMapper.MapIdo(request.Ido);
         return new(kuldo, tipus, utolsoVonat, request.Vonatszam, ido, request.Nev);
     }
