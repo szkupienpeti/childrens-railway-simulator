@@ -23,9 +23,6 @@ public static class VonatTestsUtil
     public static TestVonatInfo GetInduloVonatInfo(Irany allomasOldal)
         => VONAT_INFOS[allomasOldal];
 
-    public static readonly TimeOnly TEST_IDO = new(9, 10);
-    public static readonly string TEST_NEV = "TEST_NEV";
-
     public static Vonat CreateAndLehelyezTestVonat(Irany vonatIrany, Szakasz allomaskoz, string? vonatszam = null)
     {
         var vonat = CreateTestVonat(vonatIrany, vonatszam);

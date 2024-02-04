@@ -29,7 +29,7 @@ public class HalozatiAllomasEngedelyAdasTests : MockHalozatiAllomasTestBase
         var engedelyAdasTipus = EngedelyAdasTipus.AzonosIranyu;
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.EngedelytAd(irany, engedelyAdasTipus, null, vonatszam, nev);
         // Assert
         AssertClientCalledWithExpectedRequest(grpcRequest, allomasNev, irany, engedelyAdasTipus, null, vonatszam, nev);
@@ -55,7 +55,7 @@ public class HalozatiAllomasEngedelyAdasTests : MockHalozatiAllomasTestBase
         var utolsoVonat = ellenvonatInfo.Vonatszam;
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.EngedelytAd(irany, engedelyAdasTipus, utolsoVonat, vonatszam, nev);
         // Assert
         AssertClientCalledWithExpectedRequest(grpcRequest, allomasNev, irany, engedelyAdasTipus, utolsoVonat, vonatszam, nev);

@@ -28,7 +28,7 @@ internal static class HalozatTestsUtil
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
-        return GrpcRequestFactory.CreateEngedelyKeresRequest(kuldo, EngedelyKeresTipus.AzonosIranyuVolt, null, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateEngedelyKeresRequest(kuldo, EngedelyKeresTipus.AzonosIranyuVolt, null, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_IDO, TelefonTestsUtil.TEST_NEV);
     }
 
     public static EngedelyKeresRequest CreateBejovoEllenkezoIranyuVoltEngedelyKeresRequest(AllomasNev allomasNev, Irany irany)
@@ -47,14 +47,14 @@ internal static class HalozatTestsUtil
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
         var ellenvonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         return GrpcRequestFactory.CreateEngedelyKeresRequest(kuldo, engedelyKeresTipus,
-            ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
+            ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_IDO, TelefonTestsUtil.TEST_NEV);
     }
 
     public static EngedelyAdasRequest CreateBejovoAzonosIranyuEngedelyAdasRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
-        return GrpcRequestFactory.CreateEngedelyAdasRequest(kuldo, EngedelyAdasTipus.AzonosIranyu, null, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateEngedelyAdasRequest(kuldo, EngedelyAdasTipus.AzonosIranyu, null, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_NEV);
     }
 
     public static EngedelyAdasRequest CreateBejovoEllenkezoIranyuEngedelyAdasRequest(AllomasNev allomasNev, Irany irany)
@@ -63,35 +63,43 @@ internal static class HalozatTestsUtil
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var ellenvonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
         return GrpcRequestFactory.CreateEngedelyAdasRequest(kuldo, EngedelyAdasTipus.EllenkezoIranyu,
-            ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+            ellenvonatInfo.Vonatszam, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_NEV);
+    }
+
+    public static EngedelyMegtagadasRequest CreateBejovoEngedelyMegtagadasRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
+        return GrpcRequestFactory.CreateEngedelyMegtagadasRequest(kuldo, vonatInfo.Vonatszam,
+            TelefonTestsUtil.TEST_ENGEDELY_MEGTAGADAS_OK, TelefonTestsUtil.TEST_ENGEDELY_MEGTAGADAS_PERC_MULVA, TelefonTestsUtil.TEST_NEV);
     }
 
     public static IndulasiIdoKozlesRequest CreateBejovoIndulasiIdoKozlesRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
-        return GrpcRequestFactory.CreateIndulasiIdoKozlesRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateIndulasiIdoKozlesRequest(kuldo, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_IDO, TelefonTestsUtil.TEST_NEV);
     }
 
     public static IndulasiIdoKozlesVetelRequest CreateBejovoIndulasiIdoKozlesVetelRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
-        return GrpcRequestFactory.CreateIndulasiIdoKozlesVetelRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateIndulasiIdoKozlesVetelRequest(kuldo, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_IDO, TelefonTestsUtil.TEST_NEV);
     }
 
     public static VisszajelentesRequest CreateBejovoVisszajelentesRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
-        return GrpcRequestFactory.CreateVisszajelentesRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateVisszajelentesRequest(kuldo, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_NEV);
     }
 
     public static VisszajelentesVetelRequest CreateBejovoVisszajelentesVetelRequest(AllomasNev allomasNev, Irany irany)
     {
         var kuldo = allomasNev.Szomszed(irany)!.Value;
         var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
-        return GrpcRequestFactory.CreateVisszajelentesVetelRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+        return GrpcRequestFactory.CreateVisszajelentesVetelRequest(kuldo, vonatInfo.Vonatszam, TelefonTestsUtil.TEST_NEV);
     }
 
     public static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)

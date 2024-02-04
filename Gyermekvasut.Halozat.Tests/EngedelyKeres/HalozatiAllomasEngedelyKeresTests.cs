@@ -29,8 +29,8 @@ public class HalozatiAllomasEngedelyKeresTests : MockHalozatiAllomasTestBase
         var engedelyKeresTipus = EngedelyKeresTipus.AzonosIranyuVolt;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var ido = VonatTestsUtil.TEST_IDO;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var ido = TelefonTestsUtil.TEST_IDO;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.EngedelytKer(irany, engedelyKeresTipus, null, vonatszam, ido, nev);
         // Assert
         AssertClientCalledWithExpectedRequest(grpcRequest, allomasNev, irany, engedelyKeresTipus, null, vonatszam, ido, nev);
@@ -56,8 +56,8 @@ public class HalozatiAllomasEngedelyKeresTests : MockHalozatiAllomasTestBase
         var utolsoVonat = ellenvonatInfo.Vonatszam;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var ido = VonatTestsUtil.TEST_IDO;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var ido = TelefonTestsUtil.TEST_IDO;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.EngedelytKer(irany, engedelyKeresTipus, utolsoVonat, vonatszam, ido, nev);
         // Assert
         AssertClientCalledWithExpectedRequest(grpcRequest, allomasNev, irany, engedelyKeresTipus, utolsoVonat, vonatszam, ido, nev);
@@ -83,8 +83,8 @@ public class HalozatiAllomasEngedelyKeresTests : MockHalozatiAllomasTestBase
         var utolsoVonat = ellenvonatInfo.Vonatszam;
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var ido = VonatTestsUtil.TEST_IDO;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var ido = TelefonTestsUtil.TEST_IDO;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.EngedelytKer(irany, engedelyKeresTipus, utolsoVonat, vonatszam, ido, nev);
         // Assert
         AssertClientCalledWithExpectedRequest(grpcRequest, allomasNev, irany, engedelyKeresTipus, utolsoVonat, vonatszam, ido, nev);

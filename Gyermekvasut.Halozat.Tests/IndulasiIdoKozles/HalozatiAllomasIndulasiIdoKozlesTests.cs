@@ -27,8 +27,8 @@ public class HalozatiAllomasIndulasiIdoKozlesTests : MockHalozatiAllomasTestBase
         // Act
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var ido = VonatTestsUtil.TEST_IDO;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var ido = TelefonTestsUtil.TEST_IDO;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.IndulasiIdotKozol(irany, vonatszam, ido, nev);
         // Assert
         GetMockClient(irany).Verify(a => a.IndulasiIdoKozles(It.IsAny<IndulasiIdoKozlesRequest>(), null, null, default), Times.Once());

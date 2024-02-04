@@ -8,6 +8,11 @@ public static class TelefonTestsUtil
     public static readonly List<Csengetes> EGY_HOSSZU = new() { Csengetes.Hosszu };
     public static readonly List<Csengetes> KET_HOSSZU = new() { Csengetes.Hosszu, Csengetes.Hosszu };
 
+    public static readonly TimeOnly TEST_IDO = new(9, 10);
+    public static readonly string TEST_NEV = "TEST_NEV";
+    public static readonly string TEST_ENGEDELY_MEGTAGADAS_OK = "TEST_OK";
+    public static readonly int TEST_ENGEDELY_MEGTAGADAS_PERC_MULVA = 5;
+
     public static List<Csengetes> GetBejovoCsengetes(Irany irany)
         => GetKimenoCsengetes(irany.Fordit());
 

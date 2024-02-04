@@ -16,7 +16,7 @@ public partial class HalozatiAllomas
         EngedelyAdasEvent?.Invoke(this, e);
     }
 
-    public void EngedelytAd(Irany irany, EngedelyAdasTipus tipus, string utolsoVonat, string vonatszam, string nev)
+    public void EngedelytAd(Irany irany, EngedelyAdasTipus tipus, string? utolsoVonat, string vonatszam, string nev)
     {
         EngedelyAdasRequest request = GrpcRequestFactory.CreateEngedelyAdasRequest(AllomasNev, tipus, utolsoVonat, vonatszam, nev);
         GrpcAllomasClient szomszedClient = GetSzomszedClient(irany);

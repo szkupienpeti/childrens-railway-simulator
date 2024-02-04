@@ -27,7 +27,7 @@ public class HalozatiAllomasVisszajelentesVetelTests : MockHalozatiAllomasTestBa
         // Act
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
         var vonatszam = vonatInfo.Vonatszam;
-        var nev = VonatTestsUtil.TEST_NEV;
+        var nev = TelefonTestsUtil.TEST_NEV;
         Allomas.VisszajelentestVesz(irany, vonatszam, nev);
         // Assert
         GetMockClient(irany).Verify(a => a.VisszajelentesVetel(It.IsAny<VisszajelentesVetelRequest>(), null, null, default), Times.Once());
