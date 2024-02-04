@@ -13,7 +13,7 @@ public class GrpcAllomasClientIndulasiIdoKozlesTests : RealHalozatiAllomasTestBa
     /// <summary>
     /// Ha a szomszédos GrpcAllomasClient objektumon IndulasiIdoKozles() függvényt hívunk,
     /// lezajlik a hálózaton a <i>tényleges</i> gRPC kommunikáció, és meghívódik
-    /// a GrpcAllomasServer VisszaCsengetes() függvénye, megfelelő tartalmú VisszaCsengetesRequest objektummal
+    /// a GrpcAllomasServer IndulasiIdoKozles() függvénye, megfelelő tartalmú IndulasiIdoKozlesRequest objektummal
     /// <br />
     /// Ez egy integrációs teszt.
     /// </summary>

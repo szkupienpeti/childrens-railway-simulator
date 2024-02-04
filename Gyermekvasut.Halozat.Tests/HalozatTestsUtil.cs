@@ -30,6 +30,13 @@ internal static class HalozatTestsUtil
         return GrpcRequestFactory.CreateIndulasiIdoKozlesRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
     }
 
+    public static IndulasiIdoKozlesVetelRequest CreateBejovoIndulasiIdoKozlesVetelRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
+        return GrpcRequestFactory.CreateIndulasiIdoKozlesVetelRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
+    }
+
     public static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)
     {
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
