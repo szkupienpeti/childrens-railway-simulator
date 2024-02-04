@@ -37,6 +37,20 @@ internal static class HalozatTestsUtil
         return GrpcRequestFactory.CreateIndulasiIdoKozlesVetelRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_IDO, VonatTestsUtil.TEST_NEV);
     }
 
+    public static VisszajelentesRequest CreateBejovoVisszajelentesRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
+        return GrpcRequestFactory.CreateVisszajelentesRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+    }
+
+    public static VisszajelentesVetelRequest CreateBejovoVisszajelentesVetelRequest(AllomasNev allomasNev, Irany irany)
+    {
+        var kuldo = allomasNev.Szomszed(irany)!.Value;
+        var vonatInfo = VonatTestsUtil.GetErkezoVonatInfo(irany);
+        return GrpcRequestFactory.CreateVisszajelentesVetelRequest(kuldo, vonatInfo.Vonatszam, VonatTestsUtil.TEST_NEV);
+    }
+
     public static VonatAllomaskozbolKilepRequest CreateBejovoVonatAllomaskozbolKilepRequest(AllomasNev allomasNev, Irany irany)
     {
         var vonatInfo = VonatTestsUtil.GetInduloVonatInfo(irany);
