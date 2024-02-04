@@ -27,30 +27,44 @@ public static class GrpcRequestFactory
         return request;
     }
 
-    public static EngedelyKeresRequest CreateEngedelyKeresRequest(AllomasNev kuldo, EngedelyKeresTipus tipus, string utolsoVonat, string vonatszam, TimeOnly ido, string nev)
+    public static EngedelyKeresRequest CreateEngedelyKeresRequest(AllomasNev kuldo, EngedelyKeresTipus tipus, string? utolsoVonat, string vonatszam, TimeOnly ido, string nev)
     {
+        if ((utolsoVonat == null) != (tipus == EngedelyKeresTipus.AzonosIranyuVolt))
+        {
+            throw new ArgumentException("Az utolsó vonatnak pontosan akkor kell hiányoznia, ha azonos irányú az engedélykérés");
+        }
         var request = new EngedelyKeresRequest()
         {
             Kuldo = ModelToGrpcMapper.MapAllomasNev(kuldo),
             Tipus = ModelToGrpcMapper.MapEngedelyKeresTipus(tipus),
-            UtolsoVonat = utolsoVonat,
             Vonatszam = vonatszam,
             Ido = ModelToGrpcMapper.MapTimeOnly(ido),
             Nev = nev
         };
+        if (utolsoVonat != null)
+        {
+            request.UtolsoVonat = utolsoVonat;
+        }
         return request;
     }
 
-    public static EngedelyAdasRequest CreateEngedelyAdasRequest(AllomasNev kuldo, EngedelyAdasTipus tipus, string utolsoVonat, string vonatszam, string nev)
+    public static EngedelyAdasRequest CreateEngedelyAdasRequest(AllomasNev kuldo, EngedelyAdasTipus tipus, string? utolsoVonat, string vonatszam, string nev)
     {
+        if ((utolsoVonat == null) != (tipus == EngedelyAdasTipus.AzonosIranyu))
+        {
+            throw new ArgumentException("Az utolsó vonatnak pontosan akkor kell hiányoznia, ha azonos irányú az engedélyadás");
+        }
         var request = new EngedelyAdasRequest()
         {
             Kuldo = ModelToGrpcMapper.MapAllomasNev(kuldo),
             Tipus = ModelToGrpcMapper.MapEngedelyAdasTipus(tipus),
-            UtolsoVonat = utolsoVonat,
             Vonatszam = vonatszam,
             Nev = nev
         };
+        if (utolsoVonat != null)
+        {
+            request.UtolsoVonat = utolsoVonat;
+        }
         return request;
     }
 

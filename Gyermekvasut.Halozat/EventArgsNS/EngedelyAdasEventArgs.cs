@@ -22,6 +22,10 @@ public class EngedelyAdasEventArgs : KozlemenyEventArgs
         EngedelyAdasRequest request = grpcEventArgs.Request;
         AllomasNev kuldo = GrpcToModelMapper.MapAllomasNev(request.Kuldo);
         EngedelyAdasTipus tipus = GrpcToModelMapper.MapEngedelyAdasTipus(request.Tipus);
+        if (request.HasUtolsoVonat == (tipus == EngedelyAdasTipus.AzonosIranyu))
+        {
+            throw new ArgumentException("Az utolsó vonatnak pontosan akkor kell hiányoznia, ha azonos irányú az engedélyadás");
+        }
         return new(kuldo, tipus, request.UtolsoVonat, request.Vonatszam, request.Nev);
     }
 }
